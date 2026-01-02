@@ -65,7 +65,14 @@ The first path to succeed "wins" - duplicates are automatically filtered.
 
 Messages have a **time-to-live (TTL)**. If not delivered within the TTL, the message expires and is removed from the network.
 
-Default TTL is typically 7 days, but may vary.
+| Message Type | Default TTL |
+|--------------|-------------|
+| Direct Messages | 24 hours |
+| Group Invites | 7 days |
+| Group Updates | 24 hours |
+| Channel Messages | 4 hours |
+
+Expired messages show status `EXP` in the app.
 
 ## Acknowledgments (ACKs)
 

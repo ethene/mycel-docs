@@ -76,7 +76,7 @@ No. Mycel identifies you by a cryptographic key, not phone number or email.
 
 ### What Android version do I need?
 
-Android 10 (API 29) or higher.
+Android 8.0 (Oreo) or higher (API 26+).
 
 ### How much storage does Mycel use?
 

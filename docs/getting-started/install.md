@@ -4,7 +4,7 @@ Mycel is distributed as an APK file that you install directly on your Android de
 
 ## Requirements
 
-- **Android 10 (API 29) or higher**
+- **Android 8.0 (Oreo) or higher** (API 26+)
 - **Bluetooth and Wi-Fi** enabled
 - Approximately **50 MB** of storage
 

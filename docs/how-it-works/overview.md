@@ -91,8 +91,9 @@ Mycel uses a hybrid routing approach:
 
 ### End-to-End Encryption
 
-- **X25519** key exchange for shared secrets
-- **AES-GCM** for message encryption
+- **X25519** Diffie-Hellman key agreement
+- **HKDF-SHA256** key derivation
+- **AES-256-GCM** authenticated encryption
 - Only sender and recipient can decrypt
 
 ### Signatures

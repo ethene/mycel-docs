@@ -6,7 +6,7 @@ Mycel is designed with privacy as a core principle.
 
 ### Message Content
 
-- **End-to-end encrypted** using X25519 key exchange and AES-GCM
+- **End-to-end encrypted** using X25519 key agreement + HKDF-SHA256 + AES-256-GCM
 - Only sender and recipient can decrypt
 - Relay devices see only encrypted blobs
 
