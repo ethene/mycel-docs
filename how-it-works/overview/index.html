@@ -1730,8 +1730,9 @@
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <h3 id="end-to-end-encryption">End-to-End Encryption<a class="headerlink" href="#end-to-end-encryption" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>X25519</strong> key exchange for shared secrets</li>
-<li><strong>AES-GCM</strong> for message encryption</li>
+<li><strong>X25519</strong> Diffie-Hellman key agreement</li>
+<li><strong>HKDF-SHA256</strong> key derivation</li>
+<li><strong>AES-256-GCM</strong> authenticated encryption</li>
 <li>Only sender and recipient can decrypt</li>
 </ul>
 <h3 id="signatures">Signatures<a class="headerlink" href="#signatures" title="Permanent link">&para;</a></h3>
