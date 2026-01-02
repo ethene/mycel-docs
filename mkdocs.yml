@@ -1,0 +1,73 @@
+site_name: Mycel Documentation
+site_description: "Mycel - Delay-Tolerant Mesh Messenger for Android"
+site_url: https://ethene.github.io/mycel-docs
+repo_url: https://github.com/ethene/mycel-releases
+repo_name: Download
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+    - scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  font:
+    text: Roboto
+    code: Roboto Mono
+  language: en
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/install.md
+    - First Steps: getting-started/first-steps.md
+    - App Updates: getting-started/updates.md
+    - Permissions: getting-started/permissions.md
+  - User Guide:
+    - Messaging: user-guide/messaging.md
+    - How Delivery Works: user-guide/delivery.md
+  - How It Works:
+    - Overview: how-it-works/overview.md
+    - Transports: how-it-works/transports.md
+  - Security:
+    - Privacy: security/privacy.md
+    - Verification: security/verification.md
+  - Reference:
+    - FAQ: reference/faq.md
+    - Changelog: reference/changelog.md
+  - Legal:
+    - Privacy Policy: legal/privacy-policy.md
+    - Terms of Service: legal/terms.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - attr_list
+  - toc:
+      permalink: true
