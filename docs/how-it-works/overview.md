@@ -1,10 +1,78 @@
 # How Mycel Works
 
-A technical overview of Mycel's architecture.
+Understanding the "why" before the "how" helps everything else make sense.
+
+## The Problem Mycel Solves
+
+Traditional messengers assume the internet exists. They work like this:
+
+```
+Your Phone → Internet → Server → Internet → Friend's Phone
+```
+
+When any part of that chain breaks, communication stops.
+
+**Mycel works differently:**
+
+```
+Your Phone → Nearby Phones → ... → Friend's Phone
+```
+
+Messages travel through people, not infrastructure.
+
+## Mental Model: The Postal Service Analogy
+
+Think of Mycel like a postal service where:
+
+- **Every person is a mail carrier** - Anyone running Mycel can carry messages
+- **No post offices exist** - There's no central sorting facility
+- **Delivery takes as long as it takes** - Hours, days, or longer
+- **Multiple copies help** - If one letter gets lost, another might arrive
+
+This is called **Delay-Tolerant Networking (DTN)** - embracing delays rather than requiring instant connectivity.
+
+## Why This Works
+
+### 1. Messages Are Self-Contained
+
+Each message (called a "bundle") contains everything needed for delivery:
+
+- Who it's from
+- Who it's for
+- How long to try (time-to-live)
+- The encrypted content
+
+No external lookup or server coordination required.
+
+### 2. Every Phone Is a Relay
+
+When Mycel users encounter each other, they automatically exchange messages. Your message might travel across a city by riding along with commuters.
+
+### 3. Multiple Paths Are Better
+
+Mycel doesn't rely on a single route. It:
+
+- Sends copies via Bluetooth/Wi-Fi to nearby phones
+- Optionally sends via internet relay (Nostr) if available
+- Whichever path succeeds first "wins"
+
+## Trade-offs We Accept
+
+| Traditional Messenger | Mycel |
+|----------------------|-------|
+| Instant delivery | Seconds to days |
+| Guaranteed delivery | Best-effort |
+| Requires internet | Works offline |
+| Central server | No infrastructure |
+| Easy surveillance | Strong privacy |
+
+Mycel trades instant gratification for resilience.
+
+---
 
 ## Architecture
 
-Mycel consists of three main layers:
+Three layers work together:
 
 ```mermaid
 flowchart TB
@@ -22,31 +90,33 @@ flowchart TB
 
 ### Application Layer
 
-- User interface (Jetpack Compose)
+What you see and interact with:
+
+- Conversation list
+- Message composer
 - Contact management
-- Conversation view
-- Settings and identity
+- Settings
 
 ### DTN Layer
 
-The core of Mycel - implements the Bundle Protocol:
+The "brain" that handles message logistics:
 
-- **Bundles** - Message containers with headers and payload
-- **Routing** - Decides which path(s) to send messages
-- **Store-and-Forward** - Persists messages until delivered
-- **Acknowledgments** - Delivery confirmation
+- **Bundles** - Message packaging with routing metadata
+- **Routing** - Deciding which paths to use
+- **Store-and-Forward** - Holding messages until they can move
+- **Acknowledgments** - Tracking delivery confirmation
 
 ### Transport Layer
 
-Multiple transports work together:
+The physical delivery mechanisms:
 
-- **Nearby** - Google Nearby Connections (BLE + Wi-Fi)
-- **Nostr** - Internet relay (optional fallback)
-- **Future** - LoRa, other radios
+- **Nearby Connections** - Bluetooth + Wi-Fi Direct (primary)
+- **Nostr Relays** - Internet-based fallback
+- **Future** - LoRa radios, satellite links
 
 ## The Bundle Protocol
 
-Messages are wrapped in **bundles** - self-contained packets that can be stored and forwarded independently.
+Every message is wrapped in a **bundle** - a self-contained packet.
 
 ```mermaid
 classDiagram
@@ -74,65 +144,92 @@ classDiagram
     Bundle --> Signature
 ```
 
+**Key properties:**
+
+- **Self-identifying** - Bundle ID is a hash of contents
+- **Self-authenticating** - Signature proves who sent it
+- **Self-expiring** - TTL ensures old messages don't circulate forever
+
 > **Deep Dive:** See [Bundle Structure](../deep-dive/bundles/structure.md) for complete field reference.
 
-## Routing
+## Routing Strategies
 
-Mycel uses a hybrid routing approach:
+Mycel doesn't know the "right" path - it uses probabilistic strategies:
 
 ### Spray-and-Wait
 
-- Messages start with a **copy budget** (e.g., 3 copies)
-- Copies are distributed to encountered devices
-- Once budget is exhausted, messages wait for direct delivery
+Send limited copies, then wait:
+
+1. Message starts with a "copy budget" (e.g., 3)
+2. When meeting a new peer, hand off a copy and decrement budget
+3. When budget reaches 1, stop spraying and wait for direct encounter
+
+This balances delivery speed against network flooding.
 
 ### PRoPHET (Probabilistic Routing)
 
-- Tracks delivery probability to each destination
-- Higher probability = more likely to successfully relay
-- Updated based on encounters and successful deliveries
+Learn from history:
 
-### Interest-Based Routing
+- Track which peers eventually reach which destinations
+- Preferentially send via peers with higher delivery probability
+- Probability decays over time if no deliveries occur
 
-- Devices exchange "bloom filters" of known contacts
-- Messages preferentially sent to devices that know the destination
+### Geographic Routing
 
-## Security
+Use location hints:
+
+- Messages include optional H3 cell hints
+- Prefer relays that are geographically closer to destination
+- Avoid routes that move in the wrong direction
+
+## Security Model
 
 ### End-to-End Encryption
 
-- **X25519** Diffie-Hellman key agreement
-- **HKDF-SHA256** key derivation
-- **AES-256-GCM** authenticated encryption
-- Only sender and recipient can decrypt
+Only sender and recipient can read messages:
 
-### Signatures
+- **X25519** key agreement (Diffie-Hellman)
+- **AES-256-GCM** encryption
+- Relay nodes only see encrypted blobs
 
-- **Ed25519** signatures on all bundles
-- Verifies sender identity
+### Message Signing
+
+Every bundle is signed:
+
+- **Ed25519** signatures
+- Proves sender identity
 - Prevents tampering
 
-### No Central Authority
+### No Central Trust
 
-- No servers to trust
-- No single point of failure
-- No metadata collection
+- No servers that could be compromised
+- No certificates that could be revoked
+- Identity is just a key pair you control
 
 ## Identity
 
-Users are identified by their **Ed25519 public key**:
+You are your public key:
 
-1. Private key generated on device (never leaves)
-2. Public key = your identity
-3. **Device ID** = truncated hash of public key (for human readability)
+1. First launch generates an Ed25519 keypair
+2. Private key stays on device (never transmitted)
+3. Public key = your identity
+4. "MycTag" = human-readable hash of your key
 
-## Data Persistence
+To add a contact, you exchange public keys (via QR code, NFC, or typing).
 
-Mycel uses **Room** (SQLite) for local storage:
+## Data Storage
 
-- Bundles waiting for delivery
-- Delivered messages
-- Contact information
-- Routing tables
+All data stays on your device:
 
-No data is stored externally.
+- **Bundles** - Messages waiting for delivery or received
+- **Routing tables** - Delivery probability estimates
+- **Contacts** - Public keys of people you know
+- **Groups** - Membership and shared keys
+
+Nothing is uploaded to any server.
+
+---
+
+**Next:** [Transports](transports.md) - How messages physically move between devices
+
+> **Go Deeper:** [Deep Dive](../deep-dive/index.md) - Full technical documentation

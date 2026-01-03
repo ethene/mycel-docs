@@ -42,6 +42,7 @@ nav:
   - User Guide:
     - Messaging: user-guide/messaging.md
     - How Delivery Works: user-guide/delivery.md
+    - Battery & Background: user-guide/battery.md
   - How It Works:
     - Overview: how-it-works/overview.md
     - Transports: how-it-works/transports.md
@@ -74,6 +75,7 @@ nav:
     - Roadmap: deep-dive/roadmap.md
   - Security:
     - Privacy: security/privacy.md
+    - Threat Model: security/threat-model.md
     - Verification: security/verification.md
   - Reference:
     - FAQ: reference/faq.md

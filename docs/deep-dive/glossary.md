@@ -1,6 +1,8 @@
 # Glossary
 
-Technical terms used throughout the Mycel documentation.
+Technical terms used throughout the Mycel documentation. User-level terms are marked with **(User)**.
+
+---
 
 ## A
 
@@ -13,7 +15,7 @@ Symmetric encryption algorithm used for group messages and DM content encryption
 ## B
 
 ### Bundle
-Self-contained message unit in DTN. Contains header (routing metadata) and payload (encrypted content). See [Bundle Structure](bundles/structure.md).
+Self-contained message unit in DTN. Contains header (routing metadata) and payload (encrypted content). Think of it as a sealed envelope with address labels. See [Bundle Structure](bundles/structure.md).
 
 ### Bundle Status
 Lifecycle state of a bundle: NEW, RECEIVED, RECEIVED_FORWARDABLE, FWD, DEL, EXP, ERR, CANCELLED. See [Bundle Lifecycle](bundles/lifecycle.md).
@@ -43,8 +45,11 @@ Ed25519 public key identifying a device. 32 bytes.
 ### DRAIN
 Session state: connected, transfer-ready, queues empty, idle.
 
+### Delivery **(User)**
+When your message reaches its intended recipient. In Mycel, this can take seconds (nearby) or days (multi-hop across the mesh).
+
 ### DTN
-Delay-Tolerant Networking. Architecture for communication without continuous connectivity.
+Delay-Tolerant Networking. Architecture for communication without continuous connectivity. The key insight: embrace delays rather than require always-on connections.
 
 ## E
 
@@ -96,6 +101,9 @@ Bluetooth Logical Link Control and Adaptation Protocol. Used for BLE data transf
 
 ## M
 
+### Mesh **(User)**
+The network of Mycel devices that relay messages for each other. Everyone running Mycel is part of the mesh. More people = better coverage = faster delivery.
+
 ### MeshService
 Android foreground service managing DTN operations.
 
@@ -131,6 +139,9 @@ PRoPHET delivery predictability probability (0.0-1.0).
 Probabilistic Routing Protocol using History of Encounters and Transitivity. See [PRoPHET Algorithm](routing/prophet.md).
 
 ## R
+
+### Relay **(User)**
+Any device that carries your message toward its destination. Every Mycel user's phone acts as a relay for other people's messages. You help others; they help you.
 
 ### Relay (Nostr)
 WebSocket server that stores and forwards Nostr events.

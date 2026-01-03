@@ -6,6 +6,46 @@ Mycel is a delay-tolerant mesh messenger for Android. It sends messages by passi
 
 ---
 
+## Where Do You Want to Go?
+
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch: **I want to use Mycel**
+
+    ---
+
+    Get the app, set it up, and start messaging.
+
+    [:octicons-arrow-right-24: Getting Started](getting-started/install.md)
+
+-   :material-cog: **I want to understand how it works**
+
+    ---
+
+    Learn about mesh networking, message delivery, and transports.
+
+    [:octicons-arrow-right-24: How It Works](how-it-works/overview.md)
+
+-   :material-code-braces: **I'm a developer**
+
+    ---
+
+    Dive into protocols, algorithms, and architecture.
+
+    [:octicons-arrow-right-24: Deep Dive](deep-dive/index.md)
+
+-   :material-shield-lock: **I care about security**
+
+    ---
+
+    Understand encryption, privacy, and threat model.
+
+    [:octicons-arrow-right-24: Security](security/privacy.md)
+
+</div>
+
+---
+
 ## Why Mycel?
 
 Traditional messengers need the internet to work. When the network goes down - during emergencies, in remote areas, or when infrastructure is blocked - communication stops.
@@ -21,7 +61,7 @@ Mycel keeps you connected by turning every phone into a relay. Your message hops
 
 ---
 
-## How It Works
+## How It Works (30 Seconds)
 
 ```mermaid
 sequenceDiagram
@@ -39,7 +79,8 @@ sequenceDiagram
 3. **Delivery happens** - When a chain of connections reaches your friend, the message arrives
 4. **You get confirmation** - An acknowledgment travels back to confirm delivery
 
-Messages can arrive in seconds (if your friend is nearby) or hours/days (if they're far away). This is normal - Mycel trades instant delivery for the ability to work anywhere.
+!!! info "Delivery Time Expectations"
+    Messages can arrive in **seconds** (if nearby) or **hours/days** (if far away). This is normal - Mycel trades instant delivery for the ability to work anywhere.
 
 ---
 
@@ -55,22 +96,39 @@ Messages can arrive in seconds (if your friend is nearby) or hours/days (if they
 
 ---
 
-## Getting Started
-
-Ready to try Mycel?
+## Quick Start
 
 1. **[Download the APK](https://github.com/ethene/mycel-releases/releases/latest)** from GitHub Releases
-2. **[Install and set up](getting-started/install.md)** on your Android device
+2. **[Install and set up](getting-started/install.md)** on your Android device (requires sideloading)
 3. **[Send your first message](getting-started/first-steps.md)**
 
-For automatic updates, we recommend using [Obtainium](https://github.com/ImranR98/Obtainium).
+!!! tip "Keep Updated"
+    For automatic updates, use [Obtainium](getting-started/updates.md) - it checks GitHub for new releases and installs them for you.
+
+---
+
+## Learning Paths
+
+### For Users
+
+1. [Install the app](getting-started/install.md)
+2. [Grant permissions](getting-started/permissions.md)
+3. [Send your first message](getting-started/first-steps.md)
+4. [Understand delivery times](user-guide/delivery.md)
+
+### For Developers
+
+1. [Architecture overview](deep-dive/architecture/overview.md)
+2. [Message flow](deep-dive/architecture/data-flow.md)
+3. [Routing algorithms](deep-dive/routing/overview.md)
+4. [Transport abstractions](deep-dive/transports/nearby.md)
 
 ---
 
 ## Open Source
 
-Mycel is open source software. The documentation is available at [github.com/ethene/mycel-docs](https://github.com/ethene/mycel-docs).
+Mycel is open source software. Documentation source: [github.com/ethene/mycel-docs](https://github.com/ethene/mycel-docs).
 
 ---
 
-<small>Mycel v2.0.720 - A delay-tolerant networking experiment</small>
+<small>Mycel v2.0.724</small>
