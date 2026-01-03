@@ -172,6 +172,7 @@ flowchart LR
 ```
 
 **Copy Budget Management:**
+
 - Initial budget: 3 copies (configurable)
 - Each forward decrements budget
 - When budget = 1, node waits for direct delivery

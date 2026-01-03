@@ -144,6 +144,7 @@ block-beta
 The bundle ID is a **SHA-256 hash** of the CBOR-encoded header and payload concatenated together.
 
 This ensures:
+
 - Bundle ID is deterministic
 - Any modification invalidates the ID
 - Deduplication is reliable

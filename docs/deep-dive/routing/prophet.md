@@ -109,11 +109,12 @@ P-values are persisted and survive app restarts.
 
 ### Table Structure
 
-Each entry contains:
-- **destination** - UID hex of the target node
-- **probability** - Current P-value (0.0 to 1.0)
-- **lastUpdate** - Timestamp of last update
-- **lastEncounter** - Timestamp of last encounter
+| Field | Type | Description |
+|-------|------|-------------|
+| destination | String | UID hex of the target node |
+| probability | Float | Current P-value (0.0 to 1.0) |
+| lastUpdate | Long | Timestamp of last update |
+| lastEncounter | Long | Timestamp of last direct encounter |
 
 ### LRU Eviction
 

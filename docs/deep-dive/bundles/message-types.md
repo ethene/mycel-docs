@@ -66,6 +66,7 @@ Used for:
 | sig | 64 bytes | Ed25519 signature |
 
 **Key Properties:**
+
 - **Signed** by destination - proves authentic delivery
 - **Routed back** to origin via DTN
 - **Improves routing** via ACK path learning
@@ -136,6 +137,7 @@ Public group discovery broadcast.
 | creatorSig | 64 bytes | Ed25519 signature |
 
 **Key Properties:**
+
 - Plaintext (not encrypted)
 - Signed by group creator
 - Broadcast to mesh group topic

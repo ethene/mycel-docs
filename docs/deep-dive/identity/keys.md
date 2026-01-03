@@ -33,6 +33,7 @@ Keys are stored in Android's encrypted SharedPreferences:
 The UID is a deterministic identifier derived from the public key by computing its SHA-256 hash.
 
 **Properties:**
+
 - 32 bytes (64 hex characters)
 - Deterministic: same pubkey → same UID
 - Privacy: cannot reverse UID to get pubkey
