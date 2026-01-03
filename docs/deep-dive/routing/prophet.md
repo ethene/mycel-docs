@@ -21,8 +21,6 @@ flowchart LR
 
 ## Parameters
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt:63-70`
-
 | Parameter | Symbol | Value | Purpose |
 |-----------|--------|-------|---------|
 | Initial probability | P_init | 0.7 | Starting P-value on first encounter |
@@ -38,9 +36,8 @@ flowchart LR
 When two nodes meet, they update their probabilities for each other.
 
 **Formula:**
-```
-P(A,B)_new = P(A,B)_old + (1 - P(A,B)_old) × P_init
-```
+
+$$P(A,B)_{new} = P(A,B)_{old} + (1 - P(A,B)_{old}) \times P_{init}$$
 
 **Example:**
 - Previous P(A,B) = 0.5
@@ -64,9 +61,8 @@ sequenceDiagram
 When A meets B, A learns about B's contacts and updates transitively.
 
 **Formula:**
-```
-P(A,X)_new = P(A,X)_old + (1 - P(A,X)_old) × P(A,B) × P(B,X) × α
-```
+
+$$P(A,X)_{new} = P(A,X)_{old} + (1 - P(A,X)_{old}) \times P(A,B) \times P(B,X) \times \alpha$$
 
 **Example:**
 - A meets B
@@ -87,9 +83,8 @@ flowchart LR
 P-values decay over time if no encounters occur.
 
 **Formula:**
-```
-P(A,B)_aged = P(A,B) × γ^hours_since_encounter
-```
+
+$$P(A,B)_{aged} = P(A,B) \times \gamma^{hours}$$
 
 **Example (γ = 0.98/hour):**
 | Hours | P-value |
@@ -100,110 +95,37 @@ P(A,B)_aged = P(A,B) × γ^hours_since_encounter
 | 48 | 0.27 |
 | 72 | 0.17 |
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt:380-389`
-
-```kotlin
-fun ensureAging() {
-    val hoursSince = (now - lastAgingTime) / 3600000
-    if (hoursSince >= 1) {
-        routingTable.ageAll(hoursSince)
-        lastAgingTime = now
-    }
-}
-
-fun ageAll(hours: Long) {
-    for (entry in table.values) {
-        entry.probability *= gamma.pow(hours.toDouble())
-        if (entry.probability < delta) {
-            entry.probability = delta
-        }
-    }
-}
-```
+Aging is applied hourly. Each entry's probability is multiplied by γ raised to the number of hours since last encounter. Values never drop below the minimum floor (δ).
 
 ## Routing Table Storage
 
-P-values are persisted to `routing.json` and survive app restarts.
-
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingTableStore.kt`
+P-values are persisted and survive app restarts.
 
 ### Table Structure
 
-```json
-{
-  "entries": [
-    {
-      "destination": "abc123...",
-      "probability": 0.72,
-      "lastUpdate": 1704067200000,
-      "lastEncounter": 1704066000000
-    }
-  ],
-  "version": 1
-}
-```
+Each entry contains:
+- **destination** - UID hex of the target node
+- **probability** - Current P-value (0.0 to 1.0)
+- **lastUpdate** - Timestamp of last update
+- **lastEncounter** - Timestamp of last encounter
 
 ### LRU Eviction
 
-When the table exceeds 5,000 entries, the least-recently-updated entries are evicted:
-
-```kotlin
-fun evictIfNeeded() {
-    if (entries.size > MAX_SIZE) {
-        val toRemove = entries.sortedBy { it.lastUpdate }
-            .take(entries.size - MAX_SIZE)
-        entries.removeAll(toRemove)
-    }
-}
-```
+When the table exceeds 5,000 entries, the least-recently-updated entries are evicted.
 
 ## Forwarding Decision
 
-When deciding whether to forward a bundle:
+When deciding whether to forward a bundle, the local device compares its own P-value for the destination with the peer's P-value. The bundle is forwarded if the peer has a significantly higher probability (by at least the FORWARD_MARGIN, typically 0.1).
 
-```kotlin
-// Simplified from RoutingFacade.kt:200-220
-fun shouldForward(bundle: Bundle, peer: PeerId): Boolean {
-    val myP = routingTable.getProbability(self, bundle.destination)
-    val peerP = routingTable.getProbability(peer, bundle.destination)
-
-    // Forward if peer has better probability
-    return peerP > myP + FORWARD_MARGIN
-}
-```
-
-The `FORWARD_MARGIN` (typically 0.1) prevents oscillation where nodes keep passing bundles back and forth.
+This margin prevents oscillation where nodes keep passing bundles back and forth.
 
 ## Route Penalty
 
-When a delivery attempt times out, the route is penalized:
-
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingTableStore.kt`
-
-```kotlin
-fun applyRoutePenalty(destination: PeerId) {
-    val current = getProbability(destination)
-    setProbability(destination, current * 0.85)  // 15% penalty
-}
-```
-
-This ensures that consistently failing routes are deprioritized.
+When a delivery attempt times out, the route is penalized by multiplying the P-value by 0.85 (a 15% penalty). This ensures that consistently failing routes are deprioritized.
 
 ## ACK-Based Learning
 
-When a DeliveryAck is received, the successful path is boosted:
-
-```kotlin
-// From AckPathLearner.kt
-fun onAckReceived(ack: DeliveryAck) {
-    // Boost P-value for the peer that delivered
-    val current = routingTable.getProbability(ack.deliveredBy)
-    routingTable.setProbability(
-        ack.deliveredBy,
-        current + (1 - current) * P_INIT
-    )
-}
-```
+When a DeliveryAck is received, the successful path is boosted using the same formula as a direct encounter: P_new = P_old + (1 - P_old) × P_init.
 
 ## Comparison to Other Algorithms
 
@@ -229,14 +151,6 @@ Mycel combines PRoPHET with Spray-and-Wait for optimal balance.
 ### Dense Networks
 - Lower FORWARD_MARGIN - forward more aggressively
 - Increase max table size - track more peers
-
-## Source Files
-
-| File | Purpose | Key Lines |
-|------|---------|-----------|
-| `RoutingFacade.kt` | Core PRoPHET implementation | 359-389 |
-| `RoutingTableStore.kt` | P-value persistence | Full file |
-| `AckPathLearner.kt` | ACK-based improvements | 45-80 |
 
 ---
 

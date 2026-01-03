@@ -4,8 +4,6 @@ ACK (acknowledgment) messages are used not just for UI delivery confirmation, bu
 
 ## Overview
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/AckPathLearner.kt`
-
 | Property | Value |
 |----------|-------|
 | **Purpose** | Learn optimal paths from delivery confirmations |
@@ -13,21 +11,6 @@ ACK (acknowledgment) messages are used not just for UI delivery confirmation, bu
 | **Path Tracking** | Per-destination, per-transport |
 
 ## Timeout Constants
-
-**Source:** `AckPathLearner.kt:201-209`
-
-```kotlin
-companion object {
-    /** Default ACK timeout: 60 seconds */
-    const val DEFAULT_ACK_TIMEOUT_MS = 60_000L
-
-    /** Aggressive timeout for nearby: 30 seconds */
-    const val NEARBY_ACK_TIMEOUT_MS = 30_000L
-
-    /** Lenient timeout for Nostr: 120 seconds */
-    const val NOSTR_ACK_TIMEOUT_MS = 120_000L
-}
-```
 
 | Transport | Timeout | Rationale |
 |-----------|---------|-----------|
@@ -37,168 +20,76 @@ companion object {
 
 ## Core Responsibilities
 
-**Source:** `AckPathLearner.kt:6-14`
-
 1. **Track sent bundles** - Record which bundles are awaiting ACK
 2. **Detect timeouts** - Identify bundles without ACK within window
-3. **Record failures** - Update TransportPathTracker on timeout
+3. **Record failures** - Update path tracking on timeout
 4. **Suggest alternates** - Recommend different path when primary fails
 
 ## Data Structures
 
 ### PendingAck
 
-**Source:** `AckPathLearner.kt:25-30`
-
-```kotlin
-private data class PendingAck(
-    val bundleId: String,
-    val destUidHex: String,
-    val transportId: String,
-    val sentAtMs: Long
-)
-```
+Each pending ACK tracks:
+- **bundleId** - The bundle awaiting confirmation
+- **destUidHex** - Destination user ID
+- **transportId** - Transport used for sending
+- **sentAtMs** - Timestamp when sent
 
 ## Lifecycle
 
 ### On Bundle Sent
 
-**Source:** `AckPathLearner.kt:38-46`
-
-```kotlin
-fun onBundleSent(bundleId: String, destUidHex: String, transportId: String) {
-    val pending = PendingAck(
-        bundleId = bundleId,
-        destUidHex = destUidHex.lowercase(),
-        transportId = transportId,
-        sentAtMs = System.currentTimeMillis()
-    )
-    pendingAcks[bundleId] = pending
-}
-```
+When a bundle is sent via any transport, a pending ACK entry is created with the bundle ID, destination, transport, and current timestamp.
 
 ### On ACK Received
 
-**Source:** `AckPathLearner.kt:52-70`
-
-When ACK arrives:
+When an ACK arrives:
 1. Remove from pending map
 2. Log path learning event
-3. TransportPathTracker updated by RoutingFacade
+3. Update transport path tracking with success
 
 ### Timeout Check
 
-**Source:** `AckPathLearner.kt:78-135`
-
-Called every 30 seconds by `RoutingFacade.ensureTimeoutCheck()`:
-
-```kotlin
-fun checkTimeouts(): Int {
-    val now = System.currentTimeMillis()
-    val timedOut = pendingAcks.entries.filter { (_, pending) ->
-        now - pending.sentAtMs > ackTimeoutMs
-    }
-
-    for ((bundleId, pending) in timedOut) {
-        pendingAcks.remove(bundleId)
-
-        // Record timeout in path tracker
-        pathTracker.recordTimeout(pending.destUidHex, pending.transportId)
-
-        // Apply route penalty
-        onRoutePenalty?.invoke(pending.destUidHex)
-
-        // Find best alternate path
-        val suggestedTransport = pathTracker.getBestPath(pending.destUidHex)
-
-        // Notify for retry
-        onRetryNeeded?.invoke(bundleId, pending.destUidHex, suggestedTransport)
-    }
-    return timedOut.size
-}
-```
+Every 30 seconds, the pending ACK map is checked:
+1. Find all entries older than the timeout threshold
+2. Remove from pending map
+3. Record timeout in path tracker
+4. Apply route penalty to PRoPHET table
+5. Suggest alternate transport for retry
 
 ## Path Suggestion Logic
 
-**Source:** `AckPathLearner.kt:97-107`
+When a timeout occurs:
+1. Get the best known path for the destination
+2. If different from the failed transport → suggest it
+3. Otherwise, find any non-degraded alternate path
 
-When a timeout occurs, the learner suggests an alternate transport:
+## Integration with Routing
 
-1. Get best path for destination
-2. If different from failed transport → suggest it
-3. Otherwise, find any non-degraded path
-
-```kotlin
-val suggestedTransport = if (bestPath != pending.transportId) {
-    bestPath  // Different path available
-} else {
-    // Find any non-degraded alternate
-    pathTracker.getPathsRanked(pending.destUidHex)
-        .filter { !it.isDegraded && it.transportId != pending.transportId }
-        .firstOrNull()
-        ?.transportId
-}
-```
-
-## Integration with RoutingFacade
-
-**Source:** `RoutingFacade.kt:96-114`
-
-The `AckPathLearner` is instantiated with a route penalty callback:
-
-```kotlin
-val ackPathLearner: AckPathLearner = AckPathLearner(
-    pathTracker = pathTracker,
-    onRoutePenalty = { destUidHex ->
-        // Apply penalty to PRoPHET routing table
-        val newP = routingTable.applyRoutePenalty(destUidHex)
-        // Log the penalty
-    }
-)
-```
+The ACK path learner is integrated with the routing facade:
+- **On timeout** → Route penalty callback is invoked
+- **On success** → Preferred transport is recorded
+- **On query** → Best transport is suggested
 
 ## Periodic Timeout Job
 
-**Source:** `RoutingFacade.kt:667-685`
-
-```kotlin
-fun ensureTimeoutCheck() {
-    if (timeoutCheckJob?.isActive == true) return
-    timeoutCheckJob = scope.launch {
-        while (true) {
-            delay(30_000)  // Check every 30 seconds
-            val count = checkAckTimeouts()
-            if (count > 0) {
-                JsonEventLogger.emit(
-                    event = "ROUTE.TIMEOUT.CHECK",
-                    details = mapOf("timeouts_processed" to count)
-                )
-            }
-        }
-    }
-}
-```
+A background job runs every 30 seconds to:
+1. Check all pending ACKs for timeouts
+2. Process timeouts and record path failures
+3. Emit telemetry events for monitoring
 
 ## Debug Interface
 
-**Source:** `AckPathLearner.kt:167-185`
-
-```kotlin
-fun getDebugState(): Map<String, Any?> {
-    return mapOf(
-        "pending_count" to pendingAcks.size,
-        "ack_timeout_ms" to ackTimeoutMs,
-        "samples" to pendingAcks.entries.take(10).map { ... },
-        "path_metrics" to pathTracker.getMetricsSummary()
-    )
-}
-```
-
 Access via meshctl:
-```bash
-meshctl --serial <SERIAL> routing metrics
-# Shows ack_learner state when pending > 0
 ```
+meshctl --serial <SERIAL> routing metrics
+```
+
+Shows:
+- Pending ACK count
+- Current timeout thresholds
+- Sample pending entries
+- Path metrics summary
 
 ## JSON Events
 
@@ -211,32 +102,10 @@ meshctl --serial <SERIAL> routing metrics
 
 ## Best Transport Selection
 
-**Source:** `AckPathLearner.kt:141-143`
-
-```kotlin
-fun getBestTransport(destUidHex: String): String? {
-    return pathTracker.getBestPath(destUidHex.lowercase())
-}
-```
-
-Used by RoutingFacade to make transport decisions:
-
-**Source:** `RoutingFacade.kt:700-702`
-
-```kotlin
-fun getBestTransportForDestination(destUidHex: String): String? {
-    return ackPathLearner.getBestTransport(destUidHex)
-}
-```
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `AckPathLearner.kt` | Timeout tracking, path learning |
-| `TransportPathTracker.kt` | Path metrics storage |
-| `RoutingFacade.kt` | Integration, periodic checks |
-| `ControlMsg.kt` | DeliveryAck message type |
+When selecting a transport for a destination:
+1. Query the path tracker for the best known path
+2. Consider recent successes and failures
+3. Fall back to default if no history exists
 
 ---
 

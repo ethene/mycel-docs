@@ -15,8 +15,6 @@ All message content in Mycel is end-to-end encrypted. Relay nodes cannot read me
 
 Direct messages use Elliptic Curve Integrated Encryption Scheme.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/crypto/DmCrypto.kt`
-
 ### Encryption Flow
 
 ```mermaid
@@ -70,36 +68,6 @@ flowchart TB
     R3 --> R4 --> R5 --> R6
 ```
 
-### Code Example
-
-```kotlin
-// Encryption (simplified from DmCrypto.kt)
-fun encryptDm(plaintext: ByteArray, recipientPubKey: ByteArray): EncryptedPayload {
-    val recipientX25519 = Ed25519.toX25519Public(recipientPubKey)
-    val ephemeral = X25519.generateKeyPair()
-
-    val sharedSecret = X25519.computeSharedSecret(
-        ephemeral.privateKey,
-        recipientX25519
-    )
-
-    val aesKey = HKDF.derive(
-        ikm = sharedSecret,
-        info = "DmEncryption".toByteArray(),
-        length = 32
-    )
-
-    val nonce = SecureRandom().generateSeed(12)
-    val ciphertext = AesGcm.encrypt(plaintext, aesKey, nonce)
-
-    return EncryptedPayload(
-        ciphertext = ciphertext,
-        ephemeralPub = ephemeral.publicKey,
-        nonce = nonce
-    )
-}
-```
-
 ## Group Message Encryption
 
 Group messages use symmetric encryption with a shared group key.
@@ -112,46 +80,19 @@ Group messages use symmetric encryption with a shared group key.
 
 ### Encryption
 
-```kotlin
-fun encryptGroupMessage(
-    plaintext: ByteArray,
-    groupKey: ByteArray
-): EncryptedPayload {
-    val nonce = SecureRandom().generateSeed(12)
-    val ciphertext = AesGcm.encrypt(plaintext, groupKey, nonce)
-
-    return EncryptedPayload(
-        ciphertext = ciphertext,
-        nonce = nonce
-        // No ephemeral key needed - symmetric encryption
-    )
-}
-```
-
-### GroupUpdateMsg Format
-
-```kotlin
-data class GroupUpdateMsg(
-    val encryptedPayload: ByteArray, // AES-GCM encrypted
-    val nonce: ByteArray             // 12 bytes
-)
-```
+Messages are encrypted with **AES-256-GCM** using the shared group key and a random 12-byte nonce.
 
 ## Group Invite Encryption
 
 Group invites use ECIES with XChaCha20-Poly1305 for the symmetric cipher.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:429-471`
-
 ### GroupInviteMsg Format
 
-```kotlin
-data class GroupInviteMsg(
-    val encryptedPayload: ByteArray, // XChaCha20-Poly1305 encrypted
-    val ephemeralPubKey: ByteArray,  // X25519 (32 bytes)
-    val nonce: ByteArray             // XChaCha20 nonce (24 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| encryptedPayload | Variable | XChaCha20-Poly1305 encrypted invite |
+| ephemeralPubKey | 32 bytes | X25519 ephemeral public key |
+| nonce | 24 bytes | XChaCha20 nonce |
 
 ### Encrypted Payload Contents
 
@@ -227,15 +168,6 @@ Some advanced security features are intentionally not implemented due to DTN con
 | Double Ratchet | Requires synchronized sessions (impossible in DTN) |
 | One-time prekeys | Cannot enforce single-use without server |
 | Per-message key advancement | Messages arrive out of order |
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `core/dtn/src/.../crypto/DmCrypto.kt` | DM encryption/decryption |
-| `core/dtn/src/.../crypto/GroupInviteCrypto.kt` | Group invite ECIES |
-| `core/transport/src/.../nostr/GiftWrapModels.kt` | NIP-17 gift-wrap |
-| `core/dtn/src/.../ControlMsg.kt` | GroupInviteMsg, GroupUpdateMsg |
 
 ---
 

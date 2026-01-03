@@ -16,8 +16,6 @@ Nearby Connections is the primary short-range transport, using BLE for discovery
 
 Each peer connection follows an 8-state finite state machine.
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/session/SessionRegistry.kt:14`
-
 ```mermaid
 stateDiagram-v2
     [*] --> IDLE
@@ -61,16 +59,16 @@ stateDiagram-v2
 
 ### State Transitions
 
-| Transition | Trigger | Source |
-|------------|---------|--------|
-| IDLE → DISCOVERY | Endpoint found via BLE scan | `DiscoveryCallbackFactory.kt:40-76` |
-| DISCOVERY → CONNECTING | Connect attempt scheduled | `ConnectionCoordinator.kt:327-333` |
-| CONNECTING → SESSION_OPEN | Connection success callback | `DefaultSessionController.kt:20-33` |
-| SESSION_OPEN → SYNC | Control sync begins | `NearbyCore.kt:1652-1655` |
-| SYNC → XFER | Sync complete, ready | `NearbyCore.kt:1652-1655` |
-| XFER → DRAIN | All queued data sent | `NearbyCore.kt:3225-3229` |
-| DRAIN → CLOSING | Quiet idle timeout | `ConnectionCoordinator.kt:480-497` |
-| * → IDLE | Disconnect or timeout | `NearbyCore.kt:1245, 1284-1289` |
+| Transition | Trigger |
+|------------|---------|
+| IDLE → DISCOVERY | Endpoint found via BLE scan |
+| DISCOVERY → CONNECTING | Connect attempt scheduled |
+| CONNECTING → SESSION_OPEN | Connection success callback |
+| SESSION_OPEN → SYNC | Control sync begins |
+| SYNC → XFER | Sync complete, ready |
+| XFER → DRAIN | All queued data sent |
+| DRAIN → CLOSING | Quiet idle timeout |
+| * → IDLE | Disconnect or timeout |
 
 ## Control Session Protocol
 
@@ -92,17 +90,7 @@ After Nearby connection is established, a control session is created for bundle 
 
 ### Bundle Selection
 
-Before transfer, the routing layer selects bundles:
-
-```kotlin
-// From RoutingFacade.kt:514-567
-fun selectBundlesForPeer(peerId: PeerId): List<Bundle> {
-    return bundleRepo.getForwardable()
-        .filter { shouldSend(it, peerId) }
-        .sortedBy { it.priority }
-        .take(MAX_BATCH_SIZE)
-}
-```
+Before transfer, the routing layer selects bundles by filtering forwardable bundles, applying routing decisions, sorting by priority, and taking up to the maximum batch size.
 
 ## Connection Lifecycle
 
@@ -157,8 +145,6 @@ sequenceDiagram
 
 The Nearby stack includes a watchdog that monitors connection health.
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/watchdog/Watchdog.kt`
-
 ### Monitored Conditions
 
 | Condition | Detection | Recovery |
@@ -188,17 +174,6 @@ The Nearby stack includes a watchdog that monitors connection health.
 | Handshake time | 100-500ms |
 | Transfer speed | 50-400 Mbps (WiFi Direct) |
 | BLE fallback speed | 100-500 Kbps |
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `core/nearby/src/.../session/SessionRegistry.kt` | Session state machine |
-| `core/nearby/src/.../NearbyCore.kt` | Core transport implementation |
-| `core/nearby/src/.../ConnectionCoordinator.kt` | Connection management |
-| `core/nearby/src/.../DiscoveryCallbackFactory.kt` | Discovery handling |
-| `core/nearby/src/.../control/ControlSession.kt` | Bundle exchange protocol |
-| `core/nearby/src/.../watchdog/Watchdog.kt` | Health monitoring |
 
 ---
 

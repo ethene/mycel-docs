@@ -35,11 +35,7 @@ flowchart TB
     NTA --> GW
 ```
 
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/`
-
 ## Relay Connection States
-
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/diy/transport/RelayConnection.kt:31`
 
 ```mermaid
 stateDiagram-v2
@@ -61,15 +57,10 @@ stateDiagram-v2
 
 ## Default Relays
 
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/NostrTransportConfig.kt`
-
-```kotlin
-val DEFAULT_RELAYS = listOf(
-    "wss://relay.damus.io",
-    "wss://nos.lol",
-    "wss://relay.nostr.band"
-)
-```
+Default relay servers:
+- `wss://relay.damus.io`
+- `wss://nos.lol`
+- `wss://relay.nostr.band`
 
 Users can configure custom relays via MeshConfig.
 
@@ -106,8 +97,6 @@ flowchart TB
     S2 --> G2
     S3 --> G2
 ```
-
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/GiftWrapModels.kt`
 
 ### Security Properties
 
@@ -157,20 +146,9 @@ sequenceDiagram
 
 ## Subscription
 
-The adapter subscribes to gift-wrapped events for the local device.
-
-```kotlin
-// Subscription filter
-val filter = Filter(
-    kinds = listOf(1059),  // Gift-wrap kind
-    tags = mapOf("#p" to listOf(localPubkeyHex)),
-    since = lastSyncTimestamp
-)
-```
+The adapter subscribes to gift-wrapped events (kind 1059) for the local device's public key, filtering from the last sync timestamp.
 
 ## Transport Status
-
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/TransportState.kt:14`
 
 | Status | Meaning |
 |--------|---------|
@@ -178,33 +156,11 @@ val filter = Filter(
 | `UP` | At least one relay connected |
 | `DEGRADED` | Some relays failing |
 
-Status is computed from relay connection states:
-
-```kotlin
-fun computeStatus(): TransportStatus {
-    val connected = relays.count { it.state == Connected }
-    return when {
-        connected == 0 -> DOWN
-        connected < desiredRelays / 2 -> DEGRADED
-        else -> UP
-    }
-}
-```
+Status is computed based on the number of connected relays compared to the desired relay count.
 
 ## Backoff and Retry
 
-Failed connections use exponential backoff.
-
-```kotlin
-// From RelayConnection.kt:93-107
-fun scheduleReconnect() {
-    val delayMs = min(
-        baseDelayMs * 2.pow(attemptCount),
-        maxDelayMs  // 5 minutes
-    )
-    handler.postDelayed({ connect() }, delayMs)
-}
-```
+Failed connections use exponential backoff with a maximum delay of 5 minutes.
 
 | Attempt | Delay |
 |---------|-------|
@@ -216,19 +172,11 @@ fun scheduleReconnect() {
 
 ## Configuration
 
-```kotlin
-// From MeshConfig.kt
-data class Flags(
-    val nostrTransportEnabled: Boolean = true,
-    val nostrRelayUrls: List<String> = DEFAULT_RELAYS
-)
-```
+Nostr transport can be enabled/disabled and relay URLs can be configured.
 
-Toggle via bridge:
-```bash
-meshctl config set nostr_enabled true
-meshctl config set nostr_relays "wss://relay1.example,wss://relay2.example"
-```
+Toggle via meshctl:
+- `meshctl config set nostr_enabled true`
+- `meshctl config set nostr_relays "wss://relay1.example,wss://relay2.example"`
 
 ## Comparison to Nearby
 
@@ -246,18 +194,6 @@ meshctl config set nostr_relays "wss://relay1.example,wss://relay2.example"
 1. **No Nearby peers:** Nostr is fallback when no local peers available
 2. **ACK-based skip:** After ACK via Nearby, skip Nostr copies
 3. **Parallel delivery:** Both transports may be used simultaneously
-
-**Source:** `core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/NostrTransportManager.kt`
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `NostrTransportAdapter.kt` | Transport interface implementation |
-| `RelayPool.kt` | Relay connection management |
-| `RelayConnection.kt` | WebSocket handling |
-| `GiftWrapModels.kt` | NIP-17 encryption |
-| `NostrTransportManager.kt` | Send/receive coordination |
 
 ---
 

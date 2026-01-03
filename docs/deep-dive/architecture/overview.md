@@ -52,32 +52,32 @@ flowchart TB
 
 ### Application Layer
 
-| Component | Purpose | Source |
-|-----------|---------|--------|
-| **UI Screens** | Jetpack Compose screens for chat, contacts, settings | `feature/ui/src/.../screens/` |
-| **ViewModels** | State management, UI logic | `feature/ui/src/.../viewmodels/` |
-| **MeshService** | Foreground service, wake locks, lifecycle | `app/src/.../service/MeshService.kt` |
+| Component | Purpose |
+|-----------|---------|
+| **UI Screens** | Jetpack Compose screens for chat, contacts, settings |
+| **ViewModels** | State management, UI logic |
+| **MeshService** | Foreground service, wake locks, lifecycle |
 
 The Application layer is purely UI-focused. It never handles raw bundles or transport connections directly.
 
 ### DTN Layer
 
-| Component | Purpose | Source |
-|-----------|---------|--------|
-| **BundleRepository** | Bundle storage, status tracking, TTL management | `core/dtn/.../BundleRepository.kt` |
-| **RoutingFacade** | PRoPHET + Spray-and-Wait routing decisions | `core/nearby/.../RoutingFacade.kt` |
-| **AckPathLearner** | ACK processing, route improvement | `core/nearby/.../AckPathLearner.kt` |
-| **MembershipCrdt** | 2P-Set CRDT for group membership sync | `core/dtn/.../MembershipCrdt.kt` |
+| Component | Purpose |
+|-----------|---------|
+| **BundleRepository** | Bundle storage, status tracking, TTL management |
+| **RoutingFacade** | PRoPHET + Spray-and-Wait routing decisions |
+| **AckPathLearner** | ACK processing, route improvement |
+| **MembershipCrdt** | 2P-Set CRDT for group membership sync |
 
 The DTN layer handles message storage, routing decisions, and delivery tracking. It is transport-agnostic.
 
 ### Transport Layer
 
-| Component | Purpose | Source |
-|-----------|---------|--------|
-| **TransportRegistry** | Unified API for all transports | `core/transport/.../TransportRegistry.kt` |
-| **Nearby Connections** | BLE + WiFi Direct via Google Play Services | `core/nearby/` |
-| **Nostr Transport** | WebSocket relay pool with NIP-17/44 encryption | `core/transport/.../nostr/` |
+| Component | Purpose |
+|-----------|---------|
+| **TransportRegistry** | Unified API for all transports |
+| **Nearby Connections** | BLE + WiFi Direct via Google Play Services |
+| **Nostr Transport** | WebSocket relay pool with NIP-17/44 encryption |
 
 The Transport layer handles physical message delivery. Multiple transports form one unified network.
 
@@ -125,16 +125,6 @@ sequenceDiagram
     B_DTN->>C_DTN: Send DeliveryAck
     C_DTN->>A_DTN: Relay DeliveryAck
 ```
-
-## Source Files
-
-| File | Purpose | Lines |
-|------|---------|-------|
-| `core/dtn/src/.../BundleRepository.kt` | Bundle persistence and status | ~1800 |
-| `core/nearby/src/.../RoutingFacade.kt` | Routing algorithm implementation | ~700 |
-| `core/nearby/src/.../NearbyCore.kt` | Nearby transport core | ~3500 |
-| `core/transport/src/.../NostrTransportAdapter.kt` | Nostr relay pool | ~400 |
-| `app/src/.../service/MeshService.kt` | Foreground service | ~300 |
 
 ---
 

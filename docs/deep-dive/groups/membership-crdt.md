@@ -4,8 +4,6 @@ Group membership is synchronized using a 2P-Set CRDT (Two-Phase Set with tombsto
 
 ## Overview
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/group/MembershipCrdt.kt`
-
 | Property | Value |
 |----------|-------|
 | **Algorithm** | 2P-Set with tombstones |
@@ -16,71 +14,27 @@ Group membership is synchronized using a 2P-Set CRDT (Two-Phase Set with tombsto
 
 ### MemberEntry
 
-**Source:** `MembershipCrdt.kt:14-65`
+Each member entry contains:
 
-```kotlin
-data class MemberEntry(
-    val userId: ByteArray,        // 32 bytes - User's public key hash
-    val addedAt: Long,            // Timestamp when added (ms)
-    val addedBy: ByteArray,       // 32 bytes - Admin who added
-    val addedSig: ByteArray,      // 64 bytes - Ed25519 signature of add
-    val removedAt: Long? = null,  // Null if active, timestamp if removed
-    val removedBy: ByteArray? = null,  // Admin who removed
-    val removedSig: ByteArray? = null  // Signature of remove
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| userId | 32 bytes | User's public key hash |
+| addedAt | 8 bytes | Timestamp when added (ms) |
+| addedBy | 32 bytes | Admin who added this member |
+| addedSig | 64 bytes | Ed25519 signature of add operation |
+| removedAt | 8 bytes | Null if active, timestamp if removed |
+| removedBy | 32 bytes | Admin who removed (if applicable) |
+| removedSig | 64 bytes | Signature of remove operation |
 
 ### MembershipCrdt
 
-**Source:** `MembershipCrdt.kt:76-163`
-
-```kotlin
-data class MembershipCrdt(
-    val groupId: ByteArray,                           // 32 bytes
-    val members: Map<String, MemberEntry> = emptyMap() // Key: userIdHex
-)
-```
+The CRDT structure contains:
+- **groupId** - 32-byte group identifier
+- **members** - Map of userIdHex → MemberEntry
 
 ## Merge Semantics
 
-**Source:** `MembershipCrdt.kt:88-119`
-
 The merge operation follows 2P-Set rules:
-
-```kotlin
-fun merge(other: MembershipCrdt): MembershipCrdt {
-    val merged = members.toMutableMap()
-
-    for ((userIdHex, remoteEntry) in other.members) {
-        val localEntry = merged[userIdHex]
-
-        merged[userIdHex] = when {
-            // New member we don't know about
-            localEntry == null -> remoteEntry
-
-            // Both have removal - keep later timestamp
-            localEntry.removedAt != null && remoteEntry.removedAt != null ->
-                if (remoteEntry.removedAt > localEntry.removedAt) remoteEntry
-                else localEntry
-
-            // Remote has removal, local doesn't - removal wins
-            remoteEntry.removedAt != null -> remoteEntry
-
-            // Local has removal, remote doesn't - removal wins
-            localEntry.removedAt != null -> localEntry
-
-            // Neither removed - keep earlier add timestamp
-            else ->
-                if (remoteEntry.addedAt < localEntry.addedAt) remoteEntry
-                else localEntry
-        }
-    }
-
-    return MembershipCrdt(groupId, merged)
-}
-```
-
-### Merge Rules Summary
 
 | Scenario | Rule |
 |----------|------|
@@ -88,6 +42,15 @@ fun merge(other: MembershipCrdt): MembershipCrdt {
 | Both removed | Later timestamp wins |
 | One removed | Removal wins |
 | Neither removed | Earlier add wins |
+
+### Merge Algorithm
+
+1. For each member in the remote state:
+   - If unknown locally → accept the remote entry
+   - If both have removal → keep the one with later timestamp
+   - If remote has removal, local doesn't → removal wins
+   - If local has removal, remote doesn't → removal wins
+   - If neither removed → keep the earlier add timestamp
 
 ## State Diagram
 
@@ -111,21 +74,11 @@ stateDiagram-v2
 
 ## Active Membership
 
-**Source:** `MembershipCrdt.kt:124-137`
-
-```kotlin
-fun getActiveMembers(): List<MemberEntry> =
-    members.values.filter { it.isActive }
-
-fun isMember(userIdHex: String): Boolean =
-    members[userIdHex]?.isActive == true
-
-fun isRemoved(userIdHex: String): Boolean =
-    members[userIdHex]?.isRemoved == true
-
-fun activeCount(): Int =
-    members.values.count { it.isActive }
-```
+The CRDT provides queries for membership state:
+- **getActiveMembers()** - Returns all members without removal tombstones
+- **isMember(userIdHex)** - Checks if a user is currently active
+- **isRemoved(userIdHex)** - Checks if a user has been removed
+- **activeCount()** - Returns the number of active members
 
 ## Signature Verification
 
@@ -155,16 +108,7 @@ sequenceDiagram
 
 ## Tombstone Semantics
 
-Removed members are **never fully deleted** - they become tombstones:
-
-```kotlin
-// Check if removed (has tombstone)
-val entry = crdt.members["abc123"]
-if (entry?.isRemoved == true) {
-    // User was removed at entry.removedAt
-    // by admin entry.removedBy
-}
-```
+Removed members are **never fully deleted** - they become tombstones.
 
 **Why tombstones?**
 - Prevents re-add from stale replicas
@@ -173,46 +117,20 @@ if (entry?.isRemoved == true) {
 
 ## Serialization
 
-**Source:** `MembershipCrdt.kt:144-148`
-
-```kotlin
-fun toCbor(): ByteArray = Cbor.encodeToByteArray(this)
-
-companion object {
-    fun fromCbor(bytes: ByteArray): MembershipCrdt =
-        Cbor.decodeFromByteArray(bytes)
-
-    fun empty(groupId: ByteArray) =
-        MembershipCrdt(groupId, emptyMap())
-}
-```
+The CRDT is serialized using CBOR (Concise Binary Object Representation) for efficient transmission over the mesh network.
 
 ## Example Merge Scenario
 
-```
-Initial state on Device A:
-  Alice: added@100, active
-  Bob: added@200, active
+| Device | Before Merge |
+|--------|--------------|
+| A | Alice: added@100, active; Bob: added@200, active |
+| B | Alice: added@100, active; Bob: added@200, removed@300; Carol: added@250, active |
 
-Initial state on Device B:
-  Alice: added@100, active
-  Bob: added@200, removed@300
-  Carol: added@250, active
-
-After merge (A receives B's state):
-  Alice: added@100, active        (unchanged)
-  Bob: added@200, removed@300     (removal wins)
-  Carol: added@250, active        (new member)
-```
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `MembershipCrdt.kt` | CRDT implementation |
-| `MembershipCrdtTest.kt` | Unit tests |
-| `GroupStoreCrdtTest.kt` | Integration tests |
-| `GroupStore.kt` | CRDT storage integration |
+| After Merge (A receives B's state) |
+|-----------------------------------|
+| Alice: added@100, active (unchanged) |
+| Bob: added@200, removed@300 (removal wins) |
+| Carol: added@250, active (new member) |
 
 ---
 

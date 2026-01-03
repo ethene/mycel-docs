@@ -2,8 +2,6 @@
 
 Control messages coordinate DTN routing, group management, and delivery confirmation. They are transmitted as bundle payloads with a `msgType` field.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt`
-
 ## Message Type Reference
 
 | msgType | Class | Purpose |
@@ -26,32 +24,22 @@ Control messages coordinate DTN routing, group management, and delivery confirma
 
 Topic subscription management for groups and channels.
 
-```kotlin
-data class SubMsg(
-    val topicId: ByteArray,      // Topic/channel/group ID (32 bytes)
-    val action: SubAction,       // SUBSCRIBE or UNSUBSCRIBE
-    val expiresAt: Long? = null, // Optional expiration
-    val timestamp: Long
-)
-```
-
 | Field | Size | Description |
 |-------|------|-------------|
 | topicId | 32 bytes | Topic identifier |
 | action | 1 byte | SUBSCRIBE (0) or UNSUBSCRIBE (1) |
 | expiresAt | 8 bytes | Optional expiration timestamp |
+| timestamp | 8 bytes | Message creation time |
 
 ### HopAck (msgType=2)
 
 Confirms custody transfer at each hop.
 
-```kotlin
-data class HopAck(
-    val bundleId: ByteArray,  // Acknowledged bundle (32 bytes)
-    val fromNode: ByteArray,  // Acknowledging node's pubkey (32 bytes)
-    val timestamp: Long
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| bundleId | 32 bytes | Acknowledged bundle ID |
+| fromNode | 32 bytes | Acknowledging node's public key |
+| timestamp | 8 bytes | Acknowledgment time |
 
 Used for:
 - Spray-and-Wait copy budget management
@@ -61,23 +49,21 @@ Used for:
 
 **Primary ACK mechanism.** Signed end-to-end acknowledgment from the destination.
 
-```kotlin
-data class DeliveryAck(
-    val msgId: ByteArray,           // Original bundle ID (32 bytes)
-    val toUid: ByteArray,           // Origin UID (32 bytes)
-    val fromUid: ByteArray,         // Destination UID (32 bytes)
-    val deliveredAtMs: Long,        // Delivery timestamp
-    val status: Byte = 1,           // 1 = delivered to app
-    val ackType: Byte = 1,          // 1 = RECIPIENT
-    val ackH3r5: Long? = null,      // Coarse geo hint
-    val ackH3r7: Long? = null,      // Fine geo hint
-    val hopCount: Int? = null,      // Observed hop count
-    val latencyMs: Long? = null,    // Delivery latency
-    val transportHint: String?,     // "nearby" or "nostr"
-    val path: List<DeliveryPathHop>?, // Per-hop metadata
-    val sig: ByteArray              // Ed25519 signature (64 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| msgId | 32 bytes | Original bundle ID |
+| toUid | 32 bytes | Origin UID |
+| fromUid | 32 bytes | Destination UID |
+| deliveredAtMs | 8 bytes | Delivery timestamp |
+| status | 1 byte | 1 = delivered to app |
+| ackType | 1 byte | 1 = RECIPIENT |
+| ackH3r5 | 8 bytes | Coarse geo hint (optional) |
+| ackH3r7 | 8 bytes | Fine geo hint (optional) |
+| hopCount | 4 bytes | Observed hop count (optional) |
+| latencyMs | 8 bytes | Delivery latency (optional) |
+| transportHint | variable | "nearby" or "nostr" |
+| path | variable | Per-hop metadata (optional) |
+| sig | 64 bytes | Ed25519 signature |
 
 **Key Properties:**
 - **Signed** by destination - proves authentic delivery
@@ -88,14 +74,12 @@ data class DeliveryAck(
 
 Signed cancellation instruction.
 
-```kotlin
-data class DeliveryCancel(
-    val msgId: ByteArray,       // Bundle to cancel (32 bytes)
-    val reason: Byte,           // 1=ACKED, 2=EXPIRED, 3=RECALLED
-    val issuedByUid: ByteArray, // Issuer UID (32 bytes)
-    val sig: ByteArray          // Ed25519 signature (64 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| msgId | 32 bytes | Bundle to cancel |
+| reason | 1 byte | Cancellation reason |
+| issuedByUid | 32 bytes | Issuer UID |
+| sig | 64 bytes | Ed25519 signature |
 
 | Reason | Value | Description |
 |--------|-------|-------------|
@@ -107,13 +91,11 @@ data class DeliveryCancel(
 
 Encrypted group invitation for private groups.
 
-```kotlin
-data class GroupInviteMsg(
-    val encryptedPayload: ByteArray, // ECIES-encrypted invite
-    val ephemeralPubKey: ByteArray,  // X25519 ephemeral (32 bytes)
-    val nonce: ByteArray             // XChaCha20-Poly1305 nonce (24 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| encryptedPayload | variable | ECIES-encrypted invite |
+| ephemeralPubKey | 32 bytes | X25519 ephemeral key |
+| nonce | 24 bytes | XChaCha20-Poly1305 nonce |
 
 **Encryption:** ECIES with XChaCha20-Poly1305
 
@@ -127,12 +109,10 @@ The encrypted payload contains:
 
 Membership changes for existing groups.
 
-```kotlin
-data class GroupUpdateMsg(
-    val encryptedPayload: ByteArray, // AES-GCM encrypted update
-    val nonce: ByteArray             // AES-GCM nonce (12 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| encryptedPayload | variable | AES-GCM encrypted update |
+| nonce | 12 bytes | AES-GCM nonce |
 
 **Encryption:** AES-256-GCM with group symmetric key
 
@@ -145,17 +125,15 @@ The encrypted payload contains:
 
 Public group discovery broadcast.
 
-```kotlin
-data class GroupAnnounceMsg(
-    val groupIdString: String,    // "group:hiking-club"
-    val shortId: String,          // 10-char hash
-    val displayName: String,      // Human-readable name
-    val description: String?,     // Optional description
-    val creatorUidHex: String,    // Creator's UID (64 hex chars)
-    val createdAt: Long,          // Creation timestamp
-    val creatorSig: ByteArray     // Ed25519 signature (64 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| groupIdString | variable | Group identifier (e.g., "group:hiking-club") |
+| shortId | 10 chars | 10-character hash |
+| displayName | variable | Human-readable name |
+| description | variable | Optional description |
+| creatorUidHex | 64 chars | Creator's UID (hex) |
+| createdAt | 8 bytes | Creation timestamp |
+| creatorSig | 64 bytes | Ed25519 signature |
 
 **Key Properties:**
 - Plaintext (not encrypted)
@@ -167,56 +145,42 @@ data class GroupAnnounceMsg(
 
 Network quality metrics for intelligent routing.
 
-```kotlin
-data class LinkMetrics(
-    val clusterTag: ByteArray, // MycTagStar (32 bytes)
-    val gatewayScore: Float,   // 0.0-1.0
-    val queueLength: Int,      // Outbound queue size
-    val deltaIn: Int,          // Bundles received
-    val deltaOut: Int          // Bundles forwarded
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| clusterTag | 32 bytes | MycTagStar |
+| gatewayScore | 4 bytes | 0.0-1.0 score |
+| queueLength | 4 bytes | Outbound queue size |
+| deltaIn | 4 bytes | Bundles received |
+| deltaOut | 4 bytes | Bundles forwarded |
 
 ### Payment (msgType=5)
 
 Micropayment for routing incentives (future use).
 
-```kotlin
-data class Payment(
-    val payer: ByteArray,   // Payer pubkey (32 bytes)
-    val payee: ByteArray,   // Payee pubkey (32 bytes)
-    val amount: Long,       // Payment amount
-    val nonce: Long,        // Replay prevention
-    val sig: ByteArray      // Payer signature (64 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| payer | 32 bytes | Payer public key |
+| payee | 32 bytes | Payee public key |
+| amount | 8 bytes | Payment amount |
+| nonce | 8 bytes | Replay prevention |
+| sig | 64 bytes | Payer signature |
 
 ### ConfigUpdate (msgType=12)
 
 Remote configuration from trusted manager.
 
-```kotlin
-data class ConfigUpdate(
-    val version: Long,
-    val issuedAtMs: Long,
-    val expiresAtMs: Long?,
-    val flags: Map<String, String>,
-    val issuerKey: ByteArray,  // Trusted key (32 bytes)
-    val signature: ByteArray   // Ed25519 signature (64 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| version | 8 bytes | Config version |
+| issuedAtMs | 8 bytes | Issue timestamp |
+| expiresAtMs | 8 bytes | Expiration (optional) |
+| flags | variable | Key-value pairs |
+| issuerKey | 32 bytes | Trusted key |
+| signature | 64 bytes | Ed25519 signature |
 
 ## Serialization
 
-All control messages use CBOR serialization:
-
-```kotlin
-// Encode
-val bytes = controlMsg.toCbor()
-
-// Decode
-val msg = ControlMsg.fromCbor(bytes)
-```
+All control messages use CBOR (Concise Binary Object Representation) serialization for efficient binary encoding.
 
 ## Routing Priority
 
@@ -230,14 +194,6 @@ Control messages have different priorities:
 | GroupInvite | NORMAL (1) | User action |
 | GroupUpdate | NORMAL (1) | Membership sync |
 | LinkMetrics | BULK (2) | Background telemetry |
-
-## Source Files
-
-| File | Purpose | Lines |
-|------|---------|-------|
-| `ControlMsg.kt` | All control message definitions | Full file |
-| `BundleRepository.kt` | Control message handling | 1580-1700 |
-| `AckPathLearner.kt` | DeliveryAck processing | 45-120 |
 
 ---
 

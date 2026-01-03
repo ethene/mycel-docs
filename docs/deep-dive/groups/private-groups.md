@@ -27,45 +27,29 @@ sequenceDiagram
 
 ### Group Record
 
-```kotlin
-data class GroupRecord(
-    val groupId: String,         // "group:unique-name"
-    val shortId: String,         // 10-char hash for routing
-    val displayName: String,     // Human-readable name
-    val groupKey: ByteArray,     // AES-256 symmetric key (32 bytes)
-    val adminPubKey: ByteArray,  // Creator's public key
-    val createdAt: Long,         // Creation timestamp
-    val isPublic: Boolean        // Public discovery enabled
-)
-```
+Each group record contains:
+- **groupId** - Unique identifier (e.g., "group:team-chat")
+- **shortId** - 10-character hash for routing
+- **displayName** - Human-readable name
+- **groupKey** - AES-256 symmetric key (32 bytes)
+- **adminPubKey** - Creator's public key
+- **createdAt** - Creation timestamp
+- **isPublic** - Whether public discovery is enabled
 
 ## Group Key
 
-Each group has a 32-byte AES-256 key for message encryption.
+Each group has a 32-byte AES-256 key for message encryption, generated using `SecureRandom`.
 
 ### Key Generation
 
-```kotlin
-fun createGroup(name: String): GroupRecord {
-    val groupKey = SecureRandom().generateSeed(32)
-    val groupId = "group:${name.lowercase().replace(" ", "-")}"
-    val shortId = SHA256(groupId).take(10).base32()
-
-    return GroupRecord(
-        groupId = groupId,
-        shortId = shortId,
-        displayName = name,
-        groupKey = groupKey,
-        adminPubKey = localPubKey,
-        createdAt = System.currentTimeMillis(),
-        isPublic = false
-    )
-}
-```
+When creating a group:
+1. Generate 32 random bytes for the group key
+2. Create group ID from the name
+3. Compute short ID as base32 of first 6 bytes of SHA256(groupId)
 
 ## Invitations
 
-Inviting a member requires encrypting the group key to their public key.
+Inviting a member requires encrypting the group key to their public key using ECIES with XChaCha20-Poly1305.
 
 ### Invite Flow
 
@@ -88,65 +72,40 @@ sequenceDiagram
 
 ### GroupInviteMsg
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:429-471`
-
-```kotlin
-data class GroupInviteMsg(
-    val encryptedPayload: ByteArray, // ECIES-encrypted invite
-    val ephemeralPubKey: ByteArray,  // X25519 (32 bytes)
-    val nonce: ByteArray             // XChaCha20 (24 bytes)
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| encryptedPayload | Variable | ECIES-encrypted invite |
+| ephemeralPubKey | 32 bytes | X25519 ephemeral key |
+| nonce | 24 bytes | XChaCha20 nonce |
 
 ### Encrypted Payload Contents
 
-```kotlin
-data class GroupInvitePayload(
-    val groupId: String,
-    val displayName: String,
-    val groupKey: ByteArray,     // The shared encryption key
-    val adminPubKey: ByteArray,
-    val invitedAt: Long
-)
-```
+The invite payload contains:
+- Group ID and display name
+- The shared encryption key (32 bytes)
+- Admin public key
+- Invitation timestamp
 
 ## Membership CRDT
 
 Membership uses a 2P-Set CRDT (Two-Phase Set) for conflict-free synchronization.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/crdt/MembershipCrdt.kt`
-
 ### 2P-Set Structure
 
-```kotlin
-data class MembershipCrdt(
-    val adds: Set<MemberEntry>,    // Members added
-    val removes: Set<MemberEntry>  // Members removed (tombstones)
-)
+- **adds** - Set of member entries that have been added
+- **removes** - Set of member entries that have been removed (tombstones)
 
-data class MemberEntry(
-    val uid: ByteArray,      // Member UID
-    val addedAt: Long,       // Timestamp
-    val addedBy: ByteArray   // Admin who added
-)
-```
+Each member entry contains:
+- **uid** - Member's user ID
+- **addedAt** - Timestamp of addition
+- **addedBy** - Admin who added this member
 
 ### Merge Operation
 
-```kotlin
-fun merge(local: MembershipCrdt, remote: MembershipCrdt): MembershipCrdt {
-    return MembershipCrdt(
-        adds = local.adds + remote.adds,       // Union of adds
-        removes = local.removes + remote.removes // Union of removes
-    )
-}
-
-fun activeMembers(crdt: MembershipCrdt): Set<ByteArray> {
-    val addedUids = crdt.adds.map { it.uid }.toSet()
-    val removedUids = crdt.removes.map { it.uid }.toSet()
-    return addedUids - removedUids  // Remove trumps add
-}
-```
+To merge two CRDT states:
+1. Union all entries from both `adds` sets
+2. Union all entries from both `removes` sets
+3. Active members = adds - removes (remove trumps add)
 
 ### Properties
 
@@ -163,30 +122,16 @@ After initial invite, membership changes use GroupUpdateMsg.
 
 ### GroupUpdateMsg
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:484-523`
-
-```kotlin
-data class GroupUpdateMsg(
-    val encryptedPayload: ByteArray, // AES-GCM encrypted
-    val nonce: ByteArray             // 12 bytes
-)
-```
+| Field | Size | Description |
+|-------|------|-------------|
+| encryptedPayload | Variable | AES-GCM encrypted update |
+| nonce | 12 bytes | AES-GCM nonce |
 
 The encrypted payload contains:
-
-```kotlin
-data class GroupUpdatePayload(
-    val action: MembershipAction,  // ADD or REMOVE
-    val targetUid: ByteArray,      // Member being added/removed
-    val adminSig: ByteArray,       // Admin signature
-    val timestamp: Long
-)
-
-enum class MembershipAction {
-    ADD_MEMBER,
-    REMOVE_MEMBER
-}
-```
+- Action (ADD_MEMBER or REMOVE_MEMBER)
+- Target user UID
+- Admin signature
+- Timestamp
 
 ### Update Flow
 
@@ -207,22 +152,10 @@ sequenceDiagram
 
 ## Message Encryption
 
-Group messages use the shared symmetric key.
-
-```kotlin
-fun encryptGroupMessage(
-    plaintext: ByteArray,
-    groupKey: ByteArray
-): EncryptedPayload {
-    val nonce = SecureRandom().generateSeed(12)
-    val ciphertext = AesGcm.encrypt(plaintext, groupKey, nonce)
-
-    return EncryptedPayload(
-        ciphertext = ciphertext,
-        nonce = nonce
-    )
-}
-```
+Group messages use the shared symmetric key with AES-256-GCM:
+1. Generate random 12-byte nonce
+2. Encrypt plaintext with group key and nonce
+3. Send ciphertext + nonce in bundle
 
 ## Routing
 
@@ -230,22 +163,11 @@ Group messages are routed via interest-based filtering.
 
 ### Interest Filter
 
-Members subscribe to the group topic:
-
-```kotlin
-val topicHash = SHA256(groupId.toByteArray())
-interestFilter.add(topicHash)
-```
+Members subscribe to the group topic (SHA256 of groupId). When a bundle arrives with a matching topic, it is delivered.
 
 ### Bundle Addressing
 
-```kotlin
-val bundle = Bundle(
-    dstTopic = topicHash,  // Group topic
-    dstUser = null,        // Not specific user
-    dstNode = null         // Not specific device
-)
-```
+Group bundles use `dstTopic` instead of `dstUser` or `dstNode`, allowing them to reach all subscribers.
 
 ## Public vs Private Groups
 
@@ -270,15 +192,6 @@ val bundle = Bundle(
 ### Admin Authority
 - Only admin can add/remove members
 - Admin signatures verified before applying changes
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `core/dtn/src/.../crdt/MembershipCrdt.kt` | CRDT implementation |
-| `core/dtn/src/.../ControlMsg.kt` | GroupInviteMsg, GroupUpdateMsg |
-| `core/dtn/src/.../crypto/GroupInviteCrypto.kt` | Invite encryption |
-| `core/dtn/src/.../BundleRepository.kt` | Message handling |
 
 ---
 

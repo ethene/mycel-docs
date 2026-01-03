@@ -4,8 +4,6 @@ Channels are read-only broadcast conversations where only authorized authors can
 
 ## Overview
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/`
-
 | Property | Value |
 |----------|-------|
 | **Read Access** | Anyone can subscribe |
@@ -15,16 +13,6 @@ Channels are read-only broadcast conversations where only authorized authors can
 
 ## Conversation Types
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/ChannelDescriptor.kt:8-25`
-
-```kotlin
-enum class ConversationType {
-    GROUP,     // Anyone who joins can post (public or private)
-    CHANNEL,   // Only authorized authors can post
-    BROADCAST  // Local mesh broadcast (special case)
-}
-```
-
 | Type | Read | Write | Example |
 |------|------|-------|---------|
 | GROUP | Members only | Any member | Private chat groups |
@@ -33,15 +21,6 @@ enum class ConversationType {
 
 ## Channel Kinds
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/ChannelKind.kt:7-17`
-
-```kotlin
-enum class ChannelKind(val wireName: String) {
-    MESH_LOCAL("mesh_local"),  // Local mesh, no WAN
-    GLOBAL("global")           // WAN/relay backed (future)
-}
-```
-
 | Kind | Transport | Range | Status |
 |------|-----------|-------|--------|
 | `MESH_LOCAL` | Nearby only | Local mesh | Implemented |
@@ -49,19 +28,14 @@ enum class ChannelKind(val wireName: String) {
 
 ## Channel Descriptor
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/ChannelDescriptor.kt:38-76`
-
-```kotlin
-data class ChannelDescriptor(
-    val id: ChannelId,
-    val kind: ChannelKind,
-    val displayName: String,
-    val description: String? = null,
-    val ownerUidHex: String? = null,
-    val conversationType: ConversationType = ConversationType.CHANNEL,
-    val isPrivate: Boolean = false
-)
-```
+Each channel has a descriptor containing:
+- **id** - Channel identifier
+- **kind** - MESH_LOCAL or GLOBAL
+- **displayName** - Human-readable name
+- **description** - Optional description
+- **ownerUidHex** - Channel owner's UID
+- **conversationType** - CHANNEL, GROUP, or BROADCAST
+- **isPrivate** - Whether the channel is private
 
 ### Computed Properties
 
@@ -77,19 +51,6 @@ data class ChannelDescriptor(
 
 A special built-in channel for mesh-wide broadcasts.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/mesh/`
-
-### MeshBroadcastPayload
-
-```kotlin
-data class MeshBroadcastPayload(
-    val text: String,
-    val senderUidHex: String,
-    val senderDisplayName: String?,
-    val timestamp: Long
-)
-```
-
 ### Characteristics
 
 | Property | Value |
@@ -98,6 +59,14 @@ data class MeshBroadcastPayload(
 | Kind | MESH_LOCAL |
 | Encryption | None (plaintext) |
 | Author verification | Signature check |
+
+### Payload
+
+Each broadcast contains:
+- Message text
+- Sender UID
+- Sender display name
+- Timestamp
 
 ## Channel vs Group Comparison
 
@@ -111,17 +80,7 @@ data class MeshBroadcastPayload(
 
 ## Subscription
 
-Subscribing to a channel adds its topic to the interest filter.
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/ChannelSubscriptionStore.kt`
-
-```kotlin
-fun subscribe(channelId: ChannelId) {
-    val topicKey = channelId.topicKey()
-    interestFilter.add(topicKey)
-    subscriptions.add(channelId)
-}
-```
+Subscribing to a channel adds its topic to the interest filter. When bundles arrive with matching topics, they are delivered to subscribers.
 
 ## Message Flow
 
@@ -160,35 +119,13 @@ sequenceDiagram
 
 ## Author Verification
 
-Only messages from authorized authors are accepted.
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/conversation/channel/ChannelAuthorStore.kt`
-
-```kotlin
-fun isAuthorized(channelId: ChannelId, authorUidHex: String): Boolean {
-    val channel = channels[channelId] ?: return false
-    return channel.authorizedAuthors.contains(authorUidHex)
-}
-```
+Only messages from authorized authors are accepted. Each channel maintains a list of authorized author UIDs, and incoming messages are verified against this list.
 
 ## TTL
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/BundleRepository.kt:236`
 
 | Message Type | TTL |
 |--------------|-----|
 | Channel broadcast | 4 hours (14400s) |
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `ChannelKind.kt` | Channel type enum (MESH_LOCAL, GLOBAL) |
-| `ChannelDescriptor.kt` | Channel metadata |
-| `ChannelId.kt` | Channel identifier |
-| `ChannelSubscriptionStore.kt` | Subscription management |
-| `ChannelAuthorStore.kt` | Author verification |
-| `MeshBroadcastChannel.kt` | Mesh broadcast implementation |
 
 ---
 

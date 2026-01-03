@@ -6,16 +6,18 @@ Understanding the "why" before the "how" helps everything else make sense.
 
 Traditional messengers assume the internet exists. They work like this:
 
-```
-Your Phone → Internet → Server → Internet → Friend's Phone
+```mermaid
+flowchart LR
+    A[Your Phone] --> B[Internet] --> C[Server] --> D[Internet] --> E[Friend's Phone]
 ```
 
 When any part of that chain breaks, communication stops.
 
 **Mycel works differently:**
 
-```
-Your Phone → Nearby Phones → ... → Friend's Phone
+```mermaid
+flowchart LR
+    A[Your Phone] --> B[Nearby Phones] --> C[...] --> D[Friend's Phone]
 ```
 
 Messages travel through people, not infrastructure.

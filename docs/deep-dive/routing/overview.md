@@ -46,47 +46,26 @@ flowchart TD
 
 ## Routing Facade
 
-All routing decisions flow through `RoutingFacade`, which coordinates the algorithms.
-
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt`
+All routing decisions flow through the RoutingFacade, which coordinates the algorithms.
 
 ### Key Methods
 
-| Method | Purpose | Lines |
-|--------|---------|-------|
-| `shouldSend(bundle, peer)` | Master decision: should we send this bundle to this peer? | 180-255 |
-| `updateProbabilities(peer)` | Update PRoPHET P-values on encounter | 359-389 |
-| `makeCopyPlan(bundle)` | Create Spray-and-Wait copy plan | 514-567 |
-| `onAckReceived(bundle)` | Process ACK, improve routing | 620-680 |
+| Method | Purpose |
+|--------|---------|
+| `shouldSend(bundle, peer)` | Master decision: should we send this bundle to this peer? |
+| `updateProbabilities(peer)` | Update PRoPHET P-values on encounter |
+| `makeCopyPlan(bundle)` | Create Spray-and-Wait copy plan |
+| `onAckReceived(bundle)` | Process ACK, improve routing |
 
 ### Decision Flow
 
-```kotlin
-// Simplified from RoutingFacade.kt
-fun shouldSend(bundle: Bundle, peer: PeerId): Boolean {
-    // 1. Already delivered?
-    if (bundle.status == DEL) return false
+The routing decision follows this logic:
 
-    // 2. Already sent to this peer?
-    if (bundle.sentTo.contains(peer)) return false
-
-    // 3. Is peer the destination?
-    if (peer == bundle.destination) return true
-
-    // 4. Does peer have high P-value?
-    val pValue = routingTable.getProbability(peer, bundle.destination)
-    if (pValue > FORWARD_THRESHOLD) return true
-
-    // 5. Do we have copy budget?
-    val plan = copyPlans[bundle.id]
-    if (plan?.budgetRemaining > 0) {
-        plan.budgetRemaining--
-        return true
-    }
-
-    return false
-}
-```
+1. **Already delivered?** → Skip if bundle status is DEL
+2. **Already sent to this peer?** → Skip duplicates
+3. **Is peer the destination?** → Direct delivery
+4. **Does peer have high P-value?** → Forward via PRoPHET
+5. **Do we have copy budget?** → Spray copies to peers
 
 ## PRoPHET Algorithm
 
@@ -119,14 +98,7 @@ Controls replication to prevent flooding.
 
 ### Budget Expansion
 
-If no delivery after 60 seconds, the budget doubles (up to max):
-
-```kotlin
-// From RoutingFacade.kt:540-550
-if (now - plan.createdAt > COPY_INCREASE_TIMEOUT_MS) {
-    plan.budgetRemaining = min(plan.budgetRemaining * 2, MAX_COPIES)
-}
-```
+If no delivery after 60 seconds, the budget doubles (up to max).
 
 ## ACK-Based Path Learning
 
@@ -136,19 +108,9 @@ When a DeliveryAck is received, routing improves:
 2. **Record successful route** in history
 3. **Skip redundant copies** via other transports
 
-**Source:** `core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/AckPathLearner.kt`
-
 ### Route Penalty
 
-On ACK timeout, the P-value for that route is penalized:
-
-```kotlin
-// From RoutingTableStore.kt
-fun applyRoutePenalty(destination: PeerId) {
-    val current = getProbability(destination)
-    setProbability(destination, current * 0.85) // 15% penalty
-}
-```
+On ACK timeout, the P-value for that route is penalized by 15% (multiplied by 0.85).
 
 ## Transport Selection
 
@@ -171,8 +133,6 @@ When multiple transports are available, selection is based on:
 
 H3 hexagonal cells provide geographic routing hints.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/identity/GeoCellProvider.kt`
-
 ### Resolution Levels
 
 | Level | Cell Size | Use Case |
@@ -184,16 +144,11 @@ H3 hexagonal cells provide geographic routing hints.
 
 ### Geo Decision
 
-```kotlin
-fun shouldSendViaGeo(destCell: H3Index, neighborCell: H3Index): Boolean {
-    return when {
-        destCell == neighborCell -> true        // Same cell
-        h3Distance(neighborCell, destCell) >= 4 -> false  // Too far
-        isStaleHint(neighborCell) -> false      // Older than 6h
-        else -> true
-    }
-}
-```
+Geo routing decisions are based on:
+- Same cell → prefer this neighbor
+- H3 distance ≥ 4 → too far, avoid
+- Stale hint (> 6h) → ignore geo data
+- Otherwise → use standard routing
 
 ## Bundle Lifecycle
 
@@ -228,18 +183,6 @@ stateDiagram-v2
 | `DEL` | Delivered to destination |
 | `EXP` | Expired (TTL exceeded) |
 | `CANCELLED` | Explicitly removed |
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt:86-104`
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `core/nearby/src/.../RoutingFacade.kt` | Main routing logic |
-| `core/nearby/src/.../RoutingTableStore.kt` | PRoPHET P-value storage |
-| `core/nearby/src/.../AckPathLearner.kt` | ACK processing |
-| `core/dtn/src/.../BundleRepository.kt` | Bundle state management |
-| `core/dtn/src/.../identity/GeoCellProvider.kt` | H3 geo routing |
 
 ---
 

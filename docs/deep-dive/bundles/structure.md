@@ -22,8 +22,6 @@ flowchart LR
 
 The database representation of a bundle.
 
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt`
-
 ### Core Fields
 
 | Field | Type | Size | Description |
@@ -60,17 +58,15 @@ Bundles can be addressed in multiple ways:
 
 ### TTL Values
 
-| Message Type | Default TTL | Source |
-|--------------|-------------|--------|
-| DM (text) | 7 days (604800s) | `BundleRepository.kt:232` |
-| DM (media) | 3 days (259200s) | `BundleRepository.kt:233` |
-| Group message | 4 hours (14400s) | `BundleRepository.kt:235` |
-| Channel broadcast | 4 hours (14400s) | `BundleRepository.kt:236` |
-| Control (ACK) | 24 hours (86400s) | `BundleRepository.kt:238` |
+| Message Type | Default TTL |
+|--------------|-------------|
+| DM (text) | 7 days (604800s) |
+| DM (media) | 3 days (259200s) |
+| Group message | 4 hours (14400s) |
+| Channel broadcast | 4 hours (14400s) |
+| Control (ACK) | 24 hours (86400s) |
 
 ## Bundle Status
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt:95-104`
 
 | Status | Description | Terminal? |
 |--------|-------------|-----------|
@@ -91,8 +87,6 @@ Bundles can be addressed in multiple ways:
 | `LEGACY_UNSIGNED` | Pre-signing legacy format |
 
 ## Priority Levels
-
-**Source:** `core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlPriority.kt:7-12`
 
 | Priority | Value | Use Case |
 |----------|-------|----------|
@@ -147,16 +141,7 @@ block-beta
 
 ## Bundle ID Calculation
 
-The bundle ID is computed as:
-
-```kotlin
-fun computeBundleId(header: BundleHeader, payload: BundlePayload): ByteArray {
-    val headerBytes = Cbor.encodeToByteArray(header)
-    val payloadBytes = Cbor.encodeToByteArray(payload)
-    return MessageDigest.getInstance("SHA-256")
-        .digest(headerBytes + payloadBytes)
-}
-```
+The bundle ID is a **SHA-256 hash** of the CBOR-encoded header and payload concatenated together.
 
 This ensures:
 - Bundle ID is deterministic
@@ -171,15 +156,6 @@ This ensures:
 | Max header | 4 KB | Reasonable routing metadata |
 | Max route path | 8 hops | Loop prevention |
 | Max copy budget | 15 | Prevent flooding |
-
-## Source Files
-
-| File | Purpose |
-|------|---------|
-| `core/dtn/src/.../persistence/BundleEntity.kt` | Database entity |
-| `core/dtn/src/.../BundleRepository.kt` | Bundle storage and lifecycle |
-| `core/dtn/src/.../ControlMsg.kt` | Control message types |
-| `core/dtn/src/.../crypto/DmCrypto.kt` | DM encryption |
 
 ---
 
