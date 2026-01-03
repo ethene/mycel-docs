@@ -74,7 +74,7 @@ classDiagram
     Bundle --> Signature
 ```
 
-> **Deep Dive:** See [Bundle Structure](/deep-dive/bundles/structure/) for complete field reference.
+> **Deep Dive:** See [Bundle Structure](../deep-dive/bundles/structure.md) for complete field reference.
 
 ## Routing
 

@@ -76,9 +76,7 @@ flowchart TB
 ## Section Index
 
 ### Architecture
-- [System Overview](architecture/overview.md) - Three-layer architecture
-- [Module Map](architecture/module-map.md) - Module structure and dependencies
-- [Data Flow](architecture/data-flow.md) - End-to-end message flow
+- [System Overview](architecture/overview.md) - Three-layer architecture with module map
 
 ### Bundles
 - [Bundle Structure](bundles/structure.md) - Header and payload fields
