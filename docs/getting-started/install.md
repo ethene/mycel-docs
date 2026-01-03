@@ -2,13 +2,19 @@
 
 Mycel is distributed as an APK file that you install directly on your Android device.
 
+!!! info "Why not the Play Store?"
+    Mycel is designed for situations where you may not have internet access. The Play Store requires an active connection and Google account, which conflicts with our goal of working completely offline. Sideloading the APK ensures you can install Mycel anywhere, anytime.
+
 ## Quick Start (Recommended)
 
-The easiest way to install and keep Mycel updated is via **Obtainium** - a free app that tracks GitHub releases and notifies you of updates.
+The easiest way to install and keep Mycel updated:
+
+1. **F-Droid** - A trusted open-source app store (like Play Store, but community-run)
+2. **Obtainium** - An update manager that notifies you when new Mycel versions are released
 
 ### 1. Install F-Droid (App Store)
 
-If you don't already have F-Droid:
+[F-Droid](https://f-droid.org/) is a trusted catalog of open-source Android apps. If you don't already have it:
 
 1. Go to [f-droid.org](https://f-droid.org/) on your phone
 2. Tap **Download F-Droid**
@@ -17,11 +23,13 @@ If you don't already have F-Droid:
 
 ### 2. Install Obtainium
 
+[Obtainium](https://obtainium.imranr.dev/) tracks app releases on GitHub and notifies you when updates are available - no app store required.
+
 1. Open **F-Droid**
 2. Search for **Obtainium**
 3. Tap **Install**
 
-*Alternative:* [Download Obtainium from GitHub](https://github.com/ImranR98/Obtainium/releases/latest)
+*Alternative:* [Download from GitHub](https://github.com/ImranR98/Obtainium/releases/latest) if you prefer not to use F-Droid
 
 ### 3. Add Mycel to Obtainium
 
