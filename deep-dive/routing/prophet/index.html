@@ -2844,7 +2844,7 @@
 <h3 id="1-direct-encounter">1. Direct Encounter<a class="headerlink" href="#1-direct-encounter" title="Permanent link">&para;</a></h3>
 <p>When two nodes meet, they update their probabilities for each other.</p>
 <p><strong>Formula:</strong></p>
-<p>$$P(A,B)<em old="old">{new} = P(A,B)</em> + (1 - P(A,B)<em init="init">{old}) \times P</em>$$</p>
+<div class="arithmatex">\[P(A,B)_{new} = P(A,B)_{old} + (1 - P(A,B)_{old}) \times P_{init}\]</div>
 <p><strong>Example:</strong>
 - Previous P(A,B) = 0.5
 - P_init = 0.7
@@ -2861,7 +2861,7 @@
 <h3 id="2-transitive-update">2. Transitive Update<a class="headerlink" href="#2-transitive-update" title="Permanent link">&para;</a></h3>
 <p>When A meets B, A learns about B's contacts and updates transitively.</p>
 <p><strong>Formula:</strong></p>
-<p>$$P(A,X)<em old="old">{new} = P(A,X)</em>) \times P(A,B) \times P(B,X) \times \alpha$$} + (1 - P(A,X)_{old</p>
+<div class="arithmatex">\[P(A,X)_{new} = P(A,X)_{old} + (1 - P(A,X)_{old}) \times P(A,B) \times P(B,X) \times \alpha\]</div>
 <p><strong>Example:</strong>
 - A meets B
 - B has P(B,X) = 0.8 (B often sees X)
@@ -2875,7 +2875,7 @@
 <h3 id="3-aging">3. Aging<a class="headerlink" href="#3-aging" title="Permanent link">&para;</a></h3>
 <p>P-values decay over time if no encounters occur.</p>
 <p><strong>Formula:</strong></p>
-<p>$$P(A,B)_{aged} = P(A,B) \times \gamma^{hours}$$</p>
+<div class="arithmatex">\[P(A,B)_{aged} = P(A,B) \times \gamma^{hours}\]</div>
 <p><strong>Example (γ = 0.98/hour):</strong>
 | Hours | P-value |
 |-------|---------|
@@ -3011,6 +3011,10 @@
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
