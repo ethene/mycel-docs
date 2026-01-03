@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://ethene.github.io/mycel-docs/reference/faq/">
+        <link rel="canonical" href="https://ethene.github.io/mycel-docs/security/threat-model/">
       
       
-        <link rel="prev" href="../../security/verification/">
+        <link rel="prev" href="../privacy/">
       
       
-        <link rel="next" href="../changelog/">
+        <link rel="next" href="../verification/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>FAQ - Mycel Documentation</title>
+        <title>Threat Model - Mycel Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#frequently-asked-questions" class="md-skip">
+        <a href="#threat-model" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              FAQ
+              Threat Model
             
           </span>
         </div>
@@ -322,11 +322,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../security/privacy/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../privacy/" class="md-tabs__link">
           
   
   
@@ -342,13 +344,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../reference/faq/" class="md-tabs__link">
           
   
   
@@ -1884,28 +1884,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -1923,7 +1926,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1941,7 +1944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/privacy/" class="md-nav__link">
+      <a href="../privacy/" class="md-nav__link">
         
   
   
@@ -1966,10 +1969,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../security/threat-model/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1985,6 +2015,303 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#security-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adversary-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adversary Capabilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adversary Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passive-network-observer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passive Network Observer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay-node-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relay Node Operator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nostr-relay-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nostr Relay Operator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-thief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device Thief
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sophisticated-actor-nation-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sophisticated Actor (Nation-State)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-protected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Protected
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-not-protected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's NOT Protected
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s NOT Protected">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traffic-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-at-nostr-relays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata at Nostr Relays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-key-compromise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Key Compromise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cryptographic-primitives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cryptographic Primitives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-perfect-forward-secrecy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No Perfect Forward Secrecy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-deniability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No Deniability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limited-anonymity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limited Anonymity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommendations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-casual-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Casual Users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-high-risk-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For High-Risk Users
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1997,7 +2324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/verification/" class="md-nav__link">
+      <a href="../verification/" class="md-nav__link">
         
   
   
@@ -2029,31 +2356,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -2071,7 +2395,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2086,37 +2410,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    FAQ
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../reference/faq/" class="md-nav__link">
         
   
   
@@ -2132,398 +2429,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        General
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="General">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-is-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why "Mycel"?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-mycel-free" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is Mycel free?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-mycel-on-the-play-store" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is Mycel on the Play Store?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connectivity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Connectivity
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Connectivity">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-didnt-my-message-send-immediately" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why didn't my message send immediately?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-use-mycel-without-internet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I use Mycel without internet?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-far-can-messages-travel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How far can messages travel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-does-delivery-take-so-long" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does delivery take so long?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permissions
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Permissions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-does-mycel-need-location-permission" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does Mycel need location permission?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-does-mycel-need-background-permission" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does Mycel need background permission?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#privacy-security" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Privacy &amp; Security
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Privacy &amp; Security">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#are-my-messages-encrypted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Are my messages encrypted?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-relay-devices-read-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can relay devices read my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-there-a-server-storing-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is there a server storing my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-i-need-a-phone-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Do I need a phone number?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#technical" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Technical
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Technical">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-android-version-do-i-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Android version do I need?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-much-storage-does-mycel-use" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How much storage does Mycel use?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#does-mycel-drain-my-battery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Does Mycel drain my battery?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-is-the-nostr-transport" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the Nostr transport?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#messages-stuck-on-pending" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Messages stuck on "Pending"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#app-keeps-closing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        App keeps closing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cant-find-nearby-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can't find nearby devices
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updates
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Updates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-do-i-update-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How do I update Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-get-automatic-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I get automatic updates?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2536,7 +2441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog/" class="md-nav__link">
+      <a href="../../reference/changelog/" class="md-nav__link">
         
   
   
@@ -2708,22 +2613,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
+  <a href="#security-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        General
+        Security Goals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="General">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adversary-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adversary Capabilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adversary Capabilities">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-is-mycel" class="md-nav__link">
+  <a href="#passive-network-observer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is Mycel?
+        Passive Network Observer
       
     </span>
   </a>
@@ -2731,10 +2647,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-mycel" class="md-nav__link">
+  <a href="#relay-node-operator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why "Mycel"?
+        Relay Node Operator
       
     </span>
   </a>
@@ -2742,10 +2658,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-mycel-free" class="md-nav__link">
+  <a href="#nostr-relay-operator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Is Mycel free?
+        Nostr Relay Operator
       
     </span>
   </a>
@@ -2753,10 +2669,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-mycel-on-the-play-store" class="md-nav__link">
+  <a href="#device-thief" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Is Mycel on the Play Store?
+        Device Thief
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sophisticated-actor-nation-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sophisticated Actor (Nation-State)
       
     </span>
   </a>
@@ -2769,22 +2696,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#connectivity" class="md-nav__link">
+  <a href="#whats-protected" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connectivity
+        What's Protected
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Connectivity">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-not-protected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's NOT Protected
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s NOT Protected">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-didnt-my-message-send-immediately" class="md-nav__link">
+  <a href="#endpoint-security" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why didn't my message send immediately?
+        Endpoint Security
       
     </span>
   </a>
@@ -2792,10 +2730,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#can-i-use-mycel-without-internet" class="md-nav__link">
+  <a href="#traffic-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Can I use Mycel without internet?
+        Traffic Analysis
       
     </span>
   </a>
@@ -2803,10 +2741,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-far-can-messages-travel" class="md-nav__link">
+  <a href="#metadata-at-nostr-relays" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How far can messages travel?
+        Metadata at Nostr Relays
       
     </span>
   </a>
@@ -2814,10 +2752,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-does-delivery-take-so-long" class="md-nav__link">
+  <a href="#future-key-compromise" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does delivery take so long?
+        Future Key Compromise
       
     </span>
   </a>
@@ -2830,22 +2768,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
+  <a href="#cryptographic-primitives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permissions
+        Cryptographic Primitives
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Permissions">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Limitations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-does-mycel-need-location-permission" class="md-nav__link">
+  <a href="#no-perfect-forward-secrecy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does Mycel need location permission?
+        No Perfect Forward Secrecy
       
     </span>
   </a>
@@ -2853,10 +2813,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-does-mycel-need-background-permission" class="md-nav__link">
+  <a href="#no-deniability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does Mycel need background permission?
+        No Deniability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limited-anonymity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limited Anonymity
       
     </span>
   </a>
@@ -2869,83 +2840,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#privacy-security" class="md-nav__link">
+  <a href="#threat-comparison" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privacy &amp; Security
+        Threat Comparison
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Privacy &amp; Security">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#are-my-messages-encrypted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Are my messages encrypted?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-relay-devices-read-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can relay devices read my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-there-a-server-storing-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is there a server storing my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-i-need-a-phone-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Do I need a phone number?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#technical" class="md-nav__link">
+  <a href="#recommendations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Technical
+        Recommendations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Technical">
+    <nav class="md-nav" aria-label="Recommendations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-android-version-do-i-need" class="md-nav__link">
+  <a href="#for-casual-users" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Android version do I need?
+        For Casual Users
       
     </span>
   </a>
@@ -2953,121 +2874,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-much-storage-does-mycel-use" class="md-nav__link">
+  <a href="#for-high-risk-users" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How much storage does Mycel use?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#does-mycel-drain-my-battery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Does Mycel drain my battery?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-is-the-nostr-transport" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the Nostr transport?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#messages-stuck-on-pending" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Messages stuck on "Pending"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#app-keeps-closing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        App keeps closing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cant-find-nearby-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can't find nearby devices
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updates
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Updates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-do-i-update-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How do I update Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-get-automatic-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I get automatic updates?
+        For High-Risk Users
       
     </span>
   </a>
@@ -3099,80 +2909,243 @@
   
 
 
-<h1 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h1>
-<h2 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h2>
-<h3 id="what-is-mycel">What is Mycel?<a class="headerlink" href="#what-is-mycel" title="Permanent link">&para;</a></h3>
-<p>Mycel is a delay-tolerant mesh messenger for Android. It sends messages by hopping between nearby phones, without requiring internet connectivity.</p>
-<h3 id="why-mycel">Why "Mycel"?<a class="headerlink" href="#why-mycel" title="Permanent link">&para;</a></h3>
-<p>Named after mycelium - the underground fungal network that connects trees in a forest. Like mycelium, Mycel connects devices in a resilient, decentralized network.</p>
-<h3 id="is-mycel-free">Is Mycel free?<a class="headerlink" href="#is-mycel-free" title="Permanent link">&para;</a></h3>
-<p>Yes, Mycel is free and open source.</p>
-<h3 id="is-mycel-on-the-play-store">Is Mycel on the Play Store?<a class="headerlink" href="#is-mycel-on-the-play-store" title="Permanent link">&para;</a></h3>
-<p>Not currently. Download from <a href="https://github.com/ethene/mycel-releases/releases">GitHub Releases</a>.</p>
-<hr />
-<h2 id="connectivity">Connectivity<a class="headerlink" href="#connectivity" title="Permanent link">&para;</a></h2>
-<h3 id="why-didnt-my-message-send-immediately">Why didn't my message send immediately?<a class="headerlink" href="#why-didnt-my-message-send-immediately" title="Permanent link">&para;</a></h3>
-<p>Mycel needs to find a nearby device to relay your message. If no Mycel users are around, the message waits until an encounter happens.</p>
-<h3 id="can-i-use-mycel-without-internet">Can I use Mycel without internet?<a class="headerlink" href="#can-i-use-mycel-without-internet" title="Permanent link">&para;</a></h3>
-<p>Yes! That's the primary use case. Mycel uses Bluetooth and Wi-Fi Direct to communicate directly with nearby devices.</p>
-<h3 id="how-far-can-messages-travel">How far can messages travel?<a class="headerlink" href="#how-far-can-messages-travel" title="Permanent link">&para;</a></h3>
-<p>With enough relay devices, messages can travel anywhere. Each hop typically covers ~100 meters. Messages ride along with people as they move.</p>
-<h3 id="why-does-delivery-take-so-long">Why does delivery take so long?<a class="headerlink" href="#why-does-delivery-take-so-long" title="Permanent link">&para;</a></h3>
-<p>Messages travel through physical encounters between devices. More distance = more hops = more time. This is the trade-off for not requiring internet.</p>
-<hr />
-<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
-<h3 id="why-does-mycel-need-location-permission">Why does Mycel need location permission?<a class="headerlink" href="#why-does-mycel-need-location-permission" title="Permanent link">&para;</a></h3>
-<p>Android requires location permission to scan for Bluetooth devices. Mycel doesn't actually track or store your location - it only uses this permission for device discovery.</p>
-<h3 id="why-does-mycel-need-background-permission">Why does Mycel need background permission?<a class="headerlink" href="#why-does-mycel-need-background-permission" title="Permanent link">&para;</a></h3>
-<p>To relay messages when you're not actively using the app. Without background permission, the mesh only works when the app is open.</p>
-<hr />
-<h2 id="privacy-security">Privacy &amp; Security<a class="headerlink" href="#privacy-security" title="Permanent link">&para;</a></h2>
-<h3 id="are-my-messages-encrypted">Are my messages encrypted?<a class="headerlink" href="#are-my-messages-encrypted" title="Permanent link">&para;</a></h3>
-<p>Yes, all messages are end-to-end encrypted. Only you and your recipient can read them.</p>
-<h3 id="can-relay-devices-read-my-messages">Can relay devices read my messages?<a class="headerlink" href="#can-relay-devices-read-my-messages" title="Permanent link">&para;</a></h3>
-<p>No. Messages are encrypted before leaving your device. Relay devices can only see encrypted data and routing metadata.</p>
-<h3 id="is-there-a-server-storing-my-messages">Is there a server storing my messages?<a class="headerlink" href="#is-there-a-server-storing-my-messages" title="Permanent link">&para;</a></h3>
-<p>No. Messages are stored only on devices - yours and the relay devices carrying them. No central server exists.</p>
-<h3 id="do-i-need-a-phone-number">Do I need a phone number?<a class="headerlink" href="#do-i-need-a-phone-number" title="Permanent link">&para;</a></h3>
-<p>No. Mycel identifies you by a cryptographic key, not phone number or email.</p>
-<hr />
-<h2 id="technical">Technical<a class="headerlink" href="#technical" title="Permanent link">&para;</a></h2>
-<h3 id="what-android-version-do-i-need">What Android version do I need?<a class="headerlink" href="#what-android-version-do-i-need" title="Permanent link">&para;</a></h3>
-<p>Android 8.0 (Oreo) or higher (API 26+).</p>
-<h3 id="how-much-storage-does-mycel-use">How much storage does Mycel use?<a class="headerlink" href="#how-much-storage-does-mycel-use" title="Permanent link">&para;</a></h3>
-<p>The app is ~50 MB. Message storage varies with usage.</p>
-<h3 id="does-mycel-drain-my-battery">Does Mycel drain my battery?<a class="headerlink" href="#does-mycel-drain-my-battery" title="Permanent link">&para;</a></h3>
-<p>Mycel uses Bluetooth scanning which does consume some battery. Battery optimization settings can help balance connectivity vs. battery life.</p>
-<h3 id="what-is-the-nostr-transport">What is the Nostr transport?<a class="headerlink" href="#what-is-the-nostr-transport" title="Permanent link">&para;</a></h3>
-<p>Nostr is an optional internet-based relay. When available, it can speed up delivery. Messages are still encrypted.</p>
-<hr />
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="messages-stuck-on-pending">Messages stuck on "Pending"<a class="headerlink" href="#messages-stuck-on-pending" title="Permanent link">&para;</a></h3>
+<h1 id="threat-model">Threat Model<a class="headerlink" href="#threat-model" title="Permanent link">&para;</a></h1>
+<p>This document describes what Mycel protects against, what it doesn't, and the security assumptions we make.</p>
+<h2 id="security-goals">Security Goals<a class="headerlink" href="#security-goals" title="Permanent link">&para;</a></h2>
+<p>Mycel aims to provide:</p>
+<ol>
+<li><strong>Confidentiality</strong> - Only sender and recipient can read messages</li>
+<li><strong>Authenticity</strong> - Messages provably come from claimed sender</li>
+<li><strong>Censorship resistance</strong> - No single point of control</li>
+<li><strong>Privacy</strong> - Minimal metadata exposure</li>
+<li><strong>Offline operation</strong> - Works without internet infrastructure</li>
+</ol>
+<h2 id="adversary-capabilities">Adversary Capabilities<a class="headerlink" href="#adversary-capabilities" title="Permanent link">&para;</a></h2>
+<p>We consider adversaries with varying capabilities:</p>
+<h3 id="passive-network-observer">Passive Network Observer<a class="headerlink" href="#passive-network-observer" title="Permanent link">&para;</a></h3>
+<p><strong>Can:</strong> Monitor network traffic, see encrypted payloads
+<strong>Cannot:</strong> Read message contents, forge messages</p>
+<p><strong>Mycel's defense:</strong> End-to-end encryption, signed bundles</p>
+<h3 id="relay-node-operator">Relay Node Operator<a class="headerlink" href="#relay-node-operator" title="Permanent link">&para;</a></h3>
+<p><strong>Can:</strong> See bundle metadata (source, destination, size, timing)
+<strong>Cannot:</strong> Read message contents, prevent forwarding</p>
+<p><strong>Mycel's defense:</strong> Encryption makes content unreadable; mesh topology means messages can route around hostile nodes</p>
+<h3 id="nostr-relay-operator">Nostr Relay Operator<a class="headerlink" href="#nostr-relay-operator" title="Permanent link">&para;</a></h3>
+<p><strong>Can:</strong> See encrypted events, connection timing, IP addresses
+<strong>Cannot:</strong> Read message contents, identify users (unless IP reveals identity)</p>
+<p><strong>Mycel's defense:</strong> NIP-17 gift-wrap encryption, optional relay usage</p>
+<h3 id="device-thief">Device Thief<a class="headerlink" href="#device-thief" title="Permanent link">&para;</a></h3>
+<p><strong>Can:</strong> Access all local data if device is unlocked
+<strong>Cannot:</strong> Access data if device has screen lock (unless bypassed)</p>
+<p><strong>Mycel's defense:</strong> None beyond Android's device encryption. We don't implement app-level encryption.</p>
+<h3 id="sophisticated-actor-nation-state">Sophisticated Actor (Nation-State)<a class="headerlink" href="#sophisticated-actor-nation-state" title="Permanent link">&para;</a></h3>
+<p><strong>Can:</strong> Potentially monitor many relay nodes, perform traffic analysis, compromise devices
+<strong>Cannot:</strong> Break cryptographic primitives</p>
+<p><strong>Mycel's defense:</strong> Partial. Spray-and-Wait creates multiple paths. Strong crypto protects content. But traffic analysis may reveal communication patterns.</p>
+<h2 id="whats-protected">What's Protected<a class="headerlink" href="#whats-protected" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Protection Level</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Message content</td>
+<td>Strong</td>
+<td>AES-256-GCM encryption</td>
+</tr>
+<tr>
+<td>Sender authenticity</td>
+<td>Strong</td>
+<td>Ed25519 signatures</td>
+</tr>
+<tr>
+<td>Message integrity</td>
+<td>Strong</td>
+<td>Signature verification</td>
+</tr>
+<tr>
+<td>Sender identity</td>
+<td>Partial</td>
+<td>Public key visible to relays</td>
+</tr>
+<tr>
+<td>Recipient identity</td>
+<td>Partial</td>
+<td>Public key visible to relays</td>
+</tr>
+<tr>
+<td>Communication timing</td>
+<td>Weak</td>
+<td>Approximate timing visible to relays</td>
+</tr>
+<tr>
+<td>Communication existence</td>
+<td>Weak</td>
+<td>Observers can see "message sent"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-not-protected">What's NOT Protected<a class="headerlink" href="#whats-not-protected" title="Permanent link">&para;</a></h2>
+<h3 id="endpoint-security">Endpoint Security<a class="headerlink" href="#endpoint-security" title="Permanent link">&para;</a></h3>
+<p>If your device is compromised (malware, physical access), all bets are off. Mycel cannot protect against:</p>
 <ul>
-<li>Check that Bluetooth and Wi-Fi are enabled</li>
-<li>Ensure location permission is granted</li>
-<li>Make sure the app isn't being killed by battery optimization</li>
-<li>Be patient - mesh delivery takes time</li>
+<li>Keyloggers capturing messages as you type</li>
+<li>Screen capture malware</li>
+<li>Device theft with unlocked phone</li>
+<li>Malicious Mycel builds</li>
 </ul>
-<h3 id="app-keeps-closing">App keeps closing<a class="headerlink" href="#app-keeps-closing" title="Permanent link">&para;</a></h3>
+<h3 id="traffic-analysis">Traffic Analysis<a class="headerlink" href="#traffic-analysis" title="Permanent link">&para;</a></h3>
+<p>A sophisticated adversary monitoring multiple relay nodes could potentially:</p>
 <ul>
-<li>Disable battery optimization for Mycel</li>
-<li>Grant all requested permissions</li>
-<li>Check that your device meets the requirements</li>
+<li>Correlate message timing to identify communication partners</li>
+<li>Estimate message frequency between users</li>
+<li>Build social graphs from observation</li>
 </ul>
-<h3 id="cant-find-nearby-devices">Can't find nearby devices<a class="headerlink" href="#cant-find-nearby-devices" title="Permanent link">&para;</a></h3>
+<h3 id="metadata-at-nostr-relays">Metadata at Nostr Relays<a class="headerlink" href="#metadata-at-nostr-relays" title="Permanent link">&para;</a></h3>
+<p>When using Nostr transport:</p>
 <ul>
-<li>Both devices need Mycel running</li>
-<li>Check Bluetooth and Wi-Fi are on</li>
-<li>Check location services are enabled</li>
-<li>Try moving closer together</li>
+<li>Your IP address is visible to relay operators</li>
+<li>Connection timing reveals activity patterns</li>
+<li>Relay operators could log and correlate</li>
 </ul>
+<h3 id="future-key-compromise">Future Key Compromise<a class="headerlink" href="#future-key-compromise" title="Permanent link">&para;</a></h3>
+<p>Mycel does <strong>not</strong> provide forward secrecy:</p>
+<ul>
+<li>If your private key is compromised, all past messages can be decrypted</li>
+<li>This is a deliberate trade-off for DTN compatibility</li>
+<li>Signal-style ratcheting requires synchronized sessions</li>
+</ul>
+<h2 id="cryptographic-primitives">Cryptographic Primitives<a class="headerlink" href="#cryptographic-primitives" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Algorithm</th>
+<th>Key Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key agreement</td>
+<td>X25519 (ECDH)</td>
+<td>256-bit</td>
+</tr>
+<tr>
+<td>Symmetric encryption</td>
+<td>AES-256-GCM</td>
+<td>256-bit</td>
+</tr>
+<tr>
+<td>Key derivation</td>
+<td>HKDF-SHA256</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Signing</td>
+<td>Ed25519</td>
+<td>256-bit</td>
+</tr>
+<tr>
+<td>Hashing</td>
+<td>SHA-256</td>
+<td>256-bit</td>
+</tr>
+</tbody>
+</table>
+<p>These primitives are well-studied and considered secure against classical computers.</p>
+<h2 id="security-assumptions">Security Assumptions<a class="headerlink" href="#security-assumptions" title="Permanent link">&para;</a></h2>
+<p>Mycel's security relies on:</p>
+<ol>
+<li><strong>Cryptographic hardness</strong> - X25519, AES-256, Ed25519 remain secure</li>
+<li><strong>Random number generation</strong> - Android's SecureRandom works correctly</li>
+<li><strong>No device compromise</strong> - Your phone isn't rooted/malware-infected</li>
+<li><strong>Key secrecy</strong> - Your private key hasn't leaked</li>
+</ol>
+<h2 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h2>
+<h3 id="no-perfect-forward-secrecy">No Perfect Forward Secrecy<a class="headerlink" href="#no-perfect-forward-secrecy" title="Permanent link">&para;</a></h3>
+<p>Traditional forward secrecy requires:
+- Real-time key negotiation
+- Synchronized sessions
+- Both parties online</p>
+<p>This is incompatible with DTN where messages may arrive days later.</p>
+<p><strong>Implication:</strong> Compromise of your private key compromises all past messages.</p>
+<h3 id="no-deniability">No Deniability<a class="headerlink" href="#no-deniability" title="Permanent link">&para;</a></h3>
+<p>Messages are cryptographically signed. You cannot plausibly deny having sent a message - the signature proves it.</p>
+<h3 id="limited-anonymity">Limited Anonymity<a class="headerlink" href="#limited-anonymity" title="Permanent link">&para;</a></h3>
+<p>Your public key is visible to relay nodes. If your key is associated with your real identity (e.g., you shared it publicly), relays learn you're communicating.</p>
+<h2 id="threat-comparison">Threat Comparison<a class="headerlink" href="#threat-comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mass surveillance</td>
+<td>Strong - No central point to tap</td>
+</tr>
+<tr>
+<td>Targeted surveillance</td>
+<td>Partial - Traffic analysis possible</td>
+</tr>
+<tr>
+<td>Eavesdropping</td>
+<td>Strong - E2E encryption</td>
+</tr>
+<tr>
+<td>Message tampering</td>
+<td>Strong - Signatures</td>
+</tr>
+<tr>
+<td>Impersonation</td>
+<td>Strong - Signatures</td>
+</tr>
+<tr>
+<td>Censorship</td>
+<td>Strong - No single point of control</td>
+</tr>
+<tr>
+<td>Device theft (locked)</td>
+<td>Depends on Android encryption</td>
+</tr>
+<tr>
+<td>Device theft (unlocked)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Malware on device</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Rubber hose cryptanalysis</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recommendations">Recommendations<a class="headerlink" href="#recommendations" title="Permanent link">&para;</a></h2>
+<h3 id="for-casual-users">For Casual Users<a class="headerlink" href="#for-casual-users" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Use device screen lock</li>
+<li>Keep Mycel updated</li>
+<li>Verify contacts' identities in person</li>
+</ol>
+<h3 id="for-high-risk-users">For High-Risk Users<a class="headerlink" href="#for-high-risk-users" title="Permanent link">&para;</a></h3>
+<ol>
+<li>All of the above, plus:</li>
+<li>Consider disabling Nostr (mesh-only mode)</li>
+<li>Use a dedicated device</li>
+<li>Verify APK checksums</li>
+<li>Assume sophisticated adversaries can perform traffic analysis</li>
+<li>Consider message content carefully - encryption protects transit, not endpoints</li>
+</ol>
 <hr />
-<h2 id="updates">Updates<a class="headerlink" href="#updates" title="Permanent link">&para;</a></h2>
-<h3 id="how-do-i-update-mycel">How do I update Mycel?<a class="headerlink" href="#how-do-i-update-mycel" title="Permanent link">&para;</a></h3>
-<p>Download the latest APK from <a href="https://github.com/ethene/mycel-releases/releases">GitHub Releases</a> and install over your existing version.</p>
-<h3 id="can-i-get-automatic-updates">Can I get automatic updates?<a class="headerlink" href="#can-i-get-automatic-updates" title="Permanent link">&para;</a></h3>
-<p>Yes, use <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> to monitor for new releases.</p>
+<p><strong>See Also:</strong> <a href="../privacy/">Privacy</a> | <a href="../verification/">APK Verification</a> | <a href="../../deep-dive/bundles/encryption/">Encryption Deep Dive</a></p>
 
 
 

@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://ethene.github.io/mycel-docs/reference/faq/">
+        <link rel="canonical" href="https://ethene.github.io/mycel-docs/user-guide/battery/">
       
       
-        <link rel="prev" href="../../security/verification/">
+        <link rel="prev" href="../delivery/">
       
       
-        <link rel="next" href="../changelog/">
+        <link rel="next" href="../../how-it-works/overview/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>FAQ - Mycel Documentation</title>
+        <title>Battery & Background - Mycel Documentation</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#frequently-asked-questions" class="md-skip">
+        <a href="#battery-background-behavior" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              FAQ
+              Battery & Background
             
           </span>
         </div>
@@ -262,11 +262,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../user-guide/messaging/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../messaging/" class="md-tabs__link">
           
   
   
@@ -342,13 +344,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../reference/faq/" class="md-tabs__link">
           
   
   
@@ -629,28 +629,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -668,7 +671,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -686,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/messaging/" class="md-nav__link">
+      <a href="../messaging/" class="md-nav__link">
         
   
   
@@ -714,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/delivery/" class="md-nav__link">
+      <a href="../delivery/" class="md-nav__link">
         
   
   
@@ -739,10 +742,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../user-guide/battery/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery & Background
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -758,6 +788,259 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-background-operation-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Background Operation Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#battery-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battery Impact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#androids-background-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android's Background Restrictions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Android&#39;s Background Restrictions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-disable-battery-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Disable Battery Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-lock-the-app-some-phones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Lock the App (Some Phones)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-allow-background-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Allow Background Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-happens-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Happens When...
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Happens When...">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phone-goes-to-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phone Goes to Sleep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#battery-saver-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battery Saver Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phone-restarts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phone Restarts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-is-force-stopped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App Is Force-Stopped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#battery-optimization-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battery Optimization Tips
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Battery Optimization Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-you-need-maximum-battery-life" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If You Need Maximum Battery Life
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-you-want-best-mesh-relay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If You Want Best Mesh Relay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mycel-keeps-stopping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Mycel keeps stopping"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-receiving-messages-when-screen-is-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Not receiving messages when screen is off"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-battery-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "High battery usage"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2029,31 +2312,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -2071,7 +2351,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2086,37 +2366,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    FAQ
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../reference/faq/" class="md-nav__link">
         
   
   
@@ -2132,398 +2385,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        General
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="General">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-is-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why "Mycel"?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-mycel-free" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is Mycel free?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-mycel-on-the-play-store" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is Mycel on the Play Store?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connectivity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Connectivity
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Connectivity">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-didnt-my-message-send-immediately" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why didn't my message send immediately?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-use-mycel-without-internet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I use Mycel without internet?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-far-can-messages-travel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How far can messages travel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-does-delivery-take-so-long" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does delivery take so long?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permissions
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Permissions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-does-mycel-need-location-permission" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does Mycel need location permission?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#why-does-mycel-need-background-permission" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why does Mycel need background permission?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#privacy-security" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Privacy &amp; Security
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Privacy &amp; Security">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#are-my-messages-encrypted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Are my messages encrypted?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-relay-devices-read-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can relay devices read my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-there-a-server-storing-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is there a server storing my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-i-need-a-phone-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Do I need a phone number?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#technical" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Technical
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Technical">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-android-version-do-i-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Android version do I need?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-much-storage-does-mycel-use" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How much storage does Mycel use?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#does-mycel-drain-my-battery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Does Mycel drain my battery?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-is-the-nostr-transport" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the Nostr transport?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#messages-stuck-on-pending" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Messages stuck on "Pending"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#app-keeps-closing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        App keeps closing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cant-find-nearby-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can't find nearby devices
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updates
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Updates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-do-i-update-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How do I update Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-get-automatic-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I get automatic updates?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2536,7 +2397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog/" class="md-nav__link">
+      <a href="../../reference/changelog/" class="md-nav__link">
         
   
   
@@ -2708,22 +2569,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
+  <a href="#why-background-operation-matters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        General
+        Why Background Operation Matters
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="General">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#battery-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battery Impact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#androids-background-restrictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android's Background Restrictions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Android&#39;s Background Restrictions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-is-mycel" class="md-nav__link">
+  <a href="#1-disable-battery-optimization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is Mycel?
+        1. Disable Battery Optimization
       
     </span>
   </a>
@@ -2731,10 +2614,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-mycel" class="md-nav__link">
+  <a href="#2-lock-the-app-some-phones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why "Mycel"?
+        2. Lock the App (Some Phones)
       
     </span>
   </a>
@@ -2742,21 +2625,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-mycel-free" class="md-nav__link">
+  <a href="#3-allow-background-location" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Is Mycel free?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-mycel-on-the-play-store" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is Mycel on the Play Store?
+        3. Allow Background Location
       
     </span>
   </a>
@@ -2769,22 +2641,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#connectivity" class="md-nav__link">
+  <a href="#what-happens-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connectivity
+        What Happens When...
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Connectivity">
+    <nav class="md-nav" aria-label="What Happens When...">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-didnt-my-message-send-immediately" class="md-nav__link">
+  <a href="#phone-goes-to-sleep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why didn't my message send immediately?
+        Phone Goes to Sleep
       
     </span>
   </a>
@@ -2792,10 +2664,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#can-i-use-mycel-without-internet" class="md-nav__link">
+  <a href="#battery-saver-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Can I use Mycel without internet?
+        Battery Saver Mode
       
     </span>
   </a>
@@ -2803,10 +2675,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-far-can-messages-travel" class="md-nav__link">
+  <a href="#phone-restarts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How far can messages travel?
+        Phone Restarts
       
     </span>
   </a>
@@ -2814,10 +2686,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-does-delivery-take-so-long" class="md-nav__link">
+  <a href="#app-is-force-stopped" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does delivery take so long?
+        App Is Force-Stopped
       
     </span>
   </a>
@@ -2830,22 +2702,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
+  <a href="#battery-optimization-tips" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permissions
+        Battery Optimization Tips
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Permissions">
+    <nav class="md-nav" aria-label="Battery Optimization Tips">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-does-mycel-need-location-permission" class="md-nav__link">
+  <a href="#if-you-need-maximum-battery-life" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does Mycel need location permission?
+        If You Need Maximum Battery Life
       
     </span>
   </a>
@@ -2853,10 +2725,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-does-mycel-need-background-permission" class="md-nav__link">
+  <a href="#if-you-want-best-mesh-relay" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why does Mycel need background permission?
+        If You Want Best Mesh Relay
       
     </span>
   </a>
@@ -2869,124 +2741,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#privacy-security" class="md-nav__link">
+  <a href="#notifications" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privacy &amp; Security
+        Notifications
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Privacy &amp; Security">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#are-my-messages-encrypted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Are my messages encrypted?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-relay-devices-read-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can relay devices read my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-there-a-server-storing-my-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Is there a server storing my messages?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-i-need-a-phone-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Do I need a phone number?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#technical" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Technical
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Technical">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-android-version-do-i-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Android version do I need?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-much-storage-does-mycel-use" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How much storage does Mycel use?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#does-mycel-drain-my-battery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Does Mycel drain my battery?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-is-the-nostr-transport" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the Nostr transport?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3003,10 +2764,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#messages-stuck-on-pending" class="md-nav__link">
+  <a href="#mycel-keeps-stopping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Messages stuck on "Pending"
+        "Mycel keeps stopping"
       
     </span>
   </a>
@@ -3014,10 +2775,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#app-keeps-closing" class="md-nav__link">
+  <a href="#not-receiving-messages-when-screen-is-off" class="md-nav__link">
     <span class="md-ellipsis">
       
-        App keeps closing
+        "Not receiving messages when screen is off"
       
     </span>
   </a>
@@ -3025,49 +2786,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cant-find-nearby-devices" class="md-nav__link">
+  <a href="#high-battery-usage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Can't find nearby devices
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updates
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Updates">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-do-i-update-mycel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How do I update Mycel?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#can-i-get-automatic-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Can I get automatic updates?
+        "High battery usage"
       
     </span>
   </a>
@@ -3099,80 +2821,147 @@
   
 
 
-<h1 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h1>
-<h2 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h2>
-<h3 id="what-is-mycel">What is Mycel?<a class="headerlink" href="#what-is-mycel" title="Permanent link">&para;</a></h3>
-<p>Mycel is a delay-tolerant mesh messenger for Android. It sends messages by hopping between nearby phones, without requiring internet connectivity.</p>
-<h3 id="why-mycel">Why "Mycel"?<a class="headerlink" href="#why-mycel" title="Permanent link">&para;</a></h3>
-<p>Named after mycelium - the underground fungal network that connects trees in a forest. Like mycelium, Mycel connects devices in a resilient, decentralized network.</p>
-<h3 id="is-mycel-free">Is Mycel free?<a class="headerlink" href="#is-mycel-free" title="Permanent link">&para;</a></h3>
-<p>Yes, Mycel is free and open source.</p>
-<h3 id="is-mycel-on-the-play-store">Is Mycel on the Play Store?<a class="headerlink" href="#is-mycel-on-the-play-store" title="Permanent link">&para;</a></h3>
-<p>Not currently. Download from <a href="https://github.com/ethene/mycel-releases/releases">GitHub Releases</a>.</p>
-<hr />
-<h2 id="connectivity">Connectivity<a class="headerlink" href="#connectivity" title="Permanent link">&para;</a></h2>
-<h3 id="why-didnt-my-message-send-immediately">Why didn't my message send immediately?<a class="headerlink" href="#why-didnt-my-message-send-immediately" title="Permanent link">&para;</a></h3>
-<p>Mycel needs to find a nearby device to relay your message. If no Mycel users are around, the message waits until an encounter happens.</p>
-<h3 id="can-i-use-mycel-without-internet">Can I use Mycel without internet?<a class="headerlink" href="#can-i-use-mycel-without-internet" title="Permanent link">&para;</a></h3>
-<p>Yes! That's the primary use case. Mycel uses Bluetooth and Wi-Fi Direct to communicate directly with nearby devices.</p>
-<h3 id="how-far-can-messages-travel">How far can messages travel?<a class="headerlink" href="#how-far-can-messages-travel" title="Permanent link">&para;</a></h3>
-<p>With enough relay devices, messages can travel anywhere. Each hop typically covers ~100 meters. Messages ride along with people as they move.</p>
-<h3 id="why-does-delivery-take-so-long">Why does delivery take so long?<a class="headerlink" href="#why-does-delivery-take-so-long" title="Permanent link">&para;</a></h3>
-<p>Messages travel through physical encounters between devices. More distance = more hops = more time. This is the trade-off for not requiring internet.</p>
-<hr />
-<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
-<h3 id="why-does-mycel-need-location-permission">Why does Mycel need location permission?<a class="headerlink" href="#why-does-mycel-need-location-permission" title="Permanent link">&para;</a></h3>
-<p>Android requires location permission to scan for Bluetooth devices. Mycel doesn't actually track or store your location - it only uses this permission for device discovery.</p>
-<h3 id="why-does-mycel-need-background-permission">Why does Mycel need background permission?<a class="headerlink" href="#why-does-mycel-need-background-permission" title="Permanent link">&para;</a></h3>
-<p>To relay messages when you're not actively using the app. Without background permission, the mesh only works when the app is open.</p>
-<hr />
-<h2 id="privacy-security">Privacy &amp; Security<a class="headerlink" href="#privacy-security" title="Permanent link">&para;</a></h2>
-<h3 id="are-my-messages-encrypted">Are my messages encrypted?<a class="headerlink" href="#are-my-messages-encrypted" title="Permanent link">&para;</a></h3>
-<p>Yes, all messages are end-to-end encrypted. Only you and your recipient can read them.</p>
-<h3 id="can-relay-devices-read-my-messages">Can relay devices read my messages?<a class="headerlink" href="#can-relay-devices-read-my-messages" title="Permanent link">&para;</a></h3>
-<p>No. Messages are encrypted before leaving your device. Relay devices can only see encrypted data and routing metadata.</p>
-<h3 id="is-there-a-server-storing-my-messages">Is there a server storing my messages?<a class="headerlink" href="#is-there-a-server-storing-my-messages" title="Permanent link">&para;</a></h3>
-<p>No. Messages are stored only on devices - yours and the relay devices carrying them. No central server exists.</p>
-<h3 id="do-i-need-a-phone-number">Do I need a phone number?<a class="headerlink" href="#do-i-need-a-phone-number" title="Permanent link">&para;</a></h3>
-<p>No. Mycel identifies you by a cryptographic key, not phone number or email.</p>
-<hr />
-<h2 id="technical">Technical<a class="headerlink" href="#technical" title="Permanent link">&para;</a></h2>
-<h3 id="what-android-version-do-i-need">What Android version do I need?<a class="headerlink" href="#what-android-version-do-i-need" title="Permanent link">&para;</a></h3>
-<p>Android 8.0 (Oreo) or higher (API 26+).</p>
-<h3 id="how-much-storage-does-mycel-use">How much storage does Mycel use?<a class="headerlink" href="#how-much-storage-does-mycel-use" title="Permanent link">&para;</a></h3>
-<p>The app is ~50 MB. Message storage varies with usage.</p>
-<h3 id="does-mycel-drain-my-battery">Does Mycel drain my battery?<a class="headerlink" href="#does-mycel-drain-my-battery" title="Permanent link">&para;</a></h3>
-<p>Mycel uses Bluetooth scanning which does consume some battery. Battery optimization settings can help balance connectivity vs. battery life.</p>
-<h3 id="what-is-the-nostr-transport">What is the Nostr transport?<a class="headerlink" href="#what-is-the-nostr-transport" title="Permanent link">&para;</a></h3>
-<p>Nostr is an optional internet-based relay. When available, it can speed up delivery. Messages are still encrypted.</p>
-<hr />
+<h1 id="battery-background-behavior">Battery &amp; Background Behavior<a class="headerlink" href="#battery-background-behavior" title="Permanent link">&para;</a></h1>
+<p>Mycel needs to run in the background to relay messages. Here's what to expect and how to optimize.</p>
+<h2 id="why-background-operation-matters">Why Background Operation Matters<a class="headerlink" href="#why-background-operation-matters" title="Permanent link">&para;</a></h2>
+<p>Unlike traditional messengers that rely on push notifications from a server, Mycel must:</p>
+<ul>
+<li><strong>Continuously scan</strong> for nearby devices</li>
+<li><strong>Maintain connections</strong> with encountered peers</li>
+<li><strong>Store and forward</strong> messages for others</li>
+</ul>
+<p>If Mycel stops running, your phone drops out of the mesh network.</p>
+<h2 id="battery-impact">Battery Impact<a class="headerlink" href="#battery-impact" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Usage Pattern</th>
+<th>Battery Impact</th>
+<th>Relay Effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App in foreground</td>
+<td>High</td>
+<td>Best</td>
+</tr>
+<tr>
+<td>App in background (unrestricted)</td>
+<td>Medium</td>
+<td>Good</td>
+</tr>
+<tr>
+<td>App in background (restricted)</td>
+<td>Low</td>
+<td>Poor</td>
+</tr>
+<tr>
+<td>App killed by system</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Typical consumption:</strong> 3-8% of daily battery depending on activity and number of nearby peers.</p>
+<h2 id="androids-background-restrictions">Android's Background Restrictions<a class="headerlink" href="#androids-background-restrictions" title="Permanent link">&para;</a></h2>
+<p>Modern Android aggressively kills background apps. You need to configure your phone to let Mycel run:</p>
+<h3 id="1-disable-battery-optimization">1. Disable Battery Optimization<a class="headerlink" href="#1-disable-battery-optimization" title="Permanent link">&para;</a></h3>
+<p><strong>Settings &gt; Apps &gt; Mycel &gt; Battery &gt; Unrestricted</strong></p>
+<p>This tells Android not to limit Mycel's background activity.</p>
+<h3 id="2-lock-the-app-some-phones">2. Lock the App (Some Phones)<a class="headerlink" href="#2-lock-the-app-some-phones" title="Permanent link">&para;</a></h3>
+<p>Some manufacturers (Xiaomi, Huawei, Samsung) have extra battery management:</p>
+<table>
+<thead>
+<tr>
+<th>Brand</th>
+<th>Where to Find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Xiaomi</strong></td>
+<td>Settings &gt; Battery &gt; App battery saver &gt; Mycel &gt; No restrictions</td>
+</tr>
+<tr>
+<td><strong>Huawei</strong></td>
+<td>Settings &gt; Battery &gt; App launch &gt; Mycel &gt; Manage manually &gt; Enable all</td>
+</tr>
+<tr>
+<td><strong>Samsung</strong></td>
+<td>Settings &gt; Device care &gt; Battery &gt; App power management &gt; Mycel &gt; Don't optimize</td>
+</tr>
+<tr>
+<td><strong>OnePlus</strong></td>
+<td>Settings &gt; Battery &gt; Battery optimization &gt; Mycel &gt; Don't optimize</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Don't Kill My App</p>
+<p>Visit <a href="https://dontkillmyapp.com">dontkillmyapp.com</a> for device-specific instructions.</p>
+</div>
+<h3 id="3-allow-background-location">3. Allow Background Location<a class="headerlink" href="#3-allow-background-location" title="Permanent link">&para;</a></h3>
+<p><strong>Settings &gt; Apps &gt; Mycel &gt; Permissions &gt; Location &gt; Allow all the time</strong></p>
+<p>Without this, Bluetooth scanning stops when you lock your phone.</p>
+<h2 id="what-happens-when">What Happens When...<a class="headerlink" href="#what-happens-when" title="Permanent link">&para;</a></h2>
+<h3 id="phone-goes-to-sleep">Phone Goes to Sleep<a class="headerlink" href="#phone-goes-to-sleep" title="Permanent link">&para;</a></h3>
+<p>With proper settings, Mycel continues scanning and relaying. The app icon stays in the notification bar.</p>
+<h3 id="battery-saver-mode">Battery Saver Mode<a class="headerlink" href="#battery-saver-mode" title="Permanent link">&para;</a></h3>
+<p>Most battery saver modes will restrict Mycel. Consider adding Mycel to exceptions, or disable battery saver during important communication periods.</p>
+<h3 id="phone-restarts">Phone Restarts<a class="headerlink" href="#phone-restarts" title="Permanent link">&para;</a></h3>
+<p>Mycel automatically starts when your phone boots. You'll see the notification icon appear.</p>
+<h3 id="app-is-force-stopped">App Is Force-Stopped<a class="headerlink" href="#app-is-force-stopped" title="Permanent link">&para;</a></h3>
+<p>Force-stopping completely kills Mycel. You must manually reopen the app to rejoin the mesh.</p>
+<h2 id="battery-optimization-tips">Battery Optimization Tips<a class="headerlink" href="#battery-optimization-tips" title="Permanent link">&para;</a></h2>
+<h3 id="if-you-need-maximum-battery-life">If You Need Maximum Battery Life<a class="headerlink" href="#if-you-need-maximum-battery-life" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Use Mycel primarily when you need it (emergencies, events)</li>
+<li>Close the app when returning to internet connectivity</li>
+<li>Reduce scanning intensity in Settings (future feature)</li>
+</ol>
+<h3 id="if-you-want-best-mesh-relay">If You Want Best Mesh Relay<a class="headerlink" href="#if-you-want-best-mesh-relay" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Keep Mycel running at all times</li>
+<li>Keep phone charged or carry a power bank</li>
+<li>Grant all permissions and disable optimizations</li>
+<li>Don't use battery saver mode</li>
+</ol>
+<h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
+<p>Mycel shows a persistent notification when running in background:</p>
+<blockquote>
+<p><strong>Mycel is running</strong>
+Mesh relay active</p>
+</blockquote>
+<p>This notification:</p>
+<ul>
+<li>Indicates the app is working</li>
+<li>Prevents Android from killing the app</li>
+<li>Shows current connection status</li>
+</ul>
+<p>You can minimize this notification, but don't disable it entirely.</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="messages-stuck-on-pending">Messages stuck on "Pending"<a class="headerlink" href="#messages-stuck-on-pending" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Check that Bluetooth and Wi-Fi are enabled</li>
-<li>Ensure location permission is granted</li>
-<li>Make sure the app isn't being killed by battery optimization</li>
-<li>Be patient - mesh delivery takes time</li>
-</ul>
-<h3 id="app-keeps-closing">App keeps closing<a class="headerlink" href="#app-keeps-closing" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Disable battery optimization for Mycel</li>
-<li>Grant all requested permissions</li>
-<li>Check that your device meets the requirements</li>
-</ul>
-<h3 id="cant-find-nearby-devices">Can't find nearby devices<a class="headerlink" href="#cant-find-nearby-devices" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Both devices need Mycel running</li>
-<li>Check Bluetooth and Wi-Fi are on</li>
-<li>Check location services are enabled</li>
-<li>Try moving closer together</li>
-</ul>
+<h3 id="mycel-keeps-stopping">"Mycel keeps stopping"<a class="headerlink" href="#mycel-keeps-stopping" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Check battery optimization settings</li>
+<li>Check manufacturer-specific settings</li>
+<li>Exclude Mycel from battery saver</li>
+<li>Don't use "Clean" or "Boost" apps that kill background services</li>
+</ol>
+<h3 id="not-receiving-messages-when-screen-is-off">"Not receiving messages when screen is off"<a class="headerlink" href="#not-receiving-messages-when-screen-is-off" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Ensure background location is "Allow all the time"</li>
+<li>Check persistent notification is visible</li>
+<li>Verify battery optimization is disabled</li>
+</ol>
+<h3 id="high-battery-usage">"High battery usage"<a class="headerlink" href="#high-battery-usage" title="Permanent link">&para;</a></h3>
+<ol>
+<li>This is normal if there are many nearby peers</li>
+<li>Reduce scanning interval (future feature)</li>
+<li>Use only when needed if battery is critical</li>
+</ol>
 <hr />
-<h2 id="updates">Updates<a class="headerlink" href="#updates" title="Permanent link">&para;</a></h2>
-<h3 id="how-do-i-update-mycel">How do I update Mycel?<a class="headerlink" href="#how-do-i-update-mycel" title="Permanent link">&para;</a></h3>
-<p>Download the latest APK from <a href="https://github.com/ethene/mycel-releases/releases">GitHub Releases</a> and install over your existing version.</p>
-<h3 id="can-i-get-automatic-updates">Can I get automatic updates?<a class="headerlink" href="#can-i-get-automatic-updates" title="Permanent link">&para;</a></h3>
-<p>Yes, use <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> to monitor for new releases.</p>
+<p><strong>See Also:</strong> <a href="../../getting-started/permissions/">Permissions</a> | <a href="../delivery/">How Delivery Works</a></p>
 
 
 

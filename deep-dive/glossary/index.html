@@ -735,6 +735,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/battery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery & Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2061,6 +2089,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delivery-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dtn" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2323,6 +2362,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#mesh-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#meshservice" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2482,6 +2532,17 @@
   
     <nav class="md-nav" aria-label="R">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relay (User)
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#relay-nostr" class="md-nav__link">
@@ -2840,6 +2901,34 @@
     
   
     Privacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/threat-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Model
   
 
     
@@ -3333,6 +3422,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delivery-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dtn" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3595,6 +3695,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#mesh-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mesh (User)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#meshservice" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3754,6 +3865,17 @@
   
     <nav class="md-nav" aria-label="R">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relay (User)
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#relay-nostr" class="md-nav__link">
@@ -4020,7 +4142,8 @@
 
 
 <h1 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h1>
-<p>Technical terms used throughout the Mycel documentation.</p>
+<p>Technical terms used throughout the Mycel documentation. User-level terms are marked with <strong>(User)</strong>.</p>
+<hr />
 <h2 id="a">A<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
 <h3 id="ack-acknowledgment">ACK (Acknowledgment)<a class="headerlink" href="#ack-acknowledgment" title="Permanent link">&para;</a></h3>
 <p>Confirmation that a message was delivered. See <a href="../bundles/message-types/#deliveryack-msgtype8">DeliveryAck</a>.</p>
@@ -4028,7 +4151,7 @@
 <p>Symmetric encryption algorithm used for group messages and DM content encryption.</p>
 <h2 id="b">B<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
 <h3 id="bundle">Bundle<a class="headerlink" href="#bundle" title="Permanent link">&para;</a></h3>
-<p>Self-contained message unit in DTN. Contains header (routing metadata) and payload (encrypted content). See <a href="../bundles/structure/">Bundle Structure</a>.</p>
+<p>Self-contained message unit in DTN. Contains header (routing metadata) and payload (encrypted content). Think of it as a sealed envelope with address labels. See <a href="../bundles/structure/">Bundle Structure</a>.</p>
 <h3 id="bundle-status">Bundle Status<a class="headerlink" href="#bundle-status" title="Permanent link">&para;</a></h3>
 <p>Lifecycle state of a bundle: NEW, RECEIVED, RECEIVED_FORWARDABLE, FWD, DEL, EXP, ERR, CANCELLED. See <a href="../bundles/lifecycle/">Bundle Lifecycle</a>.</p>
 <h2 id="c">C<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
@@ -4047,8 +4170,10 @@
 <p>Ed25519 public key identifying a device. 32 bytes.</p>
 <h3 id="drain">DRAIN<a class="headerlink" href="#drain" title="Permanent link">&para;</a></h3>
 <p>Session state: connected, transfer-ready, queues empty, idle.</p>
+<h3 id="delivery-user">Delivery <strong>(User)</strong><a class="headerlink" href="#delivery-user" title="Permanent link">&para;</a></h3>
+<p>When your message reaches its intended recipient. In Mycel, this can take seconds (nearby) or days (multi-hop across the mesh).</p>
 <h3 id="dtn">DTN<a class="headerlink" href="#dtn" title="Permanent link">&para;</a></h3>
-<p>Delay-Tolerant Networking. Architecture for communication without continuous connectivity.</p>
+<p>Delay-Tolerant Networking. Architecture for communication without continuous connectivity. The key insight: embrace delays rather than require always-on connections.</p>
 <h2 id="e">E<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
 <h3 id="ecies">ECIES<a class="headerlink" href="#ecies" title="Permanent link">&para;</a></h3>
 <p>Elliptic Curve Integrated Encryption Scheme. Used for DM encryption: X25519 ECDH + HKDF + AES-256-GCM.</p>
@@ -4080,6 +4205,8 @@
 <h3 id="l2cap">L2CAP<a class="headerlink" href="#l2cap" title="Permanent link">&para;</a></h3>
 <p>Bluetooth Logical Link Control and Adaptation Protocol. Used for BLE data transfer.</p>
 <h2 id="m">M<a class="headerlink" href="#m" title="Permanent link">&para;</a></h2>
+<h3 id="mesh-user">Mesh <strong>(User)</strong><a class="headerlink" href="#mesh-user" title="Permanent link">&para;</a></h3>
+<p>The network of Mycel devices that relay messages for each other. Everyone running Mycel is part of the mesh. More people = better coverage = faster delivery.</p>
 <h3 id="meshservice">MeshService<a class="headerlink" href="#meshservice" title="Permanent link">&para;</a></h3>
 <p>Android foreground service managing DTN operations.</p>
 <h3 id="myctag">MycTag<a class="headerlink" href="#myctag" title="Permanent link">&para;</a></h3>
@@ -4103,6 +4230,8 @@
 <h3 id="prophet">PRoPHET<a class="headerlink" href="#prophet" title="Permanent link">&para;</a></h3>
 <p>Probabilistic Routing Protocol using History of Encounters and Transitivity. See <a href="../routing/prophet/">PRoPHET Algorithm</a>.</p>
 <h2 id="r">R<a class="headerlink" href="#r" title="Permanent link">&para;</a></h2>
+<h3 id="relay-user">Relay <strong>(User)</strong><a class="headerlink" href="#relay-user" title="Permanent link">&para;</a></h3>
+<p>Any device that carries your message toward its destination. Every Mycel user's phone acts as a relay for other people's messages. You help others; they help you.</p>
 <h3 id="relay-nostr">Relay (Nostr)<a class="headerlink" href="#relay-nostr" title="Permanent link">&para;</a></h3>
 <p>WebSocket server that stores and forwards Nostr events.</p>
 <h3 id="route-path">Route Path<a class="headerlink" href="#route-path" title="Permanent link">&para;</a></h3>
