@@ -45,6 +45,32 @@ nav:
   - How It Works:
     - Overview: how-it-works/overview.md
     - Transports: how-it-works/transports.md
+  - Deep Dive:
+    - Overview: deep-dive/index.md
+    - Architecture:
+      - System Overview: deep-dive/architecture/overview.md
+    - Identity:
+      - Keys & Cryptography: deep-dive/identity/keys.md
+    - Bundles:
+      - Structure: deep-dive/bundles/structure.md
+      - Lifecycle: deep-dive/bundles/lifecycle.md
+      - Message Types: deep-dive/bundles/message-types.md
+      - Encryption: deep-dive/bundles/encryption.md
+    - Routing:
+      - Overview: deep-dive/routing/overview.md
+      - PRoPHET Algorithm: deep-dive/routing/prophet.md
+      - Spray-and-Wait: deep-dive/routing/spray-wait.md
+      - Geo Routing: deep-dive/routing/geo-routing.md
+      - ACK Learning: deep-dive/routing/ack-learning.md
+    - Transports:
+      - Nearby Connections: deep-dive/transports/nearby.md
+      - Nostr Relays: deep-dive/transports/nostr.md
+    - Groups:
+      - Private Groups: deep-dive/groups/private-groups.md
+      - Channels: deep-dive/groups/channels.md
+      - Membership CRDT: deep-dive/groups/membership-crdt.md
+    - Glossary: deep-dive/glossary.md
+    - Roadmap: deep-dive/roadmap.md
   - Security:
     - Privacy: security/privacy.md
     - Verification: security/verification.md

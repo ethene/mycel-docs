@@ -6,17 +6,18 @@ A technical overview of Mycel's architecture.
 
 Mycel consists of three main layers:
 
-```
-┌─────────────────────────────────────┐
-│           Application Layer          │
-│     (UI, Contacts, Conversations)    │
-├─────────────────────────────────────┤
-│             DTN Layer                │
-│   (Bundles, Routing, Store/Forward)  │
-├─────────────────────────────────────┤
-│          Transport Layer             │
-│      (Nearby, Nostr, Future LoRa)    │
-└─────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph App["Application Layer"]
+        UI["UI, Contacts, Conversations"]
+    end
+    subgraph DTN["DTN Layer"]
+        Bundle["Bundles, Routing, Store/Forward"]
+    end
+    subgraph Transport["Transport Layer"]
+        Trans["Nearby, Nostr, Future LoRa"]
+    end
+    App --> DTN --> Transport
 ```
 
 ### Application Layer
@@ -47,24 +48,33 @@ Multiple transports work together:
 
 Messages are wrapped in **bundles** - self-contained packets that can be stored and forwarded independently.
 
+```mermaid
+classDiagram
+    class Bundle {
+        +Header header
+        +Payload payload
+        +Signature signature
+    }
+    class Header {
+        +bytes id
+        +bytes source
+        +bytes destination
+        +long created
+        +long ttl
+        +list routePath
+    }
+    class Payload {
+        +bytes encrypted_content
+    }
+    class Signature {
+        +bytes ed25519_signature
+    }
+    Bundle --> Header
+    Bundle --> Payload
+    Bundle --> Signature
 ```
-Bundle {
-    Header {
-        id: unique identifier
-        source: sender's public key
-        destination: recipient's public key
-        created: timestamp
-        ttl: time-to-live
-        routePath: nodes that have handled this bundle
-    }
-    Payload {
-        encrypted message content
-    }
-    Signature {
-        Ed25519 signature from sender
-    }
-}
-```
+
+> **Deep Dive:** See [Bundle Structure](/deep-dive/bundles/structure/) for complete field reference.
 
 ## Routing
 
