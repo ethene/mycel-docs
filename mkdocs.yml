@@ -49,6 +49,7 @@ nav:
     - Overview: deep-dive/index.md
     - Architecture:
       - System Overview: deep-dive/architecture/overview.md
+      - Message Flow: deep-dive/architecture/data-flow.md
     - Identity:
       - Keys & Cryptography: deep-dive/identity/keys.md
     - Bundles:
