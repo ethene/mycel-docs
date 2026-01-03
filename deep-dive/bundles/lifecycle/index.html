@@ -1614,17 +1614,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2918,17 +2907,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2977,52 +2955,45 @@
     note left of DEL : Successfully delivered
     note left of EXP : TTL exceeded
     note left of CANCELLED : Explicitly removed</code></pre>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt:95-104</code></p>
 <h2 id="state-descriptions">State Descriptions<a class="headerlink" href="#state-descriptions" title="Permanent link">&para;</a></h2>
 <h3 id="new">NEW<a class="headerlink" href="#new" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>BundleRepository.enqueue()</code> for locally-created bundles</li>
+<li><strong>Entry:</strong> When locally-created bundles are enqueued</li>
 <li><strong>Meaning:</strong> Bundle created by this device, queued for forwarding</li>
 <li><strong>Next States:</strong> FWD (forwarding), EXP (expired)</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:254-273</code></li>
 </ul>
 <h3 id="received">RECEIVED<a class="headerlink" href="#received" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>processReceived()</code> when bundle arrives from peer</li>
+<li><strong>Entry:</strong> When bundle arrives from peer</li>
 <li><strong>Meaning:</strong> Bundle accepted from network, stored locally</li>
 <li><strong>Next States:</strong></li>
 <li>DEL if this device is the destination</li>
 <li>RECEIVED_FORWARDABLE if destination is nearby</li>
 <li>CANCELLED if explicitly removed</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:622-653</code></li>
 </ul>
 <h3 id="received_forwardable">RECEIVED_FORWARDABLE<a class="headerlink" href="#received_forwardable" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>promoteForForwarding()</code> when destination peer is detected</li>
+<li><strong>Entry:</strong> When destination peer is detected</li>
 <li><strong>Meaning:</strong> Received bundle promoted for relay toward destination</li>
 <li><strong>Next States:</strong> FWD (forwarding)</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:908-916</code></li>
 </ul>
 <h3 id="fwd-forwarding">FWD (Forwarding)<a class="headerlink" href="#fwd-forwarding" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>markForwarded()</code> when forwarding attempt begins</li>
+<li><strong>Entry:</strong> When forwarding attempt begins</li>
 <li><strong>Meaning:</strong> Bundle currently being sent to peers</li>
 <li><strong>Next States:</strong> DEL (delivered), EXP (expired), CANCELLED</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:516-524</code></li>
 </ul>
 <h3 id="del-delivered">DEL (Delivered)<a class="headerlink" href="#del-delivered" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>markDelivered()</code> when delivery confirmed</li>
+<li><strong>Entry:</strong> When delivery confirmed</li>
 <li><strong>Meaning:</strong> Successfully delivered to final destination</li>
 <li><strong>Terminal:</strong> Yes (but may transition to CANCELLED for cleanup)</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:535-573</code></li>
 </ul>
 <h3 id="exp-expired">EXP (Expired)<a class="headerlink" href="#exp-expired" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>purgeExpired()</code> during periodic cleanup</li>
+<li><strong>Entry:</strong> During periodic cleanup</li>
 <li><strong>Meaning:</strong> TTL exceeded, bundle no longer valid</li>
 <li><strong>Terminal:</strong> Yes</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:702-724</code></li>
 </ul>
 <h3 id="err-error">ERR (Error)<a class="headerlink" href="#err-error" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3033,10 +3004,9 @@
 </ul>
 <h3 id="cancelled">CANCELLED<a class="headerlink" href="#cancelled" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Entry:</strong> <code>handleDeliveryCancel()</code> or operator action</li>
+<li><strong>Entry:</strong> On delivery cancel or operator action</li>
 <li><strong>Meaning:</strong> Explicitly removed from network</li>
 <li><strong>Terminal:</strong> Yes</li>
-<li><strong>Source:</strong> <code>BundleRepository.kt:1580-1634</code></li>
 </ul>
 <h2 id="transition-triggers">Transition Triggers<a class="headerlink" href="#transition-triggers" title="Permanent link">&para;</a></h2>
 <h3 id="creation-path">Creation Path<a class="headerlink" href="#creation-path" title="Permanent link">&para;</a></h3>
@@ -3131,34 +3101,33 @@
 </tbody>
 </table>
 <h3 id="expiration-check">Expiration Check<a class="headerlink" href="#expiration-check" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// From BundleRepository.kt:702-724</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">purgeExpired</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">expired</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="na">findExpiredBundles</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">bundle</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">expired</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">bundle</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BundleStatus</span><span class="p">.</span><span class="na">EXP</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">deletePayloadFile</span><span class="p">(</span><span class="n">bundle</span><span class="p">.</span><span class="na">id</span><span class="p">)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
-</code></pre></div>
-<p>Expiration runs periodically (every 5 minutes) to clean up stale bundles.</p>
+<p>Expiration runs periodically (every 5 minutes) to clean up stale bundles. Expired bundles have their payloads deleted and status set to EXP.</p>
 <h2 id="copy-budget-lifecycle">Copy Budget Lifecycle<a class="headerlink" href="#copy-budget-lifecycle" title="Permanent link">&para;</a></h2>
 <p>Each bundle has a copy budget for Spray-and-Wait routing.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Initial budget based on priority</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">copyBudget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">priority</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">CRITICAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="m">8</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">NORMAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="m">3</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">BULK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="m">2</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
-</code></pre></div>
-<p>Each successful forward consumes one copy:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">markForwarded</span><span class="p">(</span><span class="n">bundleId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">peerId</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">bundle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="na">find</span><span class="p">(</span><span class="n">bundleId</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">bundle</span><span class="p">.</span><span class="na">copyBudget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">copyBudget</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">bundle</span><span class="p">.</span><span class="na">attempts</span><span class="o">++</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">bundle</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FWD</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
-</code></pre></div>
+<p><strong>Initial Budget by Priority:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Copy Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRITICAL</td>
+<td>8</td>
+</tr>
+<tr>
+<td>NORMAL</td>
+<td>3</td>
+</tr>
+<tr>
+<td>BULK</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Each successful forward consumes one copy. The budget decrements with each forward, and the attempt counter increments.</p>
 <h2 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h2>
 <h3 id="ack-triggered-cleanup">ACK-Triggered Cleanup<a class="headerlink" href="#ack-triggered-cleanup" title="Permanent link">&para;</a></h3>
 <p>When a DeliveryAck is received:
@@ -3166,44 +3135,12 @@
 2. Send DeliveryCancel to network
 3. Other nodes receiving cancel → CANCELLED</p>
 <h3 id="storage-cleanup">Storage Cleanup<a class="headerlink" href="#storage-cleanup" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Payload file deletion</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">cleanupBundle</span><span class="p">(</span><span class="n">bundleId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="na">updateStatus</span><span class="p">(</span><span class="n">bundleId</span><span class="p">,</span><span class="w"> </span><span class="n">CANCELLED</span><span class="p">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">File</span><span class="p">(</span><span class="n">payloadDir</span><span class="p">,</span><span class="w"> </span><span class="n">bundleId</span><span class="p">).</span><span class="na">delete</span><span class="p">()</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div>
+<p>When a bundle is cleaned up, its status is set to CANCELLED and its payload file is deleted from storage.</p>
 <h3 id="database-cleanup">Database Cleanup<a class="headerlink" href="#database-cleanup" title="Permanent link">&para;</a></h3>
 <p>Periodic cleanup removes old terminal-state bundles:
 - DEL older than 24 hours
 - EXP older than 1 hour
 - CANCELLED older than 1 hour</p>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-<th>Key Lines</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>BundleEntity.kt</code></td>
-<td>Status enum</td>
-<td>95-104</td>
-</tr>
-<tr>
-<td><code>BundleRepository.kt</code></td>
-<td>All transitions</td>
-<td>Full file</td>
-</tr>
-<tr>
-<td><code>TransferOrchestrator.kt</code></td>
-<td>Forward triggering</td>
-<td>200-300</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../structure/">Bundle Structure</a> | <a href="../message-types/">Message Types</a></p>
 

@@ -1907,17 +1907,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2740,17 +2729,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2823,9 +2801,7 @@
     RP --&gt; R2
     RP --&gt; R3
     NTA --&gt; GW</code></pre>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/</code></p>
 <h2 id="relay-connection-states">Relay Connection States<a class="headerlink" href="#relay-connection-states" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/diy/transport/RelayConnection.kt:31</code></p>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; Connecting : start()
     Connecting --&gt; Connected : onOpen
@@ -2864,13 +2840,10 @@
 </tbody>
 </table>
 <h2 id="default-relays">Default Relays<a class="headerlink" href="#default-relays" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/NostrTransportConfig.kt</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">DEFAULT_RELAYS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="s">&quot;wss://relay.damus.io&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="s">&quot;wss://nos.lol&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="s">&quot;wss://relay.nostr.band&quot;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span>
-</code></pre></div>
+<p>Default relay servers:
+- <code>wss://relay.damus.io</code>
+- <code>wss://nos.lol</code>
+- <code>wss://relay.nostr.band</code></p>
 <p>Users can configure custom relays via MeshConfig.</p>
 <h2 id="gift-wrap-encryption-nip-17">Gift-Wrap Encryption (NIP-17)<a class="headerlink" href="#gift-wrap-encryption-nip-17" title="Permanent link">&para;</a></h2>
 <p>To hide sender/recipient from relays, messages are double-encrypted.</p>
@@ -2901,7 +2874,6 @@
     S1 --&gt; G2
     S2 --&gt; G2
     S3 --&gt; G2</code></pre>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/GiftWrapModels.kt</code></p>
 <h3 id="security-properties">Security Properties<a class="headerlink" href="#security-properties" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2958,16 +2930,8 @@
     GW--&gt;&gt;NTA: bundle payload
     NTA-&gt;&gt;App: onBundleReceived(bundle)</code></pre>
 <h2 id="subscription">Subscription<a class="headerlink" href="#subscription" title="Permanent link">&para;</a></h2>
-<p>The adapter subscribes to gift-wrapped events for the local device.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Subscription filter</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Filter</span><span class="p">(</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">kinds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="m">1059</span><span class="p">),</span><span class="w">  </span><span class="c1">// Gift-wrap kind</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;#p&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">localPubkeyHex</span><span class="p">)),</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">since</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lastSyncTimestamp</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
-</code></pre></div>
+<p>The adapter subscribes to gift-wrapped events (kind 1059) for the local device's public key, filtering from the last sync timestamp.</p>
 <h2 id="transport-status">Transport Status<a class="headerlink" href="#transport-status" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/TransportState.kt:14</code></p>
 <table>
 <thead>
 <tr>
@@ -2990,27 +2954,9 @@
 </tr>
 </tbody>
 </table>
-<p>Status is computed from relay connection states:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">computeStatus</span><span class="p">():</span><span class="w"> </span><span class="n">TransportStatus</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">connected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">relays</span><span class="p">.</span><span class="na">count</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Connected</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="n">connected</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">DOWN</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="n">connected</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">desiredRelays</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">DEGRADED</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">UP</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
-</code></pre></div>
+<p>Status is computed based on the number of connected relays compared to the desired relay count.</p>
 <h2 id="backoff-and-retry">Backoff and Retry<a class="headerlink" href="#backoff-and-retry" title="Permanent link">&para;</a></h2>
-<p>Failed connections use exponential backoff.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// From RelayConnection.kt:93-107</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">scheduleReconnect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">delayMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">baseDelayMs</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2.</span><span class="n">pow</span><span class="p">(</span><span class="n">attemptCount</span><span class="p">),</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">maxDelayMs</span><span class="w">  </span><span class="c1">// 5 minutes</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="na">postDelayed</span><span class="p">({</span><span class="w"> </span><span class="n">connect</span><span class="p">()</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">delayMs</span><span class="p">)</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
-</code></pre></div>
+<p>Failed connections use exponential backoff with a maximum delay of 5 minutes.</p>
 <table>
 <thead>
 <tr>
@@ -3042,16 +2988,10 @@
 </tbody>
 </table>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// From MeshConfig.kt</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Flags</span><span class="p">(</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nostrTransportEnabled</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nostrRelayUrls</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEFAULT_RELAYS</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">)</span>
-</code></pre></div>
-<p>Toggle via bridge:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>meshctl<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>nostr_enabled<span class="w"> </span><span class="nb">true</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>meshctl<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>nostr_relays<span class="w"> </span><span class="s2">&quot;wss://relay1.example,wss://relay2.example&quot;</span>
-</code></pre></div></p>
+<p>Nostr transport can be enabled/disabled and relay URLs can be configured.</p>
+<p>Toggle via meshctl:
+- <code>meshctl config set nostr_enabled true</code>
+- <code>meshctl config set nostr_relays "wss://relay1.example,wss://relay2.example"</code></p>
 <h2 id="comparison-to-nearby">Comparison to Nearby<a class="headerlink" href="#comparison-to-nearby" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3100,38 +3040,6 @@
 <li><strong>ACK-based skip:</strong> After ACK via Nearby, skip Nostr copies</li>
 <li><strong>Parallel delivery:</strong> Both transports may be used simultaneously</li>
 </ol>
-<p><strong>Source:</strong> <code>core/transport/src/main/kotlin/com/meshlablite/core/transport/nostr/NostrTransportManager.kt</code></p>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>NostrTransportAdapter.kt</code></td>
-<td>Transport interface implementation</td>
-</tr>
-<tr>
-<td><code>RelayPool.kt</code></td>
-<td>Relay connection management</td>
-</tr>
-<tr>
-<td><code>RelayConnection.kt</code></td>
-<td>WebSocket handling</td>
-</tr>
-<tr>
-<td><code>GiftWrapModels.kt</code></td>
-<td>NIP-17 encryption</td>
-</tr>
-<tr>
-<td><code>NostrTransportManager.kt</code></td>
-<td>Send/receive coordination</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../nearby/">Nearby Transport</a> | <a href="../../routing/overview/">Routing Overview</a></p>
 

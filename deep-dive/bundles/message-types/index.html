@@ -1525,17 +1525,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2684,17 +2673,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2717,7 +2695,6 @@
 
 <h1 id="control-message-types">Control Message Types<a class="headerlink" href="#control-message-types" title="Permanent link">&para;</a></h1>
 <p>Control messages coordinate DTN routing, group management, and delivery confirmation. They are transmitted as bundle payloads with a <code>msgType</code> field.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt</code></p>
 <h2 id="message-type-reference">Message Type Reference<a class="headerlink" href="#message-type-reference" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2788,13 +2765,6 @@
 <h2 id="detailed-message-specifications">Detailed Message Specifications<a class="headerlink" href="#detailed-message-specifications" title="Permanent link">&para;</a></h2>
 <h3 id="submsg-msgtype1">SubMsg (msgType=1)<a class="headerlink" href="#submsg-msgtype1" title="Permanent link">&para;</a></h3>
 <p>Topic subscription management for groups and channels.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SubMsg</span><span class="p">(</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">topicId</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">      </span><span class="c1">// Topic/channel/group ID (32 bytes)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">action</span><span class="p">:</span><span class="w"> </span><span class="n">SubAction</span><span class="p">,</span><span class="w">       </span><span class="c1">// SUBSCRIBE or UNSUBSCRIBE</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">expiresAt</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="c1">// Optional expiration</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">timestamp</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
-</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -2819,50 +2789,159 @@
 <td>8 bytes</td>
 <td>Optional expiration timestamp</td>
 </tr>
+<tr>
+<td>timestamp</td>
+<td>8 bytes</td>
+<td>Message creation time</td>
+</tr>
 </tbody>
 </table>
 <h3 id="hopack-msgtype2">HopAck (msgType=2)<a class="headerlink" href="#hopack-msgtype2" title="Permanent link">&para;</a></h3>
 <p>Confirms custody transfer at each hop.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">HopAck</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">bundleId</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// Acknowledged bundle (32 bytes)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">fromNode</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// Acknowledging node&#39;s pubkey (32 bytes)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">timestamp</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bundleId</td>
+<td>32 bytes</td>
+<td>Acknowledged bundle ID</td>
+</tr>
+<tr>
+<td>fromNode</td>
+<td>32 bytes</td>
+<td>Acknowledging node's public key</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>8 bytes</td>
+<td>Acknowledgment time</td>
+</tr>
+</tbody>
+</table>
 <p>Used for:
 - Spray-and-Wait copy budget management
 - Confirming successful hop-by-hop delivery</p>
 <h3 id="deliveryack-msgtype8">DeliveryAck (msgType=8)<a class="headerlink" href="#deliveryack-msgtype8" title="Permanent link">&para;</a></h3>
 <p><strong>Primary ACK mechanism.</strong> Signed end-to-end acknowledgment from the destination.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">DeliveryAck</span><span class="p">(</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">msgId</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">           </span><span class="c1">// Original bundle ID (32 bytes)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">toUid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">           </span><span class="c1">// Origin UID (32 bytes)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">fromUid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">         </span><span class="c1">// Destination UID (32 bytes)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">deliveredAtMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">        </span><span class="c1">// Delivery timestamp</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">status</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">           </span><span class="c1">// 1 = delivered to app</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ackType</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">          </span><span class="c1">// 1 = RECIPIENT</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ackH3r5</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">      </span><span class="c1">// Coarse geo hint</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ackH3r7</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">      </span><span class="c1">// Fine geo hint</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">hopCount</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">      </span><span class="c1">// Observed hop count</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">latencyMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">    </span><span class="c1">// Delivery latency</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">transportHint</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="p">,</span><span class="w">     </span><span class="c1">// &quot;nearby&quot; or &quot;nostr&quot;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">path</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DeliveryPathHop</span><span class="o">&gt;?</span><span class="p">,</span><span class="w"> </span><span class="c1">// Per-hop metadata</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sig</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">              </span><span class="c1">// Ed25519 signature (64 bytes)</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msgId</td>
+<td>32 bytes</td>
+<td>Original bundle ID</td>
+</tr>
+<tr>
+<td>toUid</td>
+<td>32 bytes</td>
+<td>Origin UID</td>
+</tr>
+<tr>
+<td>fromUid</td>
+<td>32 bytes</td>
+<td>Destination UID</td>
+</tr>
+<tr>
+<td>deliveredAtMs</td>
+<td>8 bytes</td>
+<td>Delivery timestamp</td>
+</tr>
+<tr>
+<td>status</td>
+<td>1 byte</td>
+<td>1 = delivered to app</td>
+</tr>
+<tr>
+<td>ackType</td>
+<td>1 byte</td>
+<td>1 = RECIPIENT</td>
+</tr>
+<tr>
+<td>ackH3r5</td>
+<td>8 bytes</td>
+<td>Coarse geo hint (optional)</td>
+</tr>
+<tr>
+<td>ackH3r7</td>
+<td>8 bytes</td>
+<td>Fine geo hint (optional)</td>
+</tr>
+<tr>
+<td>hopCount</td>
+<td>4 bytes</td>
+<td>Observed hop count (optional)</td>
+</tr>
+<tr>
+<td>latencyMs</td>
+<td>8 bytes</td>
+<td>Delivery latency (optional)</td>
+</tr>
+<tr>
+<td>transportHint</td>
+<td>variable</td>
+<td>"nearby" or "nostr"</td>
+</tr>
+<tr>
+<td>path</td>
+<td>variable</td>
+<td>Per-hop metadata (optional)</td>
+</tr>
+<tr>
+<td>sig</td>
+<td>64 bytes</td>
+<td>Ed25519 signature</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Key Properties:</strong>
 - <strong>Signed</strong> by destination - proves authentic delivery
 - <strong>Routed back</strong> to origin via DTN
 - <strong>Improves routing</strong> via ACK path learning</p>
 <h3 id="deliverycancel-msgtype9">DeliveryCancel (msgType=9)<a class="headerlink" href="#deliverycancel-msgtype9" title="Permanent link">&para;</a></h3>
 <p>Signed cancellation instruction.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">DeliveryCancel</span><span class="p">(</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">msgId</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">       </span><span class="c1">// Bundle to cancel (32 bytes)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">reason</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="p">,</span><span class="w">           </span><span class="c1">// 1=ACKED, 2=EXPIRED, 3=RECALLED</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">issuedByUid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// Issuer UID (32 bytes)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sig</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">          </span><span class="c1">// Ed25519 signature (64 bytes)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msgId</td>
+<td>32 bytes</td>
+<td>Bundle to cancel</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>1 byte</td>
+<td>Cancellation reason</td>
+</tr>
+<tr>
+<td>issuedByUid</td>
+<td>32 bytes</td>
+<td>Issuer UID</td>
+</tr>
+<tr>
+<td>sig</td>
+<td>64 bytes</td>
+<td>Ed25519 signature</td>
+</tr>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -2891,12 +2970,32 @@
 </table>
 <h3 id="groupinvitemsg-msgtype6">GroupInviteMsg (msgType=6)<a class="headerlink" href="#groupinvitemsg-msgtype6" title="Permanent link">&para;</a></h3>
 <p>Encrypted group invitation for private groups.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupInviteMsg</span><span class="p">(</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// ECIES-encrypted invite</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ephemeralPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// X25519 ephemeral (32 bytes)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// XChaCha20-Poly1305 nonce (24 bytes)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>encryptedPayload</td>
+<td>variable</td>
+<td>ECIES-encrypted invite</td>
+</tr>
+<tr>
+<td>ephemeralPubKey</td>
+<td>32 bytes</td>
+<td>X25519 ephemeral key</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>24 bytes</td>
+<td>XChaCha20-Poly1305 nonce</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Encryption:</strong> ECIES with XChaCha20-Poly1305</p>
 <p>The encrypted payload contains:
 - Group ID
@@ -2905,11 +3004,27 @@
 - Admin public key</p>
 <h3 id="groupupdatemsg-msgtype7">GroupUpdateMsg (msgType=7)<a class="headerlink" href="#groupupdatemsg-msgtype7" title="Permanent link">&para;</a></h3>
 <p>Membership changes for existing groups.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupUpdateMsg</span><span class="p">(</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// AES-GCM encrypted update</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// AES-GCM nonce (12 bytes)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>encryptedPayload</td>
+<td>variable</td>
+<td>AES-GCM encrypted update</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>12 bytes</td>
+<td>AES-GCM nonce</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Encryption:</strong> AES-256-GCM with group symmetric key</p>
 <p>The encrypted payload contains:
 - Action: ADD_MEMBER or REMOVE_MEMBER
@@ -2917,16 +3032,52 @@
 - Admin signature</p>
 <h3 id="groupannouncemsg-msgtype10">GroupAnnounceMsg (msgType=10)<a class="headerlink" href="#groupannouncemsg-msgtype10" title="Permanent link">&para;</a></h3>
 <p>Public group discovery broadcast.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupAnnounceMsg</span><span class="p">(</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupIdString</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">    </span><span class="c1">// &quot;group:hiking-club&quot;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">shortId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">          </span><span class="c1">// 10-char hash</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">displayName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">      </span><span class="c1">// Human-readable name</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">description</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="p">,</span><span class="w">     </span><span class="c1">// Optional description</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">creatorUidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">    </span><span class="c1">// Creator&#39;s UID (64 hex chars)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">createdAt</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">          </span><span class="c1">// Creation timestamp</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">creatorSig</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">     </span><span class="c1">// Ed25519 signature (64 bytes)</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>groupIdString</td>
+<td>variable</td>
+<td>Group identifier (e.g., "group:hiking-club")</td>
+</tr>
+<tr>
+<td>shortId</td>
+<td>10 chars</td>
+<td>10-character hash</td>
+</tr>
+<tr>
+<td>displayName</td>
+<td>variable</td>
+<td>Human-readable name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>variable</td>
+<td>Optional description</td>
+</tr>
+<tr>
+<td>creatorUidHex</td>
+<td>64 chars</td>
+<td>Creator's UID (hex)</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>8 bytes</td>
+<td>Creation timestamp</td>
+</tr>
+<tr>
+<td>creatorSig</td>
+<td>64 bytes</td>
+<td>Ed25519 signature</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Key Properties:</strong>
 - Plaintext (not encrypted)
 - Signed by group creator
@@ -2934,43 +3085,125 @@
 - Only for PUBLIC groups</p>
 <h3 id="linkmetrics-msgtype4">LinkMetrics (msgType=4)<a class="headerlink" href="#linkmetrics-msgtype4" title="Permanent link">&para;</a></h3>
 <p>Network quality metrics for intelligent routing.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LinkMetrics</span><span class="p">(</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">clusterTag</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// MycTagStar (32 bytes)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">gatewayScore</span><span class="p">:</span><span class="w"> </span><span class="kt">Float</span><span class="p">,</span><span class="w">   </span><span class="c1">// 0.0-1.0</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">queueLength</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w">      </span><span class="c1">// Outbound queue size</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">deltaIn</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w">          </span><span class="c1">// Bundles received</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">deltaOut</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w">          </span><span class="c1">// Bundles forwarded</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clusterTag</td>
+<td>32 bytes</td>
+<td>MycTagStar</td>
+</tr>
+<tr>
+<td>gatewayScore</td>
+<td>4 bytes</td>
+<td>0.0-1.0 score</td>
+</tr>
+<tr>
+<td>queueLength</td>
+<td>4 bytes</td>
+<td>Outbound queue size</td>
+</tr>
+<tr>
+<td>deltaIn</td>
+<td>4 bytes</td>
+<td>Bundles received</td>
+</tr>
+<tr>
+<td>deltaOut</td>
+<td>4 bytes</td>
+<td>Bundles forwarded</td>
+</tr>
+</tbody>
+</table>
 <h3 id="payment-msgtype5">Payment (msgType=5)<a class="headerlink" href="#payment-msgtype5" title="Permanent link">&para;</a></h3>
 <p>Micropayment for routing incentives (future use).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Payment</span><span class="p">(</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">payer</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">   </span><span class="c1">// Payer pubkey (32 bytes)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">payee</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">   </span><span class="c1">// Payee pubkey (32 bytes)</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">amount</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">       </span><span class="c1">// Payment amount</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">        </span><span class="c1">// Replay prevention</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sig</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">      </span><span class="c1">// Payer signature (64 bytes)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>payer</td>
+<td>32 bytes</td>
+<td>Payer public key</td>
+</tr>
+<tr>
+<td>payee</td>
+<td>32 bytes</td>
+<td>Payee public key</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>8 bytes</td>
+<td>Payment amount</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>8 bytes</td>
+<td>Replay prevention</td>
+</tr>
+<tr>
+<td>sig</td>
+<td>64 bytes</td>
+<td>Payer signature</td>
+</tr>
+</tbody>
+</table>
 <h3 id="configupdate-msgtype12">ConfigUpdate (msgType=12)<a class="headerlink" href="#configupdate-msgtype12" title="Permanent link">&para;</a></h3>
 <p>Remote configuration from trusted manager.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ConfigUpdate</span><span class="p">(</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">version</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">issuedAtMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">expiresAtMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="p">,</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">flags</span><span class="p">:</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="p">,</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">issuerKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// Trusted key (32 bytes)</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">signature</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">   </span><span class="c1">// Ed25519 signature (64 bytes)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>version</td>
+<td>8 bytes</td>
+<td>Config version</td>
+</tr>
+<tr>
+<td>issuedAtMs</td>
+<td>8 bytes</td>
+<td>Issue timestamp</td>
+</tr>
+<tr>
+<td>expiresAtMs</td>
+<td>8 bytes</td>
+<td>Expiration (optional)</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>variable</td>
+<td>Key-value pairs</td>
+</tr>
+<tr>
+<td>issuerKey</td>
+<td>32 bytes</td>
+<td>Trusted key</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>64 bytes</td>
+<td>Ed25519 signature</td>
+</tr>
+</tbody>
+</table>
 <h2 id="serialization">Serialization<a class="headerlink" href="#serialization" title="Permanent link">&para;</a></h2>
-<p>All control messages use CBOR serialization:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// Encode</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controlMsg</span><span class="p">.</span><span class="na">toCbor</span><span class="p">()</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">// Decode</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ControlMsg</span><span class="p">.</span><span class="na">fromCbor</span><span class="p">(</span><span class="n">bytes</span><span class="p">)</span>
-</code></pre></div>
+<p>All control messages use CBOR (Concise Binary Object Representation) serialization for efficient binary encoding.</p>
 <h2 id="routing-priority">Routing Priority<a class="headerlink" href="#routing-priority" title="Permanent link">&para;</a></h2>
 <p>Control messages have different priorities:</p>
 <table>
@@ -3011,33 +3244,6 @@
 <td>LinkMetrics</td>
 <td>BULK (2)</td>
 <td>Background telemetry</td>
-</tr>
-</tbody>
-</table>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-<th>Lines</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ControlMsg.kt</code></td>
-<td>All control message definitions</td>
-<td>Full file</td>
-</tr>
-<tr>
-<td><code>BundleRepository.kt</code></td>
-<td>Control message handling</td>
-<td>1580-1700</td>
-</tr>
-<tr>
-<td><code>AckPathLearner.kt</code></td>
-<td>DeliveryAck processing</td>
-<td>45-120</td>
 </tr>
 </tbody>
 </table>

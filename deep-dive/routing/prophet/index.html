@@ -1719,17 +1719,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2774,17 +2763,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2820,7 +2798,6 @@
         LOW["P &lt; 0.3: Low"]
     end</code></pre>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt:63-70</code></p>
 <table>
 <thead>
 <tr>
@@ -2866,9 +2843,8 @@
 <h2 id="probability-updates">Probability Updates<a class="headerlink" href="#probability-updates" title="Permanent link">&para;</a></h2>
 <h3 id="1-direct-encounter">1. Direct Encounter<a class="headerlink" href="#1-direct-encounter" title="Permanent link">&para;</a></h3>
 <p>When two nodes meet, they update their probabilities for each other.</p>
-<p><strong>Formula:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>P(A,B)_new = P(A,B)_old + (1 - P(A,B)_old) × P_init
-</code></pre></div></p>
+<p><strong>Formula:</strong></p>
+<p>$$P(A,B)<em old="old">{new} = P(A,B)</em> + (1 - P(A,B)<em init="init">{old}) \times P</em>$$</p>
 <p><strong>Example:</strong>
 - Previous P(A,B) = 0.5
 - P_init = 0.7
@@ -2884,9 +2860,8 @@
     Note over B: P(B,A) = 0.85</code></pre>
 <h3 id="2-transitive-update">2. Transitive Update<a class="headerlink" href="#2-transitive-update" title="Permanent link">&para;</a></h3>
 <p>When A meets B, A learns about B's contacts and updates transitively.</p>
-<p><strong>Formula:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>P(A,X)_new = P(A,X)_old + (1 - P(A,X)_old) × P(A,B) × P(B,X) × α
-</code></pre></div></p>
+<p><strong>Formula:</strong></p>
+<p>$$P(A,X)<em old="old">{new} = P(A,X)</em>) \times P(A,B) \times P(B,X) \times \alpha$$} + (1 - P(A,X)_{old</p>
 <p><strong>Example:</strong>
 - A meets B
 - B has P(B,X) = 0.8 (B often sees X)
@@ -2899,9 +2874,8 @@
     A -.-&gt;|learns: P=0.25| X</code></pre>
 <h3 id="3-aging">3. Aging<a class="headerlink" href="#3-aging" title="Permanent link">&para;</a></h3>
 <p>P-values decay over time if no encounters occur.</p>
-<p><strong>Formula:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>P(A,B)_aged = P(A,B) × γ^hours_since_encounter
-</code></pre></div></p>
+<p><strong>Formula:</strong></p>
+<p>$$P(A,B)_{aged} = P(A,B) \times \gamma^{hours}$$</p>
 <p><strong>Example (γ = 0.98/hour):</strong>
 | Hours | P-value |
 |-------|---------|
@@ -2910,83 +2884,24 @@
 | 24 | 0.43 |
 | 48 | 0.27 |
 | 72 | 0.17 |</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt:380-389</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">ensureAging</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">hoursSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastAgingTime</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">3600000</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hoursSince</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">routingTable</span><span class="p">.</span><span class="na">ageAll</span><span class="p">(</span><span class="n">hoursSince</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">lastAgingTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">ageAll</span><span class="p">(</span><span class="n">hours</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">table</span><span class="p">.</span><span class="na">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">entry</span><span class="p">.</span><span class="na">probability</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">gamma</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">hours</span><span class="p">.</span><span class="na">toDouble</span><span class="p">())</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="na">probability</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">            </span><span class="n">entry</span><span class="p">.</span><span class="na">probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delta</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="p">}</span>
-</code></pre></div>
+<p>Aging is applied hourly. Each entry's probability is multiplied by γ raised to the number of hours since last encounter. Values never drop below the minimum floor (δ).</p>
 <h2 id="routing-table-storage">Routing Table Storage<a class="headerlink" href="#routing-table-storage" title="Permanent link">&para;</a></h2>
-<p>P-values are persisted to <code>routing.json</code> and survive app restarts.</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingTableStore.kt</code></p>
+<p>P-values are persisted and survive app restarts.</p>
 <h3 id="table-structure">Table Structure<a class="headerlink" href="#table-structure" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123...&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">&quot;probability&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.72</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&quot;lastUpdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1704067200000</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">&quot;lastEncounter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1704066000000</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">],</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
-</code></pre></div>
+<p>Each entry contains:
+- <strong>destination</strong> - UID hex of the target node
+- <strong>probability</strong> - Current P-value (0.0 to 1.0)
+- <strong>lastUpdate</strong> - Timestamp of last update
+- <strong>lastEncounter</strong> - Timestamp of last encounter</p>
 <h3 id="lru-eviction">LRU Eviction<a class="headerlink" href="#lru-eviction" title="Permanent link">&para;</a></h3>
-<p>When the table exceeds 5,000 entries, the least-recently-updated entries are evicted:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">evictIfNeeded</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entries</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">MAX_SIZE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">toRemove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entries</span><span class="p">.</span><span class="na">sortedBy</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">lastUpdate</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">            </span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="n">entries</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MAX_SIZE</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="n">entries</span><span class="p">.</span><span class="na">removeAll</span><span class="p">(</span><span class="n">toRemove</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
-</code></pre></div>
+<p>When the table exceeds 5,000 entries, the least-recently-updated entries are evicted.</p>
 <h2 id="forwarding-decision">Forwarding Decision<a class="headerlink" href="#forwarding-decision" title="Permanent link">&para;</a></h2>
-<p>When deciding whether to forward a bundle:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Simplified from RoutingFacade.kt:200-220</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">shouldForward</span><span class="p">(</span><span class="n">bundle</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle</span><span class="p">,</span><span class="w"> </span><span class="n">peer</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">myP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routingTable</span><span class="p">.</span><span class="na">getProbability</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">destination</span><span class="p">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">peerP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routingTable</span><span class="p">.</span><span class="na">getProbability</span><span class="p">(</span><span class="n">peer</span><span class="p">,</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">destination</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="c1">// Forward if peer has better probability</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">peerP</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">myP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FORWARD_MARGIN</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
-</code></pre></div>
-<p>The <code>FORWARD_MARGIN</code> (typically 0.1) prevents oscillation where nodes keep passing bundles back and forth.</p>
+<p>When deciding whether to forward a bundle, the local device compares its own P-value for the destination with the peer's P-value. The bundle is forwarded if the peer has a significantly higher probability (by at least the FORWARD_MARGIN, typically 0.1).</p>
+<p>This margin prevents oscillation where nodes keep passing bundles back and forth.</p>
 <h2 id="route-penalty">Route Penalty<a class="headerlink" href="#route-penalty" title="Permanent link">&para;</a></h2>
-<p>When a delivery attempt times out, the route is penalized:</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingTableStore.kt</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">applyRoutePenalty</span><span class="p">(</span><span class="n">destination</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getProbability</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">setProbability</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.85</span><span class="p">)</span><span class="w">  </span><span class="c1">// 15% penalty</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>This ensures that consistently failing routes are deprioritized.</p>
+<p>When a delivery attempt times out, the route is penalized by multiplying the P-value by 0.85 (a 15% penalty). This ensures that consistently failing routes are deprioritized.</p>
 <h2 id="ack-based-learning">ACK-Based Learning<a class="headerlink" href="#ack-based-learning" title="Permanent link">&para;</a></h2>
-<p>When a DeliveryAck is received, the successful path is boosted:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// From AckPathLearner.kt</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">onAckReceived</span><span class="p">(</span><span class="n">ack</span><span class="p">:</span><span class="w"> </span><span class="n">DeliveryAck</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="c1">// Boost P-value for the peer that delivered</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routingTable</span><span class="p">.</span><span class="na">getProbability</span><span class="p">(</span><span class="n">ack</span><span class="p">.</span><span class="na">deliveredBy</span><span class="p">)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">routingTable</span><span class="p">.</span><span class="na">setProbability</span><span class="p">(</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="n">ack</span><span class="p">.</span><span class="na">deliveredBy</span><span class="p">,</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">current</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P_INIT</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span>
-</code></pre></div>
+<p>When a DeliveryAck is received, the successful path is boosted using the same formula as a direct encounter: P_new = P_old + (1 - P_old) × P_init.</p>
 <h2 id="comparison-to-other-algorithms">Comparison to Other Algorithms<a class="headerlink" href="#comparison-to-other-algorithms" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3041,33 +2956,6 @@
 <li>Lower FORWARD_MARGIN - forward more aggressively</li>
 <li>Increase max table size - track more peers</li>
 </ul>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-<th>Key Lines</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>RoutingFacade.kt</code></td>
-<td>Core PRoPHET implementation</td>
-<td>359-389</td>
-</tr>
-<tr>
-<td><code>RoutingTableStore.kt</code></td>
-<td>P-value persistence</td>
-<td>Full file</td>
-</tr>
-<tr>
-<td><code>AckPathLearner.kt</code></td>
-<td>ACK-based improvements</td>
-<td>45-80</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../ack-learning/">ACK Path Learning</a> | <a href="../overview/">Routing Overview</a></p>
 

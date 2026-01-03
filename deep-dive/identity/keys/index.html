@@ -1522,17 +1522,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2976,17 +2965,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3048,19 +3026,8 @@
 </table>
 <h2 id="device-identity">Device Identity<a class="headerlink" href="#device-identity" title="Permanent link">&para;</a></h2>
 <p>Each device has a unique Ed25519 keypair generated on first launch.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/identity/DeviceKeys.kt</code></p>
 <h3 id="key-generation">Key Generation<a class="headerlink" href="#key-generation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// From DeviceKeys.kt:221-247</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">generateDeviceKeys</span><span class="p">():</span><span class="w"> </span><span class="n">DeviceKeyPair</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">32</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">keyPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">DeviceKeyPair</span><span class="p">(</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">publicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPair</span><span class="p">.</span><span class="na">publicKey</span><span class="p">,</span><span class="w">  </span><span class="c1">// 32 bytes</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="n">privateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPair</span><span class="p">.</span><span class="na">privateKey</span><span class="w"> </span><span class="c1">// 64 bytes (seed + public)</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
-</code></pre></div>
+<p>On first launch, a cryptographically secure 32-byte seed is generated using <code>SecureRandom</code>. This seed is used to create an Ed25519 keypair with a 32-byte public key and 64-byte private key (seed + public key concatenated).</p>
 <h3 id="key-storage">Key Storage<a class="headerlink" href="#key-storage" title="Permanent link">&para;</a></h3>
 <p>Keys are stored in Android's encrypted SharedPreferences:</p>
 <table>
@@ -3082,12 +3049,7 @@
 </tbody>
 </table>
 <h2 id="user-id-uid">User ID (UID)<a class="headerlink" href="#user-id-uid" title="Permanent link">&para;</a></h2>
-<p>The UID is a deterministic identifier derived from the public key.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">computeUid</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">require</span><span class="p">(</span><span class="n">publicKey</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Public key must be 32 bytes&quot;</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SHA-256&quot;</span><span class="p">).</span><span class="na">digest</span><span class="p">(</span><span class="n">publicKey</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
-</code></pre></div>
+<p>The UID is a deterministic identifier derived from the public key by computing its SHA-256 hash.</p>
 <p><strong>Properties:</strong>
 - 32 bytes (64 hex characters)
 - Deterministic: same pubkey → same UID
@@ -3097,58 +3059,22 @@
 <p><strong>Format:</strong> <code>myc:&lt;10-character-hash&gt;</code></p>
 <p><strong>Example:</strong> <code>myc:AB3XK7QR2N</code></p>
 <h3 id="generation">Generation<a class="headerlink" href="#generation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">generateMycTag</span><span class="p">(</span><span class="n">uid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uid</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="m">6</span><span class="p">)</span><span class="w">  </span><span class="c1">// First 6 bytes</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encoded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base32Encode</span><span class="p">(</span><span class="n">hash</span><span class="p">).</span><span class="na">take</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;myc:</span><span class="si">$</span><span class="n">encoded</span><span class="s">&quot;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div>
+<p>The MycTag is generated by taking the first 6 bytes of the UID, encoding them as base32, and taking the first 10 characters. The prefix "myc:" is prepended.</p>
 <h3 id="myctagstar-cluster-identity">MycTagStar (Cluster Identity)<a class="headerlink" href="#myctagstar-cluster-identity" title="Permanent link">&para;</a></h3>
-<p>For geographic clustering, MycTagStar represents a group's identity:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">computeMycTagStar</span><span class="p">(</span><span class="n">members</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ByteArray</span><span class="o">&gt;</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sorted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">members</span><span class="p">.</span><span class="na">sortedBy</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">toHexString</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">combined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sorted</span><span class="p">.</span><span class="na">fold</span><span class="p">(</span><span class="n">ByteArray</span><span class="p">(</span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">acc</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SHA-256&quot;</span><span class="p">).</span><span class="na">digest</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
-</code></pre></div>
+<p>For geographic clustering, MycTagStar represents a group's identity. It is computed by sorting all member public keys, concatenating them, and hashing the result with SHA-256.</p>
 <h2 id="signing">Signing<a class="headerlink" href="#signing" title="Permanent link">&para;</a></h2>
 <p>All bundles are signed using Ed25519.</p>
 <h3 id="sign">Sign<a class="headerlink" href="#sign" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">signBundle</span><span class="p">(</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">BundleHeader</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="n">BundlePayload</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">.</span><span class="na">toBytes</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payload</span><span class="p">.</span><span class="na">hash</span><span class="p">()</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">sign</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">)</span><span class="w">  </span><span class="c1">// 64 bytes</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
-</code></pre></div>
+<p>The signature is created over the concatenation of the header bytes and the payload hash. The Ed25519 signature is 64 bytes.</p>
 <h3 id="verify">Verify<a class="headerlink" href="#verify" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">verifyBundle</span><span class="p">(</span><span class="n">bundle</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">header</span><span class="p">.</span><span class="na">toBytes</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">payload</span><span class="p">.</span><span class="na">hash</span><span class="p">()</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">verify</span><span class="p">(</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="n">message</span><span class="p">,</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="n">bundle</span><span class="p">.</span><span class="na">signature</span><span class="p">,</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="n">bundle</span><span class="p">.</span><span class="na">header</span><span class="p">.</span><span class="na">srcPub</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
-</code></pre></div>
+<p>Verification checks that the signature over (header bytes + payload hash) is valid for the source public key in the bundle header.</p>
 <h2 id="key-derivation-for-encryption">Key Derivation for Encryption<a class="headerlink" href="#key-derivation-for-encryption" title="Permanent link">&para;</a></h2>
 <p>Ed25519 keys are converted to X25519 for ECDH encryption.</p>
 <h3 id="ed25519-x25519">Ed25519 → X25519<a class="headerlink" href="#ed25519-x25519" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Public key conversion</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">toX25519Public</span><span class="p">(</span><span class="n">ed25519Pub</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">// Uses curve point conversion</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">toX25519Public</span><span class="p">(</span><span class="n">ed25519Pub</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">// Private key conversion</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">toX25519Private</span><span class="p">(</span><span class="n">ed25519Priv</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="c1">// Uses scalar conversion</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">toX25519Private</span><span class="p">(</span><span class="n">ed25519Priv</span><span class="p">)</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">}</span>
-</code></pre></div>
-<p>This allows the same keypair to be used for both signing and encryption.</p>
+<p>Public keys are converted using curve point conversion, and private keys using scalar conversion. This allows the same keypair to be used for both signing and encryption.</p>
 <h2 id="identity-verification">Identity Verification<a class="headerlink" href="#identity-verification" title="Permanent link">&para;</a></h2>
 <h3 id="helloproof">HelloProof<a class="headerlink" href="#helloproof" title="Permanent link">&para;</a></h3>
 <p>When devices connect via Nearby, they verify identity:</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/peers/PeerDirectory.kt:10</code></p>
 <table>
 <thead>
 <tr>
@@ -3200,10 +3126,7 @@
 <h2 id="group-keys">Group Keys<a class="headerlink" href="#group-keys" title="Permanent link">&para;</a></h2>
 <p>Groups have a separate symmetric key for message encryption.</p>
 <h3 id="group-key-generation">Group Key Generation<a class="headerlink" href="#group-key-generation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">generateGroupKey</span><span class="p">():</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">32</span><span class="p">)</span><span class="w">  </span><span class="c1">// AES-256 key</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
-</code></pre></div>
+<p>A 32-byte random key is generated using <code>SecureRandom</code> for use as an AES-256 symmetric key.</p>
 <h3 id="group-key-distribution">Group Key Distribution<a class="headerlink" href="#group-key-distribution" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Creator generates group key</li>
@@ -3230,33 +3153,6 @@
 <li>Lost key = lost identity</li>
 <li>Must create new identity if device lost</li>
 </ul>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/dtn/src/.../identity/DeviceKeys.kt</code></td>
-<td>Key generation and storage</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../identity/UidProvider.kt</code></td>
-<td>UID computation</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../peers/PeerDirectory.kt</code></td>
-<td>Identity verification</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../crypto/DmCrypto.kt</code></td>
-<td>Key conversion</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../../bundles/structure/">Bundle Structure</a> | <a href="../../bundles/encryption/">Encryption</a></p>
 

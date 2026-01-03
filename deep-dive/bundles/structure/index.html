@@ -1486,17 +1486,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2718,17 +2707,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2765,7 +2743,6 @@
     P --&gt; CONTENT[Encrypted Content]</code></pre>
 <h2 id="bundleentity">BundleEntity<a class="headerlink" href="#bundleentity" title="Permanent link">&para;</a></h2>
 <p>The database representation of a bundle.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt</code></p>
 <h3 id="core-fields">Core Fields<a class="headerlink" href="#core-fields" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2901,39 +2878,32 @@
 <tr>
 <th>Message Type</th>
 <th>Default TTL</th>
-<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>DM (text)</td>
 <td>7 days (604800s)</td>
-<td><code>BundleRepository.kt:232</code></td>
 </tr>
 <tr>
 <td>DM (media)</td>
 <td>3 days (259200s)</td>
-<td><code>BundleRepository.kt:233</code></td>
 </tr>
 <tr>
 <td>Group message</td>
 <td>4 hours (14400s)</td>
-<td><code>BundleRepository.kt:235</code></td>
 </tr>
 <tr>
 <td>Channel broadcast</td>
 <td>4 hours (14400s)</td>
-<td><code>BundleRepository.kt:236</code></td>
 </tr>
 <tr>
 <td>Control (ACK)</td>
 <td>24 hours (86400s)</td>
-<td><code>BundleRepository.kt:238</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="bundle-status">Bundle Status<a class="headerlink" href="#bundle-status" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt:95-104</code></p>
 <table>
 <thead>
 <tr>
@@ -3005,7 +2975,6 @@
 </tbody>
 </table>
 <h2 id="priority-levels">Priority Levels<a class="headerlink" href="#priority-levels" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlPriority.kt:7-12</code></p>
 <table>
 <thead>
 <tr>
@@ -3135,14 +3104,7 @@
 </tbody>
 </table>
 <h2 id="bundle-id-calculation">Bundle ID Calculation<a class="headerlink" href="#bundle-id-calculation" title="Permanent link">&para;</a></h2>
-<p>The bundle ID is computed as:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">computeBundleId</span><span class="p">(</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">BundleHeader</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">:</span><span class="w"> </span><span class="n">BundlePayload</span><span class="p">):</span><span class="w"> </span><span class="n">ByteArray</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">headerBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cbor</span><span class="p">.</span><span class="na">encodeToByteArray</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">payloadBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cbor</span><span class="p">.</span><span class="na">encodeToByteArray</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SHA-256&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="p">.</span><span class="na">digest</span><span class="p">(</span><span class="n">headerBytes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payloadBytes</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
-</code></pre></div>
+<p>The bundle ID is a <strong>SHA-256 hash</strong> of the CBOR-encoded header and payload concatenated together.</p>
 <p>This ensures:
 - Bundle ID is deterministic
 - Any modification invalidates the ID
@@ -3176,33 +3138,6 @@
 <td>Max copy budget</td>
 <td>15</td>
 <td>Prevent flooding</td>
-</tr>
-</tbody>
-</table>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/dtn/src/.../persistence/BundleEntity.kt</code></td>
-<td>Database entity</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../BundleRepository.kt</code></td>
-<td>Bundle storage and lifecycle</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../ControlMsg.kt</code></td>
-<td>Control message types</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../crypto/DmCrypto.kt</code></td>
-<td>DM encryption</td>
 </tr>
 </tbody>
 </table>

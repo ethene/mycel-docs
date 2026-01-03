@@ -1449,17 +1449,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#code-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Example
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1493,17 +1482,6 @@
     <span class="md-ellipsis">
       
         Encryption
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#groupupdatemsg-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GroupUpdateMsg Format
       
     </span>
   </a>
@@ -1648,17 +1626,6 @@
     <span class="md-ellipsis">
       
         What's NOT Implemented
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
       
     </span>
   </a>
@@ -2681,17 +2648,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#code-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Example
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2725,17 +2681,6 @@
     <span class="md-ellipsis">
       
         Encryption
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#groupupdatemsg-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GroupUpdateMsg Format
       
     </span>
   </a>
@@ -2886,17 +2831,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2948,7 +2882,6 @@
 </table>
 <h2 id="dm-encryption-ecies">DM Encryption (ECIES)<a class="headerlink" href="#dm-encryption-ecies" title="Permanent link">&para;</a></h2>
 <p>Direct messages use Elliptic Curve Integrated Encryption Scheme.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/crypto/DmCrypto.kt</code></p>
 <h3 id="encryption-flow">Encryption Flow<a class="headerlink" href="#encryption-flow" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
     subgraph Sender
@@ -2994,33 +2927,6 @@
     R1 --&gt; R3
     R2 --&gt; R3
     R3 --&gt; R4 --&gt; R5 --&gt; R6</code></pre>
-<h3 id="code-example">Code Example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Encryption (simplified from DmCrypto.kt)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">encryptDm</span><span class="p">(</span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="n">recipientPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">):</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">recipientX25519</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ed25519</span><span class="p">.</span><span class="na">toX25519Public</span><span class="p">(</span><span class="n">recipientPubKey</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ephemeral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X25519</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">()</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sharedSecret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X25519</span><span class="p">.</span><span class="na">computeSharedSecret</span><span class="p">(</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">ephemeral</span><span class="p">.</span><span class="na">privateKey</span><span class="p">,</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="n">recipientX25519</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">aesKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HKDF</span><span class="p">.</span><span class="na">derive</span><span class="p">(</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="n">ikm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sharedSecret</span><span class="p">,</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DmEncryption&quot;</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">(),</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">12</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AesGcm</span><span class="p">.</span><span class="na">encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">aesKey</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="p">(</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">        </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">,</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="n">ephemeralPub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ephemeral</span><span class="p">.</span><span class="na">publicKey</span><span class="p">,</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">}</span>
-</code></pre></div>
 <h2 id="group-message-encryption">Group Message Encryption<a class="headerlink" href="#group-message-encryption" title="Permanent link">&para;</a></h2>
 <p>Group messages use symmetric encryption with a shared group key.</p>
 <h3 id="group-key-distribution">Group Key Distribution<a class="headerlink" href="#group-key-distribution" title="Permanent link">&para;</a></h3>
@@ -3030,36 +2936,36 @@
 <li>All members have the same symmetric key</li>
 </ol>
 <h3 id="encryption_1">Encryption<a class="headerlink" href="#encryption_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">encryptGroupMessage</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">groupKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">):</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">12</span><span class="p">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AesGcm</span><span class="p">.</span><span class="na">encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">groupKey</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="p">(</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="c1">// No ephemeral key needed - symmetric encryption</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
-</code></pre></div>
-<h3 id="groupupdatemsg-format">GroupUpdateMsg Format<a class="headerlink" href="#groupupdatemsg-format" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupUpdateMsg</span><span class="p">(</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// AES-GCM encrypted</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// 12 bytes</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span>
-</code></pre></div>
+<p>Messages are encrypted with <strong>AES-256-GCM</strong> using the shared group key and a random 12-byte nonce.</p>
 <h2 id="group-invite-encryption">Group Invite Encryption<a class="headerlink" href="#group-invite-encryption" title="Permanent link">&para;</a></h2>
 <p>Group invites use ECIES with XChaCha20-Poly1305 for the symmetric cipher.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:429-471</code></p>
 <h3 id="groupinvitemsg-format">GroupInviteMsg Format<a class="headerlink" href="#groupinvitemsg-format" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupInviteMsg</span><span class="p">(</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// XChaCha20-Poly1305 encrypted</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ephemeralPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// X25519 (32 bytes)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// XChaCha20 nonce (24 bytes)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>encryptedPayload</td>
+<td>Variable</td>
+<td>XChaCha20-Poly1305 encrypted invite</td>
+</tr>
+<tr>
+<td>ephemeralPubKey</td>
+<td>32 bytes</td>
+<td>X25519 ephemeral public key</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>24 bytes</td>
+<td>XChaCha20 nonce</td>
+</tr>
+</tbody>
+</table>
 <h3 id="encrypted-payload-contents">Encrypted Payload Contents<a class="headerlink" href="#encrypted-payload-contents" title="Permanent link">&para;</a></h3>
 <p>The encrypted payload contains:
 - Group ID
@@ -3154,33 +3060,6 @@
 <tr>
 <td>Per-message key advancement</td>
 <td>Messages arrive out of order</td>
-</tr>
-</tbody>
-</table>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/dtn/src/.../crypto/DmCrypto.kt</code></td>
-<td>DM encryption/decryption</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../crypto/GroupInviteCrypto.kt</code></td>
-<td>Group invite ECIES</td>
-</tr>
-<tr>
-<td><code>core/transport/src/.../nostr/GiftWrapModels.kt</code></td>
-<td>NIP-17 gift-wrap</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../ControlMsg.kt</code></td>
-<td>GroupInviteMsg, GroupUpdateMsg</td>
 </tr>
 </tbody>
 </table>

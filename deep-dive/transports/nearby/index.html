@@ -1891,17 +1891,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2764,17 +2753,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2830,7 +2808,6 @@
 </table>
 <h2 id="session-state-machine">Session State Machine<a class="headerlink" href="#session-state-machine" title="Permanent link">&para;</a></h2>
 <p>Each peer connection follows an 8-state finite state machine.</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/session/SessionRegistry.kt:14</code></p>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; IDLE
 
@@ -2922,49 +2899,40 @@
 <tr>
 <th>Transition</th>
 <th>Trigger</th>
-<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>IDLE → DISCOVERY</td>
 <td>Endpoint found via BLE scan</td>
-<td><code>DiscoveryCallbackFactory.kt:40-76</code></td>
 </tr>
 <tr>
 <td>DISCOVERY → CONNECTING</td>
 <td>Connect attempt scheduled</td>
-<td><code>ConnectionCoordinator.kt:327-333</code></td>
 </tr>
 <tr>
 <td>CONNECTING → SESSION_OPEN</td>
 <td>Connection success callback</td>
-<td><code>DefaultSessionController.kt:20-33</code></td>
 </tr>
 <tr>
 <td>SESSION_OPEN → SYNC</td>
 <td>Control sync begins</td>
-<td><code>NearbyCore.kt:1652-1655</code></td>
 </tr>
 <tr>
 <td>SYNC → XFER</td>
 <td>Sync complete, ready</td>
-<td><code>NearbyCore.kt:1652-1655</code></td>
 </tr>
 <tr>
 <td>XFER → DRAIN</td>
 <td>All queued data sent</td>
-<td><code>NearbyCore.kt:3225-3229</code></td>
 </tr>
 <tr>
 <td>DRAIN → CLOSING</td>
 <td>Quiet idle timeout</td>
-<td><code>ConnectionCoordinator.kt:480-497</code></td>
 </tr>
 <tr>
 <td>* → IDLE</td>
 <td>Disconnect or timeout</td>
-<td><code>NearbyCore.kt:1245, 1284-1289</code></td>
 </tr>
 </tbody>
 </table>
@@ -3000,15 +2968,7 @@
 </tbody>
 </table>
 <h3 id="bundle-selection">Bundle Selection<a class="headerlink" href="#bundle-selection" title="Permanent link">&para;</a></h3>
-<p>Before transfer, the routing layer selects bundles:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// From RoutingFacade.kt:514-567</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">selectBundlesForPeer</span><span class="p">(</span><span class="n">peerId</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Bundle</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bundleRepo</span><span class="p">.</span><span class="na">getForwardable</span><span class="p">()</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">shouldSend</span><span class="p">(</span><span class="nb">it</span><span class="p">,</span><span class="w"> </span><span class="n">peerId</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="p">.</span><span class="na">sortedBy</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">priority</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="n">MAX_BATCH_SIZE</span><span class="p">)</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
-</code></pre></div>
+<p>Before transfer, the routing layer selects bundles by filtering forwardable bundles, applying routing decisions, sorting by priority, and taking up to the maximum batch size.</p>
 <h2 id="connection-lifecycle">Connection Lifecycle<a class="headerlink" href="#connection-lifecycle" title="Permanent link">&para;</a></h2>
 <h3 id="discovery">Discovery<a class="headerlink" href="#discovery" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>sequenceDiagram
@@ -3047,7 +3007,6 @@
     Note over Local: Bundle marked FWD</code></pre>
 <h2 id="watchdog">Watchdog<a class="headerlink" href="#watchdog" title="Permanent link">&para;</a></h2>
 <p>The Nearby stack includes a watchdog that monitors connection health.</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/watchdog/Watchdog.kt</code></p>
 <h3 id="monitored-conditions">Monitored Conditions<a class="headerlink" href="#monitored-conditions" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3150,41 +3109,6 @@
 <tr>
 <td>BLE fallback speed</td>
 <td>100-500 Kbps</td>
-</tr>
-</tbody>
-</table>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/nearby/src/.../session/SessionRegistry.kt</code></td>
-<td>Session state machine</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../NearbyCore.kt</code></td>
-<td>Core transport implementation</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../ConnectionCoordinator.kt</code></td>
-<td>Connection management</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../DiscoveryCallbackFactory.kt</code></td>
-<td>Discovery handling</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../control/ControlSession.kt</code></td>
-<td>Bundle exchange protocol</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../watchdog/Watchdog.kt</code></td>
-<td>Health monitoring</td>
 </tr>
 </tbody>
 </table>

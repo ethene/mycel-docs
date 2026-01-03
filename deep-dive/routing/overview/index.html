@@ -1737,17 +1737,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2866,17 +2855,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2961,66 +2939,43 @@
 </tbody>
 </table>
 <h2 id="routing-facade">Routing Facade<a class="headerlink" href="#routing-facade" title="Permanent link">&para;</a></h2>
-<p>All routing decisions flow through <code>RoutingFacade</code>, which coordinates the algorithms.</p>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/RoutingFacade.kt</code></p>
+<p>All routing decisions flow through the RoutingFacade, which coordinates the algorithms.</p>
 <h3 id="key-methods">Key Methods<a class="headerlink" href="#key-methods" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Method</th>
 <th>Purpose</th>
-<th>Lines</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>shouldSend(bundle, peer)</code></td>
 <td>Master decision: should we send this bundle to this peer?</td>
-<td>180-255</td>
 </tr>
 <tr>
 <td><code>updateProbabilities(peer)</code></td>
 <td>Update PRoPHET P-values on encounter</td>
-<td>359-389</td>
 </tr>
 <tr>
 <td><code>makeCopyPlan(bundle)</code></td>
 <td>Create Spray-and-Wait copy plan</td>
-<td>514-567</td>
 </tr>
 <tr>
 <td><code>onAckReceived(bundle)</code></td>
 <td>Process ACK, improve routing</td>
-<td>620-680</td>
 </tr>
 </tbody>
 </table>
 <h3 id="decision-flow">Decision Flow<a class="headerlink" href="#decision-flow" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Simplified from RoutingFacade.kt</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">shouldSend</span><span class="p">(</span><span class="n">bundle</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle</span><span class="p">,</span><span class="w"> </span><span class="n">peer</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1">// 1. Already delivered?</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bundle</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DEL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// 2. Already sent to this peer?</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bundle</span><span class="p">.</span><span class="na">sentTo</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">peer</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="c1">// 3. Is peer the destination?</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">peer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">destination</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="c1">// 4. Does peer have high P-value?</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">pValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routingTable</span><span class="p">.</span><span class="na">getProbability</span><span class="p">(</span><span class="n">peer</span><span class="p">,</span><span class="w"> </span><span class="n">bundle</span><span class="p">.</span><span class="na">destination</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pValue</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">FORWARD_THRESHOLD</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// 5. Do we have copy budget?</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copyPlans</span><span class="o">[</span><span class="n">bundle</span><span class="p">.</span><span class="na">id</span><span class="o">]</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">plan</span><span class="o">?.</span><span class="na">budgetRemaining</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="n">plan</span><span class="p">.</span><span class="na">budgetRemaining</span><span class="o">--</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="p">}</span>
-</code></pre></div>
+<p>The routing decision follows this logic:</p>
+<ol>
+<li><strong>Already delivered?</strong> → Skip if bundle status is DEL</li>
+<li><strong>Already sent to this peer?</strong> → Skip duplicates</li>
+<li><strong>Is peer the destination?</strong> → Direct delivery</li>
+<li><strong>Does peer have high P-value?</strong> → Forward via PRoPHET</li>
+<li><strong>Do we have copy budget?</strong> → Spray copies to peers</li>
+</ol>
 <h2 id="prophet-algorithm">PRoPHET Algorithm<a class="headerlink" href="#prophet-algorithm" title="Permanent link">&para;</a></h2>
 <p>PRoPHET (Probabilistic Routing Protocol using History of Encounters and Transitivity) maintains delivery predictability scores.</p>
 <p><strong>See:</strong> <a href="../prophet/">PRoPHET Details</a></p>
@@ -3096,12 +3051,7 @@
 </tbody>
 </table>
 <h3 id="budget-expansion">Budget Expansion<a class="headerlink" href="#budget-expansion" title="Permanent link">&para;</a></h3>
-<p>If no delivery after 60 seconds, the budget doubles (up to max):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// From RoutingFacade.kt:540-550</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">plan</span><span class="p">.</span><span class="na">createdAt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">COPY_INCREASE_TIMEOUT_MS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">plan</span><span class="p">.</span><span class="na">budgetRemaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">plan</span><span class="p">.</span><span class="na">budgetRemaining</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_COPIES</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
-</code></pre></div>
+<p>If no delivery after 60 seconds, the budget doubles (up to max).</p>
 <h2 id="ack-based-path-learning">ACK-Based Path Learning<a class="headerlink" href="#ack-based-path-learning" title="Permanent link">&para;</a></h2>
 <p>When a DeliveryAck is received, routing improves:</p>
 <ol>
@@ -3109,15 +3059,8 @@
 <li><strong>Record successful route</strong> in history</li>
 <li><strong>Skip redundant copies</strong> via other transports</li>
 </ol>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/AckPathLearner.kt</code></p>
 <h3 id="route-penalty">Route Penalty<a class="headerlink" href="#route-penalty" title="Permanent link">&para;</a></h3>
-<p>On ACK timeout, the P-value for that route is penalized:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// From RoutingTableStore.kt</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">applyRoutePenalty</span><span class="p">(</span><span class="n">destination</span><span class="p">:</span><span class="w"> </span><span class="n">PeerId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getProbability</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">setProbability</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.85</span><span class="p">)</span><span class="w"> </span><span class="c1">// 15% penalty</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div>
+<p>On ACK timeout, the P-value for that route is penalized by 15% (multiplied by 0.85).</p>
 <h2 id="transport-selection">Transport Selection<a class="headerlink" href="#transport-selection" title="Permanent link">&para;</a></h2>
 <p>When multiple transports are available, selection is based on:</p>
 <table>
@@ -3159,7 +3102,6 @@
 </ol>
 <h2 id="geo-routing-h3">Geo Routing (H3)<a class="headerlink" href="#geo-routing-h3" title="Permanent link">&para;</a></h2>
 <p>H3 hexagonal cells provide geographic routing hints.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/identity/GeoCellProvider.kt</code></p>
 <h3 id="resolution-levels">Resolution Levels<a class="headerlink" href="#resolution-levels" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3193,15 +3135,11 @@
 </tbody>
 </table>
 <h3 id="geo-decision">Geo Decision<a class="headerlink" href="#geo-decision" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">shouldSendViaGeo</span><span class="p">(</span><span class="n">destCell</span><span class="p">:</span><span class="w"> </span><span class="n">H3Index</span><span class="p">,</span><span class="w"> </span><span class="n">neighborCell</span><span class="p">:</span><span class="w"> </span><span class="n">H3Index</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">destCell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">neighborCell</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c1">// Same cell</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">h3Distance</span><span class="p">(</span><span class="n">neighborCell</span><span class="p">,</span><span class="w"> </span><span class="n">destCell</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1">// Too far</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">isStaleHint</span><span class="p">(</span><span class="n">neighborCell</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w">      </span><span class="c1">// Older than 6h</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
-</code></pre></div>
+<p>Geo routing decisions are based on:
+- Same cell → prefer this neighbor
+- H3 distance ≥ 4 → too far, avoid
+- Stale hint (&gt; 6h) → ignore geo data
+- Otherwise → use standard routing</p>
 <h2 id="bundle-lifecycle">Bundle Lifecycle<a class="headerlink" href="#bundle-lifecycle" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; NEW : enqueue()
@@ -3256,38 +3194,6 @@
 <tr>
 <td><code>CANCELLED</code></td>
 <td>Explicitly removed</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/persistence/BundleEntity.kt:86-104</code></p>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/nearby/src/.../RoutingFacade.kt</code></td>
-<td>Main routing logic</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../RoutingTableStore.kt</code></td>
-<td>PRoPHET P-value storage</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../AckPathLearner.kt</code></td>
-<td>ACK processing</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../BundleRepository.kt</code></td>
-<td>Bundle state management</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../identity/GeoCellProvider.kt</code></td>
-<td>H3 geo routing</td>
 </tr>
 </tbody>
 </table>

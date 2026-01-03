@@ -2129,17 +2129,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2998,17 +2987,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3069,37 +3047,23 @@
     Creator-&gt;&gt;DB: Add self as admin
     Creator-&gt;&gt;DTN: Optionally announce (public only)</code></pre>
 <h3 id="group-record">Group Record<a class="headerlink" href="#group-record" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupRecord</span><span class="p">(</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">         </span><span class="c1">// &quot;group:unique-name&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">shortId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">         </span><span class="c1">// 10-char hash for routing</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">displayName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w">     </span><span class="c1">// Human-readable name</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">     </span><span class="c1">// AES-256 symmetric key (32 bytes)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">adminPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// Creator&#39;s public key</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">createdAt</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">         </span><span class="c1">// Creation timestamp</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isPublic</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w">        </span><span class="c1">// Public discovery enabled</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
-</code></pre></div>
+<p>Each group record contains:
+- <strong>groupId</strong> - Unique identifier (e.g., "group:team-chat")
+- <strong>shortId</strong> - 10-character hash for routing
+- <strong>displayName</strong> - Human-readable name
+- <strong>groupKey</strong> - AES-256 symmetric key (32 bytes)
+- <strong>adminPubKey</strong> - Creator's public key
+- <strong>createdAt</strong> - Creation timestamp
+- <strong>isPublic</strong> - Whether public discovery is enabled</p>
 <h2 id="group-key">Group Key<a class="headerlink" href="#group-key" title="Permanent link">&para;</a></h2>
-<p>Each group has a 32-byte AES-256 key for message encryption.</p>
+<p>Each group has a 32-byte AES-256 key for message encryption, generated using <code>SecureRandom</code>.</p>
 <h3 id="key-generation">Key Generation<a class="headerlink" href="#key-generation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">createGroup</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GroupRecord</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">32</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;group:</span><span class="si">${</span><span class="n">name</span><span class="p">.</span><span class="na">lowercase</span><span class="p">().</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="w"> </span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="o">-</span><span class="s">&quot;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">shortId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHA256</span><span class="p">(</span><span class="n">groupId</span><span class="p">).</span><span class="na">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="na">base32</span><span class="p">()</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">GroupRecord</span><span class="p">(</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupId</span><span class="p">,</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">shortId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shortId</span><span class="p">,</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">groupKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="p">,</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">adminPubKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localPubKey</span><span class="p">,</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="n">createdAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">(),</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="n">isPublic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="p">}</span>
-</code></pre></div>
+<p>When creating a group:
+1. Generate 32 random bytes for the group key
+2. Create group ID from the name
+3. Compute short ID as base32 of first 6 bytes of SHA256(groupId)</p>
 <h2 id="invitations">Invitations<a class="headerlink" href="#invitations" title="Permanent link">&para;</a></h2>
-<p>Inviting a member requires encrypting the group key to their public key.</p>
+<p>Inviting a member requires encrypting the group key to their public key using ECIES with XChaCha20-Poly1305.</p>
 <h3 id="invite-flow">Invite Flow<a class="headerlink" href="#invite-flow" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>sequenceDiagram
     participant Admin as Admin
@@ -3116,51 +3080,54 @@
     Crypto--&gt;&gt;Invitee: Group key + metadata
     Note over Invitee: Join group</code></pre>
 <h3 id="groupinvitemsg">GroupInviteMsg<a class="headerlink" href="#groupinvitemsg" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:429-471</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupInviteMsg</span><span class="p">(</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// ECIES-encrypted invite</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ephemeralPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">  </span><span class="c1">// X25519 (32 bytes)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// XChaCha20 (24 bytes)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>encryptedPayload</td>
+<td>Variable</td>
+<td>ECIES-encrypted invite</td>
+</tr>
+<tr>
+<td>ephemeralPubKey</td>
+<td>32 bytes</td>
+<td>X25519 ephemeral key</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>24 bytes</td>
+<td>XChaCha20 nonce</td>
+</tr>
+</tbody>
+</table>
 <h3 id="encrypted-payload-contents">Encrypted Payload Contents<a class="headerlink" href="#encrypted-payload-contents" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupInvitePayload</span><span class="p">(</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">displayName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">groupKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">     </span><span class="c1">// The shared encryption key</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">adminPubKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">invitedAt</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
-</code></pre></div>
+<p>The invite payload contains:
+- Group ID and display name
+- The shared encryption key (32 bytes)
+- Admin public key
+- Invitation timestamp</p>
 <h2 id="membership-crdt">Membership CRDT<a class="headerlink" href="#membership-crdt" title="Permanent link">&para;</a></h2>
 <p>Membership uses a 2P-Set CRDT (Two-Phase Set) for conflict-free synchronization.</p>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/crdt/MembershipCrdt.kt</code></p>
 <h3 id="2p-set-structure">2P-Set Structure<a class="headerlink" href="#2p-set-structure" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MembershipCrdt</span><span class="p">(</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">adds</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">MemberEntry</span><span class="o">&gt;</span><span class="p">,</span><span class="w">    </span><span class="c1">// Members added</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">removes</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">MemberEntry</span><span class="o">&gt;</span><span class="w">  </span><span class="c1">// Members removed (tombstones)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MemberEntry</span><span class="p">(</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">      </span><span class="c1">// Member UID</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">addedAt</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w">       </span><span class="c1">// Timestamp</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">addedBy</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">   </span><span class="c1">// Admin who added</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">)</span>
-</code></pre></div>
+<ul>
+<li><strong>adds</strong> - Set of member entries that have been added</li>
+<li><strong>removes</strong> - Set of member entries that have been removed (tombstones)</li>
+</ul>
+<p>Each member entry contains:
+- <strong>uid</strong> - Member's user ID
+- <strong>addedAt</strong> - Timestamp of addition
+- <strong>addedBy</strong> - Admin who added this member</p>
 <h3 id="merge-operation">Merge Operation<a class="headerlink" href="#merge-operation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="n">local</span><span class="p">:</span><span class="w"> </span><span class="n">MembershipCrdt</span><span class="p">,</span><span class="w"> </span><span class="n">remote</span><span class="p">:</span><span class="w"> </span><span class="n">MembershipCrdt</span><span class="p">):</span><span class="w"> </span><span class="n">MembershipCrdt</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MembershipCrdt</span><span class="p">(</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="n">adds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="na">adds</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">remote</span><span class="p">.</span><span class="na">adds</span><span class="p">,</span><span class="w">       </span><span class="c1">// Union of adds</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="n">removes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="na">removes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">remote</span><span class="p">.</span><span class="na">removes</span><span class="w"> </span><span class="c1">// Union of removes</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">}</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">activeMembers</span><span class="p">(</span><span class="n">crdt</span><span class="p">:</span><span class="w"> </span><span class="n">MembershipCrdt</span><span class="p">):</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">ByteArray</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">addedUids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crdt</span><span class="p">.</span><span class="na">adds</span><span class="p">.</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">uid</span><span class="w"> </span><span class="p">}.</span><span class="na">toSet</span><span class="p">()</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">removedUids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crdt</span><span class="p">.</span><span class="na">removes</span><span class="p">.</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">uid</span><span class="w"> </span><span class="p">}.</span><span class="na">toSet</span><span class="p">()</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">addedUids</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">removedUids</span><span class="w">  </span><span class="c1">// Remove trumps add</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">}</span>
-</code></pre></div>
+<p>To merge two CRDT states:
+1. Union all entries from both <code>adds</code> sets
+2. Union all entries from both <code>removes</code> sets
+3. Active members = adds - removes (remove trumps add)</p>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3191,25 +3158,32 @@
 <h2 id="membership-updates">Membership Updates<a class="headerlink" href="#membership-updates" title="Permanent link">&para;</a></h2>
 <p>After initial invite, membership changes use GroupUpdateMsg.</p>
 <h3 id="groupupdatemsg">GroupUpdateMsg<a class="headerlink" href="#groupupdatemsg" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>core/dtn/src/main/kotlin/com/meshlablite/core/dtn/ControlMsg.kt:484-523</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupUpdateMsg</span><span class="p">(</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">encryptedPayload</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w"> </span><span class="c1">// AES-GCM encrypted</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="w">             </span><span class="c1">// 12 bytes</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">)</span>
-</code></pre></div>
-<p>The encrypted payload contains:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GroupUpdatePayload</span><span class="p">(</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">action</span><span class="p">:</span><span class="w"> </span><span class="n">MembershipAction</span><span class="p">,</span><span class="w">  </span><span class="c1">// ADD or REMOVE</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">targetUid</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">      </span><span class="c1">// Member being added/removed</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">adminSig</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span><span class="w">       </span><span class="c1">// Admin signature</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">timestamp</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">)</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MembershipAction</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="n">ADD_MEMBER</span><span class="p">,</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="n">REMOVE_MEMBER</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">}</span>
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Size</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>encryptedPayload</td>
+<td>Variable</td>
+<td>AES-GCM encrypted update</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>12 bytes</td>
+<td>AES-GCM nonce</td>
+</tr>
+</tbody>
+</table>
+<p>The encrypted payload contains:
+- Action (ADD_MEMBER or REMOVE_MEMBER)
+- Target user UID
+- Admin signature
+- Timestamp</p>
 <h3 id="update-flow">Update Flow<a class="headerlink" href="#update-flow" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>sequenceDiagram
     participant Admin as Admin
@@ -3224,34 +3198,16 @@
     Group-&gt;&gt;Group: Verify admin sig
     Group-&gt;&gt;Group: Apply CRDT update</code></pre>
 <h2 id="message-encryption">Message Encryption<a class="headerlink" href="#message-encryption" title="Permanent link">&para;</a></h2>
-<p>Group messages use the shared symmetric key.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">encryptGroupMessage</span><span class="p">(</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">plaintext</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span><span class="p">,</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">groupKey</span><span class="p">:</span><span class="w"> </span><span class="n">ByteArray</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">):</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">generateSeed</span><span class="p">(</span><span class="m">12</span><span class="p">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AesGcm</span><span class="p">.</span><span class="na">encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">groupKey</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EncryptedPayload</span><span class="p">(</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">,</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="p">}</span>
-</code></pre></div>
+<p>Group messages use the shared symmetric key with AES-256-GCM:
+1. Generate random 12-byte nonce
+2. Encrypt plaintext with group key and nonce
+3. Send ciphertext + nonce in bundle</p>
 <h2 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">&para;</a></h2>
 <p>Group messages are routed via interest-based filtering.</p>
 <h3 id="interest-filter">Interest Filter<a class="headerlink" href="#interest-filter" title="Permanent link">&para;</a></h3>
-<p>Members subscribe to the group topic:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">topicHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHA256</span><span class="p">(</span><span class="n">groupId</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">())</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">interestFilter</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">topicHash</span><span class="p">)</span>
-</code></pre></div>
+<p>Members subscribe to the group topic (SHA256 of groupId). When a bundle arrives with a matching topic, it is delivered.</p>
 <h3 id="bundle-addressing">Bundle Addressing<a class="headerlink" href="#bundle-addressing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bundle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Bundle</span><span class="p">(</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">dstTopic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topicHash</span><span class="p">,</span><span class="w">  </span><span class="c1">// Group topic</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">dstUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">        </span><span class="c1">// Not specific user</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">dstNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="w">         </span><span class="c1">// Not specific device</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">)</span>
-</code></pre></div>
+<p>Group bundles use <code>dstTopic</code> instead of <code>dstUser</code> or <code>dstNode</code>, allowing them to reach all subscribers.</p>
 <h2 id="public-vs-private-groups">Public vs Private Groups<a class="headerlink" href="#public-vs-private-groups" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3301,33 +3257,6 @@
 <li>Only admin can add/remove members</li>
 <li>Admin signatures verified before applying changes</li>
 </ul>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/dtn/src/.../crdt/MembershipCrdt.kt</code></td>
-<td>CRDT implementation</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../ControlMsg.kt</code></td>
-<td>GroupInviteMsg, GroupUpdateMsg</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../crypto/GroupInviteCrypto.kt</code></td>
-<td>Invite encryption</td>
-</tr>
-<tr>
-<td><code>core/dtn/src/.../BundleRepository.kt</code></td>
-<td>Message handling</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../channels/">Channels</a> | <a href="../../bundles/encryption/">Encryption</a></p>
 

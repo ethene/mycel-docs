@@ -1593,10 +1593,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#georoutingaction-enum" class="md-nav__link">
+  <a href="#georoutingaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GeoRoutingAction Enum
+        GeoRoutingAction
       
     </span>
   </a>
@@ -1698,17 +1698,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defaultgeoroutingresolver" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        DefaultGeoRoutingResolver
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#h3-distance-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1720,10 +1709,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-with-routingfacade" class="md-nav__link">
+  <a href="#integration-with-routing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration with RoutingFacade
+        Integration with Routing
       
     </span>
   </a>
@@ -1768,17 +1757,6 @@
     <span class="md-ellipsis">
       
         H3 Resolution
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
       
     </span>
   </a>
@@ -2591,10 +2569,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#georoutingaction-enum" class="md-nav__link">
+  <a href="#georoutingaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GeoRoutingAction Enum
+        GeoRoutingAction
       
     </span>
   </a>
@@ -2696,17 +2674,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defaultgeoroutingresolver" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        DefaultGeoRoutingResolver
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#h3-distance-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2718,10 +2685,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-with-routingfacade" class="md-nav__link">
+  <a href="#integration-with-routing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration with RoutingFacade
+        Integration with Routing
       
     </span>
   </a>
@@ -2772,17 +2739,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2806,7 +2762,6 @@
 <h1 id="h3-geo-routing">H3 Geo Routing<a class="headerlink" href="#h3-geo-routing" title="Permanent link">&para;</a></h1>
 <p>Geographic routing uses Uber's H3 hexagonal spatial index to make location-aware forwarding decisions.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/GeoRoutingPolicy.kt</code></p>
 <table>
 <thead>
 <tr>
@@ -2830,7 +2785,6 @@
 </tbody>
 </table>
 <h2 id="distance-based-decisions">Distance-Based Decisions<a class="headerlink" href="#distance-based-decisions" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:64-104</code></p>
 <table>
 <thead>
 <tr>
@@ -2857,10 +2811,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="georoutingaction-enum">GeoRoutingAction Enum<a class="headerlink" href="#georoutingaction-enum" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:25</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GeoRoutingAction</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="n">PREFER</span><span class="p">,</span><span class="w"> </span><span class="n">AVOID</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
+<h2 id="georoutingaction">GeoRoutingAction<a class="headerlink" href="#georoutingaction" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2884,155 +2835,53 @@
 </tbody>
 </table>
 <h2 id="georoutingdecision">GeoRoutingDecision<a class="headerlink" href="#georoutingdecision" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:27-34</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GeoRoutingDecision</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">action</span><span class="p">:</span><span class="w"> </span><span class="n">GeoRoutingAction</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">reason</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">DEFAULT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">(</span><span class="n">GeoRoutingAction</span><span class="p">.</span><span class="na">DEFAULT</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
-</code></pre></div>
+<p>Each decision contains:
+- <strong>action</strong> - One of DEFAULT, PREFER, or AVOID
+- <strong>reason</strong> - Human-readable explanation (optional)</p>
 <h2 id="stale-threshold">Stale Threshold<a class="headerlink" href="#stale-threshold" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:113-115</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">GEO_STALE_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">HOURS</span><span class="p">.</span><span class="na">toMillis</span><span class="p">(</span><span class="m">6</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-</code></pre></div>
-<p>If location data is older than 6 hours, geo routing falls back to <code>DEFAULT</code>.</p>
+<p>If location data is older than 6 hours, geo routing falls back to <code>DEFAULT</code>. This prevents routing decisions based on outdated position information.</p>
 <h2 id="evaluation-logic">Evaluation Logic<a class="headerlink" href="#evaluation-logic" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:49-105</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">BundleHeader</span><span class="p">,</span><span class="w"> </span><span class="n">neighborEid</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="c1">// 1. Get destination cell</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">dstUidHex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DeviceId</span><span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="na">dstUser</span><span class="o">!!</span><span class="p">).</span><span class="na">toHex</span><span class="p">()</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">destCell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">destinationSnapshot</span><span class="p">(</span><span class="n">dstUidHex</span><span class="p">)</span><span class="o">?.</span><span class="na">cell</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">.</span><span class="na">DEFAULT</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="c1">// 2. Check staleness</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dest</span><span class="p">.</span><span class="na">updatedMs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">GEO_STALE_MS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">.</span><span class="na">DEFAULT</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="c1">// 3. Get neighbor cell</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">neighborCell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">neighborSnapshot</span><span class="p">(</span><span class="n">neighborEid</span><span class="p">)</span><span class="o">?.</span><span class="na">cell</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">.</span><span class="na">DEFAULT</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="c1">// 4. Compute H3 distance</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h3</span><span class="p">.</span><span class="na">h3Distance</span><span class="p">(</span><span class="n">destCell</span><span class="p">,</span><span class="w"> </span><span class="n">neighborCell</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="c1">// 5. Make decision</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">(</span><span class="n">PREFER</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;neighbor_matches_dest&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">distance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">(</span><span class="n">AVOID</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;neighbor_far_from_dest&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">.</span><span class="na">DEFAULT</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="p">}</span>
-</code></pre></div>
+<p>The geo routing evaluation follows these steps:</p>
+<ol>
+<li><strong>Get destination cell</strong> - Look up the destination's H3 cell from the contact directory</li>
+<li><strong>Check staleness</strong> - If destination data is stale, return DEFAULT</li>
+<li><strong>Get neighbor cell</strong> - Look up the neighbor's H3 cell from the peer store</li>
+<li><strong>Check staleness</strong> - If neighbor data is stale, return DEFAULT</li>
+<li><strong>Compute H3 distance</strong> - Calculate the number of cells between neighbor and destination</li>
+<li><strong>Make decision</strong> - Apply distance-based rules</li>
+</ol>
 <h2 id="local-cell-optimization">Local Cell Optimization<a class="headerlink" href="#local-cell-optimization" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:76-91</code></p>
-<p>Special case when local device is in same cell as destination:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">localCell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">localCell</span><span class="p">()</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">localCell</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">localCell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">destCell</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">localToNeighbor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">computeDistance</span><span class="p">(</span><span class="n">localCell</span><span class="p">,</span><span class="w"> </span><span class="n">neighborCell</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">distance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">localToNeighbor</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoRoutingDecision</span><span class="p">(</span><span class="n">AVOID</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;local_is_dest_neighbor_far&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
-</code></pre></div>
+<p>Special case: When the local device is in the same cell as the destination, and a neighbor is far from both, the AVOID decision is applied more aggressively.</p>
 <h2 id="data-snapshots">Data Snapshots<a class="headerlink" href="#data-snapshots" title="Permanent link">&para;</a></h2>
 <h3 id="geoneighborsnapshot">GeoNeighborSnapshot<a class="headerlink" href="#geoneighborsnapshot" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:12-17</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GeoNeighborSnapshot</span><span class="p">(</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">endpointId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">deviceIdHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="p">,</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cell</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="p">,</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">updatedMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
-</code></pre></div>
+<p>Information about a neighbor's geographic location:
+- <strong>endpointId</strong> - Nearby endpoint identifier
+- <strong>deviceIdHex</strong> - Device public key (hex)
+- <strong>cell</strong> - H3 cell index
+- <strong>updatedMs</strong> - Last update timestamp</p>
 <h3 id="geodestinationsnapshot">GeoDestinationSnapshot<a class="headerlink" href="#geodestinationsnapshot" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:19-23</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GeoDestinationSnapshot</span><span class="p">(</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cell</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span><span class="p">,</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">updatedMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long?</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">)</span>
-</code></pre></div>
+<p>Information about a destination's geographic location:
+- <strong>uidHex</strong> - User ID (hex)
+- <strong>cell</strong> - H3 cell index
+- <strong>updatedMs</strong> - Last update timestamp</p>
 <h2 id="resolver-interface">Resolver Interface<a class="headerlink" href="#resolver-interface" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:36-40</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">GeoRoutingResolver</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">localCell</span><span class="p">():</span><span class="w"> </span><span class="kt">Long?</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">neighborSnapshot</span><span class="p">(</span><span class="n">endpointId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GeoNeighborSnapshot?</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">destinationSnapshot</span><span class="p">(</span><span class="n">uidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GeoDestinationSnapshot?</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="defaultgeoroutingresolver">DefaultGeoRoutingResolver<a class="headerlink" href="#defaultgeoroutingresolver" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:118-150</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DefaultGeoRoutingResolver</span><span class="p">(</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">geoCellProvider</span><span class="p">:</span><span class="w"> </span><span class="n">GeoCellProvider</span><span class="p">,</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">contactDirectory</span><span class="p">:</span><span class="w"> </span><span class="n">ContactDirectory</span><span class="p">,</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">peerStore</span><span class="p">:</span><span class="w"> </span><span class="n">PeerStore</span><span class="p">,</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">peerDirectory</span><span class="p">:</span><span class="w"> </span><span class="n">PeerDirectory</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GeoRoutingResolver</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">localCell</span><span class="p">():</span><span class="w"> </span><span class="kt">Long?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geoCellProvider</span><span class="p">.</span><span class="na">cached</span><span class="p">()</span><span class="o">?.</span><span class="na">cell</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">neighborSnapshot</span><span class="p">(</span><span class="n">endpointId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GeoNeighborSnapshot? </span><span class="p">{</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">deviceId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peerDirectory</span><span class="p">.</span><span class="na">deviceId</span><span class="p">(</span><span class="n">endpointId</span><span class="p">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peerStore</span><span class="p">.</span><span class="na">getEntry</span><span class="p">(</span><span class="n">deviceId</span><span class="p">)</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoNeighborSnapshot</span><span class="p">(</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">            </span><span class="n">endpointId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointId</span><span class="p">,</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">            </span><span class="n">deviceIdHex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceId</span><span class="p">,</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">            </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="o">?.</span><span class="na">geoCellFine</span><span class="p">,</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">            </span><span class="n">updatedMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="o">?.</span><span class="na">lastDiscoveryMs</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">        </span><span class="p">)</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">destinationSnapshot</span><span class="p">(</span><span class="n">uidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">GeoDestinationSnapshot? </span><span class="p">{</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contactDirectory</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">uidHex</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GeoDestinationSnapshot</span><span class="p">(</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">            </span><span class="n">uidHex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uidHex</span><span class="p">,</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">            </span><span class="n">cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">geoCellFine</span><span class="p">,</span>
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">            </span><span class="n">updatedMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">lastUpdatedMs</span>
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">        </span><span class="p">)</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="p">}</span>
-</code></pre></div>
+<p>The geo routing resolver provides three operations:
+- <strong>localCell()</strong> - Get the local device's H3 cell
+- <strong>neighborSnapshot(endpointId)</strong> - Get a neighbor's location info
+- <strong>destinationSnapshot(uidHex)</strong> - Get a destination's location info</p>
+<p>The default resolver pulls data from:
+- Local cell from GeoCellProvider
+- Neighbor cells from PeerStore
+- Destination cells from ContactDirectory</p>
 <h2 id="h3-distance-calculation">H3 Distance Calculation<a class="headerlink" href="#h3-distance-calculation" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>GeoRoutingPolicy.kt:107-111</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">computeDistance</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">):</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">h3</span><span class="o">?.</span><span class="na">h3Distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">_</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kc">null</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
-</code></pre></div>
-<p><strong>Note:</strong> H3 distance is the number of hexagonal cells between two points at the same resolution.</p>
-<h2 id="integration-with-routingfacade">Integration with RoutingFacade<a class="headerlink" href="#integration-with-routingfacade" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>RoutingFacade.kt:1063-1078</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">featureFlags</span><span class="p">.</span><span class="na">geoRoutingEnabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">decision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geoRoutingPolicy</span><span class="o">?.</span><span class="na">evaluate</span><span class="p">(</span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">neighborEid</span><span class="p">)</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decision</span><span class="o">?.</span><span class="na">action</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GeoRoutingAction</span><span class="p">.</span><span class="na">AVOID</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="n">routeSkipsCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="n">JsonEventLogger</span><span class="p">.</span><span class="na">emit</span><span class="p">(</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">            </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ROUTE.SKIP.GEO&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">            </span><span class="n">peerEid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">neighborEid</span><span class="p">,</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">            </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">                </span><span class="s">&quot;bundle&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">bundleId</span><span class="p">,</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">                </span><span class="s">&quot;reason&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">decision</span><span class="p">.</span><span class="na">reason</span><span class="p">,</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">                </span><span class="s">&quot;dst_uid&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">uidX</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">            </span><span class="p">)</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="p">)</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="p">}</span>
-</code></pre></div>
+<p>H3 distance is the number of hexagonal cells between two points at the same resolution. If the distance cannot be computed (e.g., different resolutions), the calculation returns null and DEFAULT is used.</p>
+<h2 id="integration-with-routing">Integration with Routing<a class="headerlink" href="#integration-with-routing" title="Permanent link">&para;</a></h2>
+<p>When geo routing is enabled (via feature flag), each routing decision checks the geo policy:
+- If AVOID is returned, the bundle is not sent to that neighbor
+- If PREFER is returned, the neighbor is prioritized
+- If DEFAULT is returned, standard PRoPHET/Spray-Wait applies</p>
 <h2 id="feature-flag">Feature Flag<a class="headerlink" href="#feature-flag" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>RoutingFacade.kt:75</code></p>
-<p>Geo routing is controlled by a feature flag:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@Volatile</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">featureFlags</span><span class="p">:</span><span class="w"> </span><span class="n">RoutingFeatureFlags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// featureFlags.geoRoutingEnabled</span>
-</code></pre></div>
+<p>Geo routing is controlled by a feature flag and can be enabled/disabled at runtime without app restart.</p>
 <h2 id="json-events">JSON Events<a class="headerlink" href="#json-events" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3056,58 +2905,20 @@
 </tbody>
 </table>
 <h2 id="decision-flow">Decision Flow<a class="headerlink" href="#decision-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Bundle arrives
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    ↓
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Get destination cell from ContactDirectory
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    ↓
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>Check staleness (&gt; 6 hours?) → DEFAULT
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    ↓
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>Get neighbor cell from PeerStore
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    ↓
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>Check staleness (&gt; 6 hours?) → DEFAULT
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    ↓
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>Compute H3 distance
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    ↓
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>distance ≤ 1? → PREFER
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>distance ≥ 4? → AVOID
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>otherwise   → DEFAULT
-</code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    A[Bundle arrives] --&gt; B[Get destination cell]
+    B --&gt; C{Stale &gt; 6h?}
+    C --&gt;|Yes| D1[DEFAULT]
+    C --&gt;|No| E[Get neighbor cell]
+    E --&gt; F{Stale &gt; 6h?}
+    F --&gt;|Yes| D2[DEFAULT]
+    F --&gt;|No| G[Compute H3 distance]
+    G --&gt; H{Distance check}
+    H --&gt;|≤ 1| I[PREFER]
+    H --&gt;|≥ 4| J[AVOID]
+    H --&gt;|2-3| D3[DEFAULT]</code></pre>
 <h2 id="h3-resolution">H3 Resolution<a class="headerlink" href="#h3-resolution" title="Permanent link">&para;</a></h2>
-<p>The app uses "fine" resolution H3 cells stored in:
-- <code>PeerStore.geoCellFine</code> - For neighbors
-- <code>ContactDirectory.geoCellFine</code> - For destinations</p>
-<p>See <code>GeoCellProvider</code> for resolution configuration.</p>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GeoRoutingPolicy.kt</code></td>
-<td>Decision logic</td>
-</tr>
-<tr>
-<td><code>GeoCellProvider.kt</code></td>
-<td>H3 cell generation</td>
-</tr>
-<tr>
-<td><code>ContactDirectory.kt</code></td>
-<td>Destination locations</td>
-</tr>
-<tr>
-<td><code>PeerStore.kt</code></td>
-<td>Neighbor locations</td>
-</tr>
-<tr>
-<td><code>RoutingFacade.kt</code></td>
-<td>Integration point</td>
-</tr>
-</tbody>
-</table>
+<p>The app uses "fine" resolution H3 cells for both neighbors and destinations. This provides neighborhood-level precision (~1-5km depending on resolution).</p>
 <hr />
 <p><strong>Next:</strong> <a href="../prophet/">PRoPHET</a> | <a href="../ack-learning/">ACK Learning</a></p>
 

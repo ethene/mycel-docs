@@ -2891,12 +2891,12 @@
 <p>Understanding the "why" before the "how" helps everything else make sense.</p>
 <h2 id="the-problem-mycel-solves">The Problem Mycel Solves<a class="headerlink" href="#the-problem-mycel-solves" title="Permanent link">&para;</a></h2>
 <p>Traditional messengers assume the internet exists. They work like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Your Phone → Internet → Server → Internet → Friend&#39;s Phone
-</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A[Your Phone] --&gt; B[Internet] --&gt; C[Server] --&gt; D[Internet] --&gt; E[Friend's Phone]</code></pre>
 <p>When any part of that chain breaks, communication stops.</p>
 <p><strong>Mycel works differently:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Your Phone → Nearby Phones → ... → Friend&#39;s Phone
-</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A[Your Phone] --&gt; B[Nearby Phones] --&gt; C[...] --&gt; D[Friend's Phone]</code></pre>
 <p>Messages travel through people, not infrastructure.</p>
 <h2 id="mental-model-the-postal-service-analogy">Mental Model: The Postal Service Analogy<a class="headerlink" href="#mental-model-the-postal-service-analogy" title="Permanent link">&para;</a></h2>
 <p>Think of Mycel like a postal service where:</p>

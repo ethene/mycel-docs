@@ -1228,17 +1228,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2630,17 +2619,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2712,24 +2690,20 @@
 <tr>
 <th>Component</th>
 <th>Purpose</th>
-<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>UI Screens</strong></td>
 <td>Jetpack Compose screens for chat, contacts, settings</td>
-<td><code>feature/ui/src/.../screens/</code></td>
 </tr>
 <tr>
 <td><strong>ViewModels</strong></td>
 <td>State management, UI logic</td>
-<td><code>feature/ui/src/.../viewmodels/</code></td>
 </tr>
 <tr>
 <td><strong>MeshService</strong></td>
 <td>Foreground service, wake locks, lifecycle</td>
-<td><code>app/src/.../service/MeshService.kt</code></td>
 </tr>
 </tbody>
 </table>
@@ -2740,29 +2714,24 @@
 <tr>
 <th>Component</th>
 <th>Purpose</th>
-<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>BundleRepository</strong></td>
 <td>Bundle storage, status tracking, TTL management</td>
-<td><code>core/dtn/.../BundleRepository.kt</code></td>
 </tr>
 <tr>
 <td><strong>RoutingFacade</strong></td>
 <td>PRoPHET + Spray-and-Wait routing decisions</td>
-<td><code>core/nearby/.../RoutingFacade.kt</code></td>
 </tr>
 <tr>
 <td><strong>AckPathLearner</strong></td>
 <td>ACK processing, route improvement</td>
-<td><code>core/nearby/.../AckPathLearner.kt</code></td>
 </tr>
 <tr>
 <td><strong>MembershipCrdt</strong></td>
 <td>2P-Set CRDT for group membership sync</td>
-<td><code>core/dtn/.../MembershipCrdt.kt</code></td>
 </tr>
 </tbody>
 </table>
@@ -2773,24 +2742,20 @@
 <tr>
 <th>Component</th>
 <th>Purpose</th>
-<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>TransportRegistry</strong></td>
 <td>Unified API for all transports</td>
-<td><code>core/transport/.../TransportRegistry.kt</code></td>
 </tr>
 <tr>
 <td><strong>Nearby Connections</strong></td>
 <td>BLE + WiFi Direct via Google Play Services</td>
-<td><code>core/nearby/</code></td>
 </tr>
 <tr>
 <td><strong>Nostr Transport</strong></td>
 <td>WebSocket relay pool with NIP-17/44 encryption</td>
-<td><code>core/transport/.../nostr/</code></td>
 </tr>
 </tbody>
 </table>
@@ -2830,43 +2795,6 @@
     B_DTN-&gt;&gt;Bob: Deliver message
     B_DTN-&gt;&gt;C_DTN: Send DeliveryAck
     C_DTN-&gt;&gt;A_DTN: Relay DeliveryAck</code></pre>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-<th>Lines</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>core/dtn/src/.../BundleRepository.kt</code></td>
-<td>Bundle persistence and status</td>
-<td>~1800</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../RoutingFacade.kt</code></td>
-<td>Routing algorithm implementation</td>
-<td>~700</td>
-</tr>
-<tr>
-<td><code>core/nearby/src/.../NearbyCore.kt</code></td>
-<td>Nearby transport core</td>
-<td>~3500</td>
-</tr>
-<tr>
-<td><code>core/transport/src/.../NostrTransportAdapter.kt</code></td>
-<td>Nostr relay pool</td>
-<td>~400</td>
-</tr>
-<tr>
-<td><code>app/src/.../service/MeshService.kt</code></td>
-<td>Foreground service</td>
-<td>~300</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <p><strong>Next:</strong> <a href="../../transports/nearby/">Transports - Nearby</a> | <a href="../../routing/overview/">Routing Overview</a></p>
 

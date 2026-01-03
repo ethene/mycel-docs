@@ -1721,10 +1721,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-with-routingfacade" class="md-nav__link">
+  <a href="#integration-with-routing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration with RoutingFacade
+        Integration with Routing
       
     </span>
   </a>
@@ -1769,17 +1769,6 @@
     <span class="md-ellipsis">
       
         Best Transport Selection
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
       
     </span>
   </a>
@@ -2664,10 +2653,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-with-routingfacade" class="md-nav__link">
+  <a href="#integration-with-routing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration with RoutingFacade
+        Integration with Routing
       
     </span>
   </a>
@@ -2718,17 +2707,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#source-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Files
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2752,7 +2730,6 @@
 <h1 id="ack-based-path-learning">ACK-Based Path Learning<a class="headerlink" href="#ack-based-path-learning" title="Permanent link">&para;</a></h1>
 <p>ACK (acknowledgment) messages are used not just for UI delivery confirmation, but as telemetry for routing optimization.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>core/nearby/src/main/kotlin/com/meshlablite/core/nearby/routing/AckPathLearner.kt</code></p>
 <table>
 <thead>
 <tr>
@@ -2776,18 +2753,6 @@
 </tbody>
 </table>
 <h2 id="timeout-constants">Timeout Constants<a class="headerlink" href="#timeout-constants" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:201-209</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="cm">/** Default ACK timeout: 60 seconds */</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">DEFAULT_ACK_TIMEOUT_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span><span class="n">_000L</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="cm">/** Aggressive timeout for nearby: 30 seconds */</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">NEARBY_ACK_TIMEOUT_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="n">_000L</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="cm">/** Lenient timeout for Nostr: 120 seconds */</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">NOSTR_ACK_TIMEOUT_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">120</span><span class="n">_000L</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
-</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -2815,132 +2780,58 @@
 </tbody>
 </table>
 <h2 id="core-responsibilities">Core Responsibilities<a class="headerlink" href="#core-responsibilities" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:6-14</code></p>
 <ol>
 <li><strong>Track sent bundles</strong> - Record which bundles are awaiting ACK</li>
 <li><strong>Detect timeouts</strong> - Identify bundles without ACK within window</li>
-<li><strong>Record failures</strong> - Update TransportPathTracker on timeout</li>
+<li><strong>Record failures</strong> - Update path tracking on timeout</li>
 <li><strong>Suggest alternates</strong> - Recommend different path when primary fails</li>
 </ol>
 <h2 id="data-structures">Data Structures<a class="headerlink" href="#data-structures" title="Permanent link">&para;</a></h2>
 <h3 id="pendingack">PendingAck<a class="headerlink" href="#pendingack" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:25-30</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">PendingAck</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">bundleId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">destUidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">transportId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">sentAtMs</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
-</code></pre></div>
+<p>Each pending ACK tracks:
+- <strong>bundleId</strong> - The bundle awaiting confirmation
+- <strong>destUidHex</strong> - Destination user ID
+- <strong>transportId</strong> - Transport used for sending
+- <strong>sentAtMs</strong> - Timestamp when sent</p>
 <h2 id="lifecycle">Lifecycle<a class="headerlink" href="#lifecycle" title="Permanent link">&para;</a></h2>
 <h3 id="on-bundle-sent">On Bundle Sent<a class="headerlink" href="#on-bundle-sent" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:38-46</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">onBundleSent</span><span class="p">(</span><span class="n">bundleId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">destUidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">transportId</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">pending</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PendingAck</span><span class="p">(</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">bundleId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bundleId</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="n">destUidHex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">destUidHex</span><span class="p">.</span><span class="na">lowercase</span><span class="p">(),</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="n">transportId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transportId</span><span class="p">,</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="n">sentAtMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">pendingAcks</span><span class="o">[</span><span class="n">bundleId</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pending</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
-</code></pre></div>
+<p>When a bundle is sent via any transport, a pending ACK entry is created with the bundle ID, destination, transport, and current timestamp.</p>
 <h3 id="on-ack-received">On ACK Received<a class="headerlink" href="#on-ack-received" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:52-70</code></p>
-<p>When ACK arrives:
+<p>When an ACK arrives:
 1. Remove from pending map
 2. Log path learning event
-3. TransportPathTracker updated by RoutingFacade</p>
+3. Update transport path tracking with success</p>
 <h3 id="timeout-check">Timeout Check<a class="headerlink" href="#timeout-check" title="Permanent link">&para;</a></h3>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:78-135</code></p>
-<p>Called every 30 seconds by <code>RoutingFacade.ensureTimeoutCheck()</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">checkTimeouts</span><span class="p">():</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">timedOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pendingAcks</span><span class="p">.</span><span class="na">entries</span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">pending</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">sentAtMs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ackTimeoutMs</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">bundleId</span><span class="p">,</span><span class="w"> </span><span class="n">pending</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">timedOut</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="n">pendingAcks</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">bundleId</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="c1">// Record timeout in path tracker</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">pathTracker</span><span class="p">.</span><span class="na">recordTimeout</span><span class="p">(</span><span class="n">pending</span><span class="p">.</span><span class="na">destUidHex</span><span class="p">,</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">transportId</span><span class="p">)</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="c1">// Apply route penalty</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="n">onRoutePenalty</span><span class="o">?.</span><span class="na">invoke</span><span class="p">(</span><span class="n">pending</span><span class="p">.</span><span class="na">destUidHex</span><span class="p">)</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="c1">// Find best alternate path</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">suggestedTransport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathTracker</span><span class="p">.</span><span class="na">getBestPath</span><span class="p">(</span><span class="n">pending</span><span class="p">.</span><span class="na">destUidHex</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="c1">// Notify for retry</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="n">onRetryNeeded</span><span class="o">?.</span><span class="na">invoke</span><span class="p">(</span><span class="n">bundleId</span><span class="p">,</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">destUidHex</span><span class="p">,</span><span class="w"> </span><span class="n">suggestedTransport</span><span class="p">)</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">timedOut</span><span class="p">.</span><span class="na">size</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="p">}</span>
-</code></pre></div>
+<p>Every 30 seconds, the pending ACK map is checked:
+1. Find all entries older than the timeout threshold
+2. Remove from pending map
+3. Record timeout in path tracker
+4. Apply route penalty to PRoPHET table
+5. Suggest alternate transport for retry</p>
 <h2 id="path-suggestion-logic">Path Suggestion Logic<a class="headerlink" href="#path-suggestion-logic" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:97-107</code></p>
-<p>When a timeout occurs, the learner suggests an alternate transport:</p>
-<ol>
-<li>Get best path for destination</li>
-<li>If different from failed transport → suggest it</li>
-<li>Otherwise, find any non-degraded path</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">suggestedTransport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bestPath</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">transportId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">bestPath</span><span class="w">  </span><span class="c1">// Different path available</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="c1">// Find any non-degraded alternate</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">pathTracker</span><span class="p">.</span><span class="na">getPathsRanked</span><span class="p">(</span><span class="n">pending</span><span class="p">.</span><span class="na">destUidHex</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">!</span><span class="nb">it</span><span class="p">.</span><span class="na">isDegraded</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">transportId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">transportId</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="p">.</span><span class="na">firstOrNull</span><span class="p">()</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="o">?.</span><span class="na">transportId</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="integration-with-routingfacade">Integration with RoutingFacade<a class="headerlink" href="#integration-with-routingfacade" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>RoutingFacade.kt:96-114</code></p>
-<p>The <code>AckPathLearner</code> is instantiated with a route penalty callback:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">ackPathLearner</span><span class="p">:</span><span class="w"> </span><span class="n">AckPathLearner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AckPathLearner</span><span class="p">(</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">pathTracker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pathTracker</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">onRoutePenalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">destUidHex</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="c1">// Apply penalty to PRoPHET routing table</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">newP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routingTable</span><span class="p">.</span><span class="na">applyRoutePenalty</span><span class="p">(</span><span class="n">destUidHex</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="c1">// Log the penalty</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">)</span>
-</code></pre></div>
+<p>When a timeout occurs:
+1. Get the best known path for the destination
+2. If different from the failed transport → suggest it
+3. Otherwise, find any non-degraded alternate path</p>
+<h2 id="integration-with-routing">Integration with Routing<a class="headerlink" href="#integration-with-routing" title="Permanent link">&para;</a></h2>
+<p>The ACK path learner is integrated with the routing facade:
+- <strong>On timeout</strong> → Route penalty callback is invoked
+- <strong>On success</strong> → Preferred transport is recorded
+- <strong>On query</strong> → Best transport is suggested</p>
 <h2 id="periodic-timeout-job">Periodic Timeout Job<a class="headerlink" href="#periodic-timeout-job" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>RoutingFacade.kt:667-685</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">ensureTimeoutCheck</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeoutCheckJob</span><span class="o">?.</span><span class="na">isActive</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">timeoutCheckJob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">            </span><span class="n">delay</span><span class="p">(</span><span class="m">30</span><span class="n">_000</span><span class="p">)</span><span class="w">  </span><span class="c1">// Check every 30 seconds</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkAckTimeouts</span><span class="p">()</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">                </span><span class="n">JsonEventLogger</span><span class="p">.</span><span class="na">emit</span><span class="p">(</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">                    </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ROUTE.TIMEOUT.CHECK&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">                    </span><span class="n">details</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;timeouts_processed&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">count</span><span class="p">)</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">                </span><span class="p">)</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="p">}</span>
-</code></pre></div>
+<p>A background job runs every 30 seconds to:
+1. Check all pending ACKs for timeouts
+2. Process timeouts and record path failures
+3. Emit telemetry events for monitoring</p>
 <h2 id="debug-interface">Debug Interface<a class="headerlink" href="#debug-interface" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:167-185</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">getDebugState</span><span class="p">():</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Any?</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="s">&quot;pending_count&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">pendingAcks</span><span class="p">.</span><span class="na">size</span><span class="p">,</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="s">&quot;ack_timeout_ms&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ackTimeoutMs</span><span class="p">,</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="s">&quot;samples&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">pendingAcks</span><span class="p">.</span><span class="na">entries</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="s">&quot;path_metrics&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">pathTracker</span><span class="p">.</span><span class="na">getMetricsSummary</span><span class="p">()</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">}</span>
-</code></pre></div>
 <p>Access via meshctl:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>meshctl<span class="w"> </span>--serial<span class="w"> </span>&lt;SERIAL&gt;<span class="w"> </span>routing<span class="w"> </span>metrics
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># Shows ack_learner state when pending &gt; 0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>meshctl --serial &lt;SERIAL&gt; routing metrics
 </code></pre></div></p>
+<p>Shows:
+- Pending ACK count
+- Current timeout thresholds
+- Sample pending entries
+- Path metrics summary</p>
 <h2 id="json-events">JSON Events<a class="headerlink" href="#json-events" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2974,44 +2865,10 @@
 </tbody>
 </table>
 <h2 id="best-transport-selection">Best Transport Selection<a class="headerlink" href="#best-transport-selection" title="Permanent link">&para;</a></h2>
-<p><strong>Source:</strong> <code>AckPathLearner.kt:141-143</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">getBestTransport</span><span class="p">(</span><span class="n">destUidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pathTracker</span><span class="p">.</span><span class="na">getBestPath</span><span class="p">(</span><span class="n">destUidHex</span><span class="p">.</span><span class="na">lowercase</span><span class="p">())</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">}</span>
-</code></pre></div>
-<p>Used by RoutingFacade to make transport decisions:</p>
-<p><strong>Source:</strong> <code>RoutingFacade.kt:700-702</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">getBestTransportForDestination</span><span class="p">(</span><span class="n">destUidHex</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ackPathLearner</span><span class="p">.</span><span class="na">getBestTransport</span><span class="p">(</span><span class="n">destUidHex</span><span class="p">)</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="source-files">Source Files<a class="headerlink" href="#source-files" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>AckPathLearner.kt</code></td>
-<td>Timeout tracking, path learning</td>
-</tr>
-<tr>
-<td><code>TransportPathTracker.kt</code></td>
-<td>Path metrics storage</td>
-</tr>
-<tr>
-<td><code>RoutingFacade.kt</code></td>
-<td>Integration, periodic checks</td>
-</tr>
-<tr>
-<td><code>ControlMsg.kt</code></td>
-<td>DeliveryAck message type</td>
-</tr>
-</tbody>
-</table>
+<p>When selecting a transport for a destination:
+1. Query the path tracker for the best known path
+2. Consider recent successes and failures
+3. Fall back to default if no history exists</p>
 <hr />
 <p><strong>Next:</strong> <a href="../spray-wait/">Spray-and-Wait</a> | <a href="../geo-routing/">Geo Routing</a></p>
 
