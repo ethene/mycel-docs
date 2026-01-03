@@ -8,41 +8,12 @@ Mycel is a delay-tolerant mesh messenger for Android. It sends messages by passi
 
 ## Where Do You Want to Go?
 
-<div class="grid cards" markdown>
-
--   :material-rocket-launch: **I want to use Mycel**
-
-    ---
-
-    Get the app, set it up, and start messaging.
-
-    [:octicons-arrow-right-24: Getting Started](getting-started/install.md)
-
--   :material-cog: **I want to understand how it works**
-
-    ---
-
-    Learn about mesh networking, message delivery, and transports.
-
-    [:octicons-arrow-right-24: How It Works](how-it-works/overview.md)
-
--   :material-code-braces: **I'm a developer**
-
-    ---
-
-    Dive into protocols, algorithms, and architecture.
-
-    [:octicons-arrow-right-24: Deep Dive](deep-dive/index.md)
-
--   :material-shield-lock: **I care about security**
-
-    ---
-
-    Understand encryption, privacy, and threat model.
-
-    [:octicons-arrow-right-24: Security](security/privacy.md)
-
-</div>
+| I want to... | Start here |
+|--------------|------------|
+| **Use Mycel** | [Getting Started](getting-started/install.md) - Install, set up, send messages |
+| **Understand how it works** | [How It Works](how-it-works/overview.md) - Mesh networking, delivery, transports |
+| **Dive into technical details** | [Deep Dive](deep-dive/index.md) - Protocols, algorithms, architecture |
+| **Learn about security** | [Security](security/privacy.md) - Encryption, privacy, threat model |
 
 ---
 
@@ -115,6 +86,7 @@ sequenceDiagram
 2. [Grant permissions](getting-started/permissions.md)
 3. [Send your first message](getting-started/first-steps.md)
 4. [Understand delivery times](user-guide/delivery.md)
+5. [Battery & background tips](user-guide/battery.md)
 
 ### For Developers
 
