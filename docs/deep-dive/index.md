@@ -30,10 +30,6 @@ flowchart TB
     end
 
     APP --> DTN --> TRANSPORT
-
-    classDef appLayer fill:#64B5F6,stroke:#1565C0,color:#000
-    classDef dtnLayer fill:#81C784,stroke:#2E7D32,color:#000
-    classDef transportLayer fill:#FFB74D,stroke:#EF6C00,color:#000
 ```
 
 ## Core Concepts

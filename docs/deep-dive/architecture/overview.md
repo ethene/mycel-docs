@@ -38,14 +38,6 @@ flowchart TB
     REPO --> REG
     REG --> NEARBY
     REG --> NOSTR
-
-    classDef appLayer fill:#64B5F6,stroke:#1565C0,color:#000
-    classDef dtnLayer fill:#81C784,stroke:#2E7D32,color:#000
-    classDef transportLayer fill:#FFB74D,stroke:#EF6C00,color:#000
-
-    class UI,VM,SVC appLayer
-    class REPO,ROUTE,ACK,CRDT dtnLayer
-    class REG,NEARBY,NOSTR transportLayer
 ```
 
 ## Layer Responsibilities
