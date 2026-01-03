@@ -33,13 +33,16 @@ The easiest way to install and keep Mycel updated:
 
 ### 3. Add Mycel to Obtainium
 
+[![Get it on Obtainium](https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png)](https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/ethene/mycel-releases)
+
+**Tap the badge above** to add Mycel automatically, or manually:
+
 1. Open Obtainium
 2. Tap **+** (Add App)
-3. Paste this URL: `https://github.com/ethene/mycel-releases`
-4. Tap **Add**
-5. Tap **Install** when prompted
+3. Paste: `https://github.com/ethene/mycel-releases`
+4. Tap **Add** → **Install**
 
-That's it! Obtainium will download and install Mycel, and notify you of future updates.
+That's it! Obtainium will notify you of future updates.
 
 ---
 
