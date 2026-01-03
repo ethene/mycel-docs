@@ -39,9 +39,9 @@ flowchart TB
     REG --> NEARBY
     REG --> NOSTR
 
-    classDef appLayer fill:#E3F2FD,stroke:#1976D2
-    classDef dtnLayer fill:#E8F5E9,stroke:#388E3C
-    classDef transportLayer fill:#FFF3E0,stroke:#F57C00
+    classDef appLayer fill:#64B5F6,stroke:#1565C0,color:#000
+    classDef dtnLayer fill:#81C784,stroke:#2E7D32,color:#000
+    classDef transportLayer fill:#FFB74D,stroke:#EF6C00,color:#000
 
     class UI,VM,SVC appLayer
     class REPO,ROUTE,ACK,CRDT dtnLayer
