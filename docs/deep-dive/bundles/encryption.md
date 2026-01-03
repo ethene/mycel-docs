@@ -228,8 +228,6 @@ Some advanced security features are intentionally not implemented due to DTN con
 | One-time prekeys | Cannot enforce single-use without server |
 | Per-message key advancement | Messages arrive out of order |
 
-**Source:** `docs/security/SECURITY_ROADMAP.md:131-140`
-
 ## Source Files
 
 | File | Purpose |
