@@ -2919,11 +2919,37 @@
 <h2 id="routing-table-storage">Routing Table Storage<a class="headerlink" href="#routing-table-storage" title="Permanent link">&para;</a></h2>
 <p>P-values are persisted and survive app restarts.</p>
 <h3 id="table-structure">Table Structure<a class="headerlink" href="#table-structure" title="Permanent link">&para;</a></h3>
-<p>Each entry contains:
-- <strong>destination</strong> - UID hex of the target node
-- <strong>probability</strong> - Current P-value (0.0 to 1.0)
-- <strong>lastUpdate</strong> - Timestamp of last update
-- <strong>lastEncounter</strong> - Timestamp of last encounter</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>destination</td>
+<td>String</td>
+<td>UID hex of the target node</td>
+</tr>
+<tr>
+<td>probability</td>
+<td>Float</td>
+<td>Current P-value (0.0 to 1.0)</td>
+</tr>
+<tr>
+<td>lastUpdate</td>
+<td>Long</td>
+<td>Timestamp of last update</td>
+</tr>
+<tr>
+<td>lastEncounter</td>
+<td>Long</td>
+<td>Timestamp of last direct encounter</td>
+</tr>
+</tbody>
+</table>
 <h3 id="lru-eviction">LRU Eviction<a class="headerlink" href="#lru-eviction" title="Permanent link">&para;</a></h3>
 <p>When the table exceeds 5,000 entries, the least-recently-updated entries are evicted.</p>
 <h2 id="forwarding-decision">Forwarding Decision<a class="headerlink" href="#forwarding-decision" title="Permanent link">&para;</a></h2>

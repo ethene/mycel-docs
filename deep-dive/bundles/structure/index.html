@@ -3105,10 +3105,12 @@
 </table>
 <h2 id="bundle-id-calculation">Bundle ID Calculation<a class="headerlink" href="#bundle-id-calculation" title="Permanent link">&para;</a></h2>
 <p>The bundle ID is a <strong>SHA-256 hash</strong> of the CBOR-encoded header and payload concatenated together.</p>
-<p>This ensures:
-- Bundle ID is deterministic
-- Any modification invalidates the ID
-- Deduplication is reliable</p>
+<p>This ensures:</p>
+<ul>
+<li>Bundle ID is deterministic</li>
+<li>Any modification invalidates the ID</li>
+<li>Deduplication is reliable</li>
+</ul>
 <h2 id="size-limits">Size Limits<a class="headerlink" href="#size-limits" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

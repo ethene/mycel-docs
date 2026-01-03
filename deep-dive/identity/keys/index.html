@@ -3050,10 +3050,12 @@
 </table>
 <h2 id="user-id-uid">User ID (UID)<a class="headerlink" href="#user-id-uid" title="Permanent link">&para;</a></h2>
 <p>The UID is a deterministic identifier derived from the public key by computing its SHA-256 hash.</p>
-<p><strong>Properties:</strong>
-- 32 bytes (64 hex characters)
-- Deterministic: same pubkey → same UID
-- Privacy: cannot reverse UID to get pubkey</p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>32 bytes (64 hex characters)</li>
+<li>Deterministic: same pubkey → same UID</li>
+<li>Privacy: cannot reverse UID to get pubkey</li>
+</ul>
 <h2 id="myctag">MycTag<a class="headerlink" href="#myctag" title="Permanent link">&para;</a></h2>
 <p>Human-readable identity string for sharing.</p>
 <p><strong>Format:</strong> <code>myc:&lt;10-character-hash&gt;</code></p>
