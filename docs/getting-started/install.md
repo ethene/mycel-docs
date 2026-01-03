@@ -2,82 +2,89 @@
 
 Mycel is distributed as an APK file that you install directly on your Android device.
 
-## Requirements
+## Quick Start (Recommended)
 
-- **Android 8.0 (Oreo) or higher** (API 26+)
-- **Bluetooth and Wi-Fi** enabled
-- Approximately **50 MB** of storage
+The easiest way to install and keep Mycel updated is via **Obtainium** - a free app that tracks GitHub releases and notifies you of updates.
 
-## Download
+### 1. Install F-Droid (App Store)
 
-Get the latest release from GitHub:
+If you don't already have F-Droid:
+
+1. Go to [f-droid.org](https://f-droid.org/) on your phone
+2. Tap **Download F-Droid**
+3. Open the downloaded APK and tap **Install**
+4. You may need to allow installation from your browser (see [Enable Unknown Sources](#enable-unknown-sources) below)
+
+### 2. Install Obtainium
+
+1. Open **F-Droid**
+2. Search for **Obtainium**
+3. Tap **Install**
+
+*Alternative:* [Download Obtainium from GitHub](https://github.com/ImranR98/Obtainium/releases/latest)
+
+### 3. Add Mycel to Obtainium
+
+1. Open Obtainium
+2. Tap **+** (Add App)
+3. Paste this URL: `https://github.com/ethene/mycel-releases`
+4. Tap **Add**
+5. Tap **Install** when prompted
+
+That's it! Obtainium will download and install Mycel, and notify you of future updates.
+
+---
+
+## Manual Installation
+
+If you prefer not to use Obtainium:
+
+### Download
 
 **[Download Mycel APK](https://github.com/ethene/mycel-releases/releases/latest){ .md-button .md-button--primary }**
 
-Each release includes:
+### Enable Unknown Sources
 
-- `Mycel-vX.X.XXX.apk` - The application
-- `Mycel-vX.X.XXX.apk.sha256` - Checksum for verification
-
-## Verify the Download (Optional)
-
-To ensure you downloaded an authentic, unmodified APK:
-
-```bash
-# Check SHA-256 checksum
-sha256sum Mycel-*.apk
-# Compare with the .sha256 file contents
-```
-
-See [APK Verification](../security/verification.md) for detailed instructions and the official signing certificate fingerprint.
-
-## Install on Android
-
-### Step 1: Enable Unknown Sources
-
-Since Mycel isn't on the Play Store, you need to allow installation from unknown sources:
+Since Mycel isn't on the Play Store:
 
 1. Open **Settings** > **Security** (or **Privacy**)
-2. Find **Install unknown apps** or **Unknown sources**
+2. Find **Install unknown apps**
 3. Enable for your browser or file manager
 
-!!! note "This is a one-time setup"
-    You only need to do this once. After installation, you can disable it again if you prefer.
-
-### Step 2: Install the APK
+### Install
 
 1. Open the downloaded `.apk` file
 2. Tap **Install**
-3. Wait for installation to complete
-4. Tap **Open** to launch Mycel
+3. Tap **Open** to launch Mycel
 
-## Automatic Updates with Obtainium
+---
 
-For automatic update notifications, we recommend [Obtainium](https://github.com/ImranR98/Obtainium):
+## Requirements
 
-1. Install Obtainium from [F-Droid](https://f-droid.org/packages/dev.imranr.obtainium.fdroid/) or [GitHub](https://github.com/ImranR98/Obtainium/releases)
-2. Add app with URL: `https://github.com/ethene/mycel-releases`
-3. Obtainium will notify you when updates are available
+- **Android 8.0+** (Oreo, API 26)
+- **Bluetooth and Wi-Fi** enabled
+- ~50 MB storage
 
 ## Troubleshooting
 
 ### "App not installed" error
 
-- Make sure you have enough storage space
-- Try uninstalling any previous version first
-- Ensure the APK downloaded completely (check file size)
-
-### "Parse error" or "Package appears to be corrupt"
-
-- Re-download the APK
-- Verify the checksum matches
+- Check you have enough storage
+- Ensure the APK downloaded completely
 
 ### Installation blocked by Play Protect
 
 1. Tap **More details**
 2. Tap **Install anyway**
 
-Google Play Protect may warn about apps from outside the Play Store. This is normal for sideloaded apps.
+This is normal for apps from outside the Play Store.
+
+### "Signatures do not match"
+
+You have a different version installed. Uninstall it first, then install the new APK.
+
+!!! warning "Uninstalling removes your data"
+    Your messages and identity are deleted when you uninstall. Only do this if necessary.
 
 ---
 
