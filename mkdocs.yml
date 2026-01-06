@@ -40,7 +40,13 @@ nav:
     - App Updates: getting-started/updates.md
     - Permissions: getting-started/permissions.md
   - User Guide:
+    - Overview: user-guide/index.md
     - Messaging: user-guide/messaging.md
+    - Groups: user-guide/groups.md
+    - Channels: user-guide/channels.md
+    - Mesh Broadcast: user-guide/mesh-broadcast.md
+    - Contacts: user-guide/contacts.md
+    - Settings: user-guide/settings.md
     - How Delivery Works: user-guide/delivery.md
     - Battery & Background: user-guide/battery.md
   - How It Works:
