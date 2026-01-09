@@ -36,5 +36,8 @@ jobs:
       - name: Build documentation
         run: mkdocs build --strict
 
+      - name: Copy static files (contact redirect, App Links)
+        run: cp -r static/* site/
+
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force
