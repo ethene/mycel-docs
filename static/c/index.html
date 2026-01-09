@@ -112,15 +112,19 @@
         // URL format: /c/<pubkey>?n=name&geo=geo&label=label
         // or: /mycel-docs/c/<pubkey>?...
         const fullPath = window.location.pathname;
-        const pathMatch = fullPath.match(/\/c\/([A-Za-z0-9_-]+)/);
+        // Match any base64 characters (standard + URL-safe)
+        const pathMatch = fullPath.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
         const pubkey = pathMatch ? pathMatch[1] : '';
         const query = window.location.search;
         const params = new URLSearchParams(query);
 
         // Construct mycel:// deep link
-        const mycelUrl = 'mycel://contact/' + pubkey + query;
+        const mycelUrl = pubkey ? ('mycel://contact/' + pubkey + query) : '';
 
-        // Display contact info
+        // Store for retry button
+        window.mycelUrl = mycelUrl;
+
+        // Display contact info when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             const name = params.get('n') || params.get('full') || 'Unknown Contact';
             const label = params.get('label');
@@ -128,20 +132,28 @@
             const labelEl = document.getElementById('contact-label');
             if (nameEl) nameEl.textContent = decodeURIComponent(name);
             if (labelEl && label) labelEl.textContent = decodeURIComponent(label);
+
+            // Try to open app using hidden iframe (doesn't break page on failure)
+            if (mycelUrl) {
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = mycelUrl;
+                document.body.appendChild(iframe);
+
+                // Clean up iframe after attempt
+                setTimeout(function() {
+                    document.body.removeChild(iframe);
+                }, 100);
+            }
+
+            // Show fallback after 2s (app either opened or didn't)
+            setTimeout(function() {
+                var loading = document.getElementById('loading');
+                var fallback = document.getElementById('fallback');
+                if (loading) loading.style.display = 'none';
+                if (fallback) fallback.style.display = 'block';
+            }, 2000);
         });
-
-        // Try to open in app
-        if (pubkey) {
-            window.location.href = mycelUrl;
-        }
-
-        // If still here after 2s, show fallback
-        setTimeout(function() {
-            var loading = document.getElementById('loading');
-            var fallback = document.getElementById('fallback');
-            if (loading) loading.style.display = 'none';
-            if (fallback) fallback.style.display = 'block';
-        }, 2000);
     </script>
 </head>
 <body>

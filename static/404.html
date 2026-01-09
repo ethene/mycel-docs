@@ -50,18 +50,19 @@
     <script>
         // Check if this is a contact URL: /c/<pubkey> or /mycel-docs/c/<pubkey>
         const path = window.location.pathname;
-        const contactMatch = path.match(/\/c\/([A-Za-z0-9_-]+)/);
+        // Match any base64 characters (standard + URL-safe)
+        const contactMatch = path.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
 
         if (contactMatch) {
-            // This is a contact link - redirect to app
+            // This is a contact link
             const pubkey = contactMatch[1];
             const query = window.location.search;
             const mycelUrl = 'mycel://contact/' + pubkey + query;
 
-            // Try to open in app
-            window.location.href = mycelUrl;
+            // Store for retry button
+            window.mycelUrl = mycelUrl;
 
-            // Show contact UI after page loads
+            // Show contact UI and try to open app after DOM loads
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('contact-section').style.display = 'block';
                 const params = new URLSearchParams(query);
@@ -70,17 +71,25 @@
                 document.getElementById('contact-name').textContent = decodeURIComponent(name);
                 if (label) document.getElementById('contact-label').textContent = decodeURIComponent(label);
 
-                // Store for retry button
-                window.mycelUrl = mycelUrl;
-            });
+                // Try to open app using hidden iframe (doesn't break page on failure)
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = mycelUrl;
+                document.body.appendChild(iframe);
 
-            // Show fallback after 2s if still on page
-            setTimeout(function() {
-                var loading = document.getElementById('loading');
-                var fallback = document.getElementById('fallback');
-                if (loading) loading.style.display = 'none';
-                if (fallback) fallback.style.display = 'block';
-            }, 2000);
+                // Clean up iframe after attempt
+                setTimeout(function() {
+                    document.body.removeChild(iframe);
+                }, 100);
+
+                // Show fallback after 2s (app either opened or didn't)
+                setTimeout(function() {
+                    var loading = document.getElementById('loading');
+                    var fallback = document.getElementById('fallback');
+                    if (loading) loading.style.display = 'none';
+                    if (fallback) fallback.style.display = 'block';
+                }, 2000);
+            });
         } else {
             // Regular 404 - show not found page
             document.addEventListener('DOMContentLoaded', function() {
