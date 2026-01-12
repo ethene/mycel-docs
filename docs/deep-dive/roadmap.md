@@ -4,7 +4,7 @@
 
 This roadmap reflects the current state of development and planned improvements.
 
-## Current Release: v2.0.x
+## Current Release: v2.1.x
 
 | Feature | Status |
 |---------|--------|
@@ -81,6 +81,7 @@ These features are explicitly **not planned** because they are incompatible with
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| v2.1.0 | 2026-01-12 | Iran soft launch, Farsi L10N (486 strings), bilingual invite |
 | v2.0.724 | 2026-01-02 | Nostr enabled by default |
 | v2.0.723 | 2026-01-02 | FGS permission fix |
 | v2.0.722 | 2026-01-02 | Gson TypeToken fix, dynamic versioning |
