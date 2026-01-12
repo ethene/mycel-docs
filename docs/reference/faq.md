@@ -14,6 +14,10 @@ Named after mycelium - the underground fungal network that connects trees in a f
 
 Yes, Mycel is free and open source.
 
+### Can I use Mycel for emergencies?
+
+**No.** Mycel is not suitable for emergency communications. Delivery can take hours or days with no guarantee of arrival. For emergencies, use official emergency services.
+
 ### Is Mycel on the Play Store?
 
 Not currently. Download from [GitHub Releases](https://github.com/ethene/mycel-releases/releases).
@@ -76,7 +80,7 @@ No. Mycel identifies you by a cryptographic key, not phone number or email.
 
 ### What Android version do I need?
 
-Android 8.0 (Oreo) or higher (API 26+).
+Android 10 or higher (API 29+). Google Play Services is also required.
 
 ### How much storage does Mycel use?
 

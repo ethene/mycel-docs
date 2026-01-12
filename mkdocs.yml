@@ -37,6 +37,7 @@ nav:
   - Getting Started:
     - Installation: getting-started/install.md
     - First Steps: getting-started/first-steps.md
+    - What Works (& Doesn't): getting-started/limitations.md
     - App Updates: getting-started/updates.md
     - Permissions: getting-started/permissions.md
   - User Guide:
