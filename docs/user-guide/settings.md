@@ -2,6 +2,8 @@
 
 Complete reference for all Mycel settings and configuration options.
 
+![Settings screen](../assets/screenshots/en/settings-main.png){ width="300" align="right" }
+
 ## Accessing Settings
 
 1. Open Mycel

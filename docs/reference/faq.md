@@ -80,7 +80,7 @@ No. Mycel identifies you by a cryptographic key, not phone number or email.
 
 ### What Android version do I need?
 
-Android 10 or higher (API 29+). Google Play Services is also required.
+Android 8.0 or higher (API 26+). Full mesh features require Android 10+. Google Play Services is also required.
 
 ### How much storage does Mycel use?
 

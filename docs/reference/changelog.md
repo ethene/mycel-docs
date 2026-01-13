@@ -2,6 +2,33 @@
 
 All notable changes to Mycel are documented here.
 
+## [2.1.1] - 2026-01-13
+
+### Fixed
+
+- Version system now reads from version.txt (single source of truth)
+- CRDT signature verification for GROUP_UPDATE via Nostr
+
+---
+
+## [2.1.0] - 2026-01-12
+
+**Iran soft launch release**
+
+### Features
+
+- Complete Farsi (fa-IR) localization - 486 strings translated
+- Bilingual invite sharing (English + Farsi)
+- Nostr-only CRDT propagation for group membership
+- Self-managing analytics system with hypothesis dashboard
+
+### Technical
+
+- CRDT over Nostr topic publishing
+- Signature verification using raw Ed25519 public keys
+
+---
+
 ## [2.0.720] - 2026-01-02
 
 **First public release**
@@ -20,7 +47,7 @@ All notable changes to Mycel are documented here.
 
 ### Technical
 
-- Android 10+ (API 29+)
+- Android 8.0+ (API 26+), full mesh features on Android 10+
 - Kotlin 1.9.24
 - Jetpack Compose UI
 - Room database

@@ -2,6 +2,8 @@
 
 Groups let multiple people chat together. Unlike channels, **any member can post messages**.
 
+![Groups list](../assets/screenshots/en/groups-list.png){ width="300" align="right" }
+
 ## Groups vs Other Conversation Types
 
 | Feature | Direct Message | Group | Channel |

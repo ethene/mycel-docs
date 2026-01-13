@@ -2,6 +2,8 @@
 
 Everything you need to know about using Mycel day-to-day.
 
+![Conversations list](../assets/screenshots/en/conversations-list.png){ width="300" align="right" }
+
 ## Conversations
 
 Mycel supports three types of conversations:

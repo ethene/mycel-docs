@@ -103,4 +103,4 @@ Mycel is open source software. Documentation source: [github.com/ethene/mycel-do
 
 ---
 
-<small>Mycel v2.0.724</small>
+<small>Mycel v2.1.1</small>

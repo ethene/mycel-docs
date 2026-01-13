@@ -36,14 +36,14 @@ These are **not bugs** - they're fundamental properties of mesh networking:
 |------------|--------|
 | **Guarantee delivery** | If no chain of users exists, messages wait |
 | **Instant messaging** | Store-and-forward takes time |
-| **Work on all phones** | Requires Android 10+ with Google Play Services |
+| **Work on all phones** | Requires Android 8.0+ with Google Play Services (full mesh features need Android 10+) |
 | **Delivery to iPhone** | iOS app not yet available |
 
 ## Technical Requirements
 
 | Requirement | Details |
 |-------------|---------|
-| **Android version** | Android 10 (API 29) or higher |
+| **Android version** | Android 8.0 (API 26) or higher. Full mesh features require Android 10+ |
 | **Google Play Services** | Required for Nearby Connections |
 | **Bluetooth** | Must be enabled |
 | **Battery optimization** | Must be disabled for Mycel |

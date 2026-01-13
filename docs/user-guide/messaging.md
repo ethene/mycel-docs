@@ -2,6 +2,8 @@
 
 This guide covers Direct Messages (DMs) - one-to-one encrypted conversations. For group conversations, see [Groups](groups.md). For broadcast channels, see [Channels](channels.md).
 
+![Direct message chat](../assets/screenshots/en/chat-dm.png){ width="300" align="right" }
+
 ## Direct Messages Overview
 
 Direct messages are:

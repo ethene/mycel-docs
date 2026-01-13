@@ -40,6 +40,7 @@ nav:
     - What Works (& Doesn't): getting-started/limitations.md
     - App Updates: getting-started/updates.md
     - Permissions: getting-started/permissions.md
+    - Getting Help: getting-started/help.md
   - User Guide:
     - Overview: user-guide/index.md
     - Messaging: user-guide/messaging.md
@@ -53,8 +54,10 @@ nav:
   - How It Works:
     - Overview: how-it-works/overview.md
     - Transports: how-it-works/transports.md
+    - Nearby Stack: how-it-works/nearby-stack.md
   - Deep Dive:
     - Overview: deep-dive/index.md
+    - Building from Source: deep-dive/building.md
     - Architecture:
       - System Overview: deep-dive/architecture/overview.md
       - Message Flow: deep-dive/architecture/data-flow.md
@@ -87,6 +90,8 @@ nav:
   - Reference:
     - FAQ: reference/faq.md
     - Changelog: reference/changelog.md
+  - About:
+    - Vision: about/vision.md
   - Legal:
     - Privacy Policy: legal/privacy-policy.md
     - Terms of Service: legal/terms.md
