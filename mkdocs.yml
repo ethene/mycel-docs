@@ -101,6 +101,46 @@ nav:
 
 plugins:
   - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: fa
+          name: فارسی
+          build: true
+          site_name: "مستندات Mycel"
+          nav_translations:
+            Home: خانه
+            Getting Started: شروع کار
+            Installation: نصب
+            First Steps: اولین قدم‌ها
+            What Works (& Doesn't): محدودیت‌ها
+            App Updates: به‌روزرسانی
+            Permissions: مجوزها
+            Getting Help: راهنما
+            User Guide: راهنمای کاربر
+            Overview: نمای کلی
+            Messaging: پیام‌رسانی
+            Groups: گروه‌ها
+            Channels: کانال‌ها
+            Contacts: مخاطبین
+            Settings: تنظیمات
+            How Delivery Works: نحوه تحویل
+            Battery & Background: باتری و پس‌زمینه
+            How It Works: نحوه کار
+            Transports: انتقال‌ها
+            Nearby Stack: استک نزدیک
+            Security: امنیت
+            Privacy: حریم خصوصی
+            FAQ: سوالات متداول
+            About: درباره
+            Vision: چشم‌انداز
 
 markdown_extensions:
   - admonition
