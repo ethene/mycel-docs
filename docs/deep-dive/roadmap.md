@@ -44,16 +44,30 @@ These features are planned but have no committed timeline.
 | Nostr Relay Proximity Selection | High | Proposed |
 | Nostr Priority Queue | High | Proposed |
 | Relay Health Tracking | Medium | Proposed |
-| LoRa Transport | Medium | Proposed |
+| LoRa Transport | Medium | **Researched - Feasible** |
 | Transport Cost Model | Low | Proposed |
 
 ### LoRa Transport
 
-LoRa would enable long-range, low-power mesh communication:
+!!! success "Research Complete (January 2026)"
+    LoRa integration via Meshtastic is technically feasible and recommended.
 
-- Sub-GHz frequencies for kilometer-range links
-- Designed for areas with no cellular coverage
-- Architecture designed, implementation not started
+**Summary:** Long-range mesh (1-15 km) using external LoRa hardware connected via BLE/USB.
+
+| Aspect | Finding |
+|--------|---------|
+| **Recommended Path** | Meshtastic integration via device API |
+| **Hardware Cost** | $20-40 per node (Heltec, TTGO, RAK) |
+| **Payload Support** | ~240 bytes per packet (meets DTN requirements) |
+| **Mesh Routing** | Built-in 3-hop flooding (no additional work) |
+| **Effort Estimate** | 4-6 weeks integration |
+| **License** | GPL v3 firmware, but external component model avoids conflicts |
+
+**Key Decision:** Treat Meshtastic device as external modem (BLE/serial interface) to maintain Apache 2.0 licensing.
+
+**Regulatory:** ISM bands available globally (EU 868 MHz, US 915 MHz). Duty cycle limits apply (1% EU, 400ms dwell US).
+
+See [LoRa Transport Details](transports/lora.md) for full research findings.
 
 ## Security
 
