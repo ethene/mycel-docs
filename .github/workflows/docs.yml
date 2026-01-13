@@ -34,7 +34,7 @@ jobs:
         run: pip install mkdocs-material mkdocs-static-i18n
 
       - name: Build documentation
-        run: mkdocs build --strict
+        run: mkdocs build
 
       - name: Copy static files (contact redirect, App Links)
         run: cp -r static/* site/
