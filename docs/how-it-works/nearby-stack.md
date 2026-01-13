@@ -173,7 +173,19 @@ This was **disabled** due to Bluetooth stack corruption issues. Nearby Connectio
 
 ### WiFi Aware
 
-WiFi Aware (NAN - Neighbor Awareness Networking) is detected if available but not explicitly used beyond what Nearby Connections chooses internally.
+WiFi Aware (NAN - Neighbor Awareness Networking) provides superior range and throughput compared to BLE:
+
+| Property | WiFi Aware | BLE |
+|----------|------------|-----|
+| **Range** | 50-100m indoor | 10-30m typical |
+| **Throughput** | 100-250+ Mbps | 1-4 Mbps |
+| **Power** | Higher | Lower |
+| **Device Support** | ~70-80% of modern Android | Nearly universal |
+
+Nearby Connections **automatically uses WiFi Aware** when both devices support it. No additional implementation is needed - Google handles transport selection internally.
+
+!!! info "Research Finding (January 2026)"
+    Standalone WiFi Aware implementation was evaluated and determined unnecessary. Nearby already provides optimal transport selection.
 
 ---
 
@@ -215,11 +227,13 @@ meshctl --serial DEVICE nearby discovery
 
 ### LoRa Integration
 
-Long-range radio transport is being researched:
+Long-range radio transport has been researched and validated as feasible:
 
-- Potential integration with Meshtastic ecosystem
-- Would provide kilometer-scale range
-- Low bandwidth (~250 bytes/message)
+- Integration via Meshtastic ecosystem (recommended path)
+- 1-15 km range with external hardware ($20-40)
+- Low bandwidth (~36-700 bytes/sec depending on settings)
+
+See [LoRa Transport](../deep-dive/transports/lora.md) for full details.
 
 ### Pure BLE Transport
 

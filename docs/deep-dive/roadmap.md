@@ -33,9 +33,32 @@ These features are planned but have no committed timeline.
 | Feature | Description |
 |---------|-------------|
 | Pure BLE transport | Direct BLE L2CAP outside Nearby Connections |
-| WiFi Direct transport | Direct WiFi P2P outside Nearby Connections |
 | iOS version | Native iOS client |
 | Desktop client | macOS/Windows/Linux client |
+
+### WiFi Aware / WiFi Direct
+
+!!! info "Research Complete (January 2026) - No Action Required"
+    Nearby Connections already uses WiFi Aware automatically when available.
+
+**Summary:** Standalone WiFi Aware implementation is **not recommended**. Google's Nearby Connections API already selects WiFi Aware when both devices support it.
+
+| Aspect | Finding |
+|--------|---------|
+| **Device Support** | ~70-80% of modern Android devices |
+| **Performance** | 100-250+ Mbps (vs BLE ~1-4 Mbps) |
+| **Range** | 50-100m indoor (vs BLE 10-30m) |
+| **Power** | Higher than BLE |
+| **Nearby Integration** | Already automatic |
+
+**Recommendation:** Rely on Nearby Connections. Benefits:
+
+- Automatic WiFi Aware use when available
+- Seamless BLE fallback for unsupported devices
+- No additional code to maintain
+- Future-proof (Google updates Nearby as tech improves)
+
+**Future consideration:** Direct WiFi Aware may be revisited for iOS interoperability (iOS 17+ has WiFi Aware framework mandated by EU).
 
 ## Proposed Routing Improvements
 
