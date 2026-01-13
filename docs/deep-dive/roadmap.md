@@ -92,6 +92,53 @@ These features are planned but have no committed timeline.
 
 See [LoRa Transport Details](transports/lora.md) for full research findings.
 
+## Ecosystem & Crypto Integration
+
+!!! success "Research Complete (January 2026)"
+    Comprehensive analysis of crypto and identity integrations for DTN environments.
+
+### Recommended Integrations
+
+| Integration | Priority | DTN Compatible | Notes |
+|-------------|----------|----------------|-------|
+| **Cashu E-cash** | High | ✅ Yes | Offline payments via bearer tokens |
+| **NIP-77 Negentropy** | High | ✅ Yes | Efficient mesh sync |
+| **NIP-BE (BLE transport)** | High | ✅ Yes | Interoperable BLE mesh |
+| **DIDs & VCs** | Medium | ✅ Yes | Offline identity/credentials |
+| **NIP-05 Identity** | Medium | ⚠️ Partial | Cache when online |
+| **Lightning Network** | Low | ⚠️ Partial | Needs watchtowers |
+
+### What Works Offline
+
+| Technology | Offline? | Notes |
+|------------|----------|-------|
+| Cashu e-cash | ✅ Yes | Bearer tokens, mint verifies on redemption |
+| Peer DIDs (did:peer) | ✅ Yes | No blockchain needed |
+| Verifiable Credentials | ✅ Yes | Signature verification is local |
+| Lightning (local mesh) | ⚠️ Partial | Works if channel graph connected |
+| On-chain Bitcoin | ⚠️ Partial | Sign offline, broadcast later |
+
+### What Doesn't Work Offline
+
+| Technology | Why Not |
+|------------|---------|
+| MobileCoin / Signal-style | Requires online consensus nodes |
+| Stablecoins (USDT/USDC) | Blockchain access required |
+| Real-time zaps | Lightning routing needs connectivity |
+| DNS-based identity | Lookup requires internet |
+
+### Key Decision: Cashu for Offline Payments
+
+Cashu e-cash is the recommended payment integration:
+
+- Users deposit BTC to mint when online, receive tokens
+- Tokens transfer P2P via mesh (Nostr events, QR, Bluetooth)
+- Recipient redeems when any connectivity available
+- Double-spend prevented by mint (first redemption wins)
+- Proven: BitChat demonstrated BTC over Bluetooth
+
+See [Ecosystem Integration Details](ecosystem/crypto.md) for full research findings.
+
 ## Security
 
 ### Implemented

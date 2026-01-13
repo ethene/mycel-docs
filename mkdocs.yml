@@ -82,6 +82,8 @@ nav:
       - Private Groups: deep-dive/groups/private-groups.md
       - Channels: deep-dive/groups/channels.md
       - Membership CRDT: deep-dive/groups/membership-crdt.md
+    - Ecosystem:
+      - Crypto & Identity (Planned): deep-dive/ecosystem/crypto.md
     - Glossary: deep-dive/glossary.md
     - Roadmap: deep-dive/roadmap.md
   - Security:
