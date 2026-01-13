@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +14,9 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #fff;
         }
+        body[dir="rtl"] {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
         .container { max-width: 400px; padding: 40px 20px; }
         .logo { font-size: 64px; margin-bottom: 20px; }
         h1 { font-size: 24px; font-weight: 600; margin: 0 0 16px 0; }
@@ -27,31 +30,120 @@
             margin: 0 auto 20px auto;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #fallback {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
         .btn {
             display: inline-block; padding: 14px 32px;
             background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
             color: #000; text-decoration: none; border-radius: 12px;
             font-weight: 600; font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(74, 222, 128, 0.4);
         }
         .btn-secondary {
             background: rgba(255,255,255,0.1); color: #fff;
             box-shadow: none; margin-top: 12px;
         }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            box-shadow: none;
+        }
         .contact-preview {
             background: rgba(255,255,255,0.05);
             border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: left;
+        }
+        body[dir="rtl"] .contact-preview {
+            text-align: right;
         }
         .contact-name { font-size: 18px; font-weight: 600; color: #fff; }
         .contact-label { font-size: 14px; color: #666; margin-top: 4px; }
         .note { font-size: 14px; color: #666; margin-top: 24px; }
         #contact-section, #notfound-section { display: none; }
+        .lang-switch {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 14px;
+        }
+        body[dir="rtl"] .lang-switch {
+            right: auto;
+            left: 16px;
+        }
+        .lang-switch a {
+            color: #666;
+            text-decoration: none;
+        }
+        .lang-switch a:hover {
+            color: #fff;
+        }
     </style>
     <script>
+        // Localization strings
+        const i18n = {
+            en: {
+                opening: 'Opening in Mycel...',
+                redirecting: 'Redirecting to the app',
+                notInstalled: 'Mycel not installed?',
+                downloadPrompt: 'Download the app to import this contact and join the mesh network.',
+                install: 'Install Mycel',
+                tryAgain: 'Try opening again',
+                afterInstall: 'After installing, come back and tap this link again to import the contact.',
+                unknownContact: 'Unknown Contact',
+                installUrl: '/mycel-docs/getting-started/install/',
+                pageNotFound: 'Page Not Found',
+                pageNotFoundDesc: "The page you're looking for doesn't exist.",
+                goToDocs: 'Go to Documentation',
+                docsUrl: '/mycel-docs/'
+            },
+            fa: {
+                opening: 'در حال باز کردن در Mycel...',
+                redirecting: 'در حال هدایت به برنامه',
+                notInstalled: 'Mycel نصب نیست؟',
+                downloadPrompt: 'برنامه را دانلود کنید تا این مخاطب را وارد کنید و به شبکه مش بپیوندید.',
+                install: 'نصب Mycel',
+                tryAgain: 'تلاش مجدد',
+                afterInstall: 'پس از نصب، برگردید و دوباره روی این لینک بزنید تا مخاطب وارد شود.',
+                unknownContact: 'مخاطب ناشناس',
+                installUrl: '/mycel-docs/fa/getting-started/install/',
+                pageNotFound: 'صفحه پیدا نشد',
+                pageNotFoundDesc: 'صفحه‌ای که دنبالش هستید وجود ندارد.',
+                goToDocs: 'رفتن به مستندات',
+                docsUrl: '/mycel-docs/fa/'
+            }
+        };
+
+        // Detect language from URL path or browser
+        function detectLang() {
+            const path = window.location.pathname;
+            if (path.includes('/fa/')) return 'fa';
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang && browserLang.startsWith('fa')) return 'fa';
+            return 'en';
+        }
+
+        const lang = detectLang();
+        const t = i18n[lang];
+
+        // Set RTL for Farsi
+        if (lang === 'fa') {
+            document.documentElement.lang = 'fa';
+            document.documentElement.dir = 'rtl';
+        }
+
         // Check if this is a contact URL: /c/<pubkey> or /mycel-docs/c/<pubkey>
-        const path = window.location.pathname;
+        const fullPath = window.location.pathname;
         // Match any base64 characters (standard + URL-safe)
-        const contactMatch = path.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
+        const contactMatch = fullPath.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
 
         if (contactMatch) {
             // This is a contact link
@@ -64,9 +156,24 @@
 
             // Show contact UI and try to open app after DOM loads
             document.addEventListener('DOMContentLoaded', function() {
+                // Update text content with translations
+                document.getElementById('loading-title').textContent = t.opening;
+                document.getElementById('loading-subtitle').textContent = t.redirecting;
+                document.getElementById('fallback-title').textContent = t.notInstalled;
+                document.getElementById('fallback-desc').textContent = t.downloadPrompt;
+                document.getElementById('install-btn').textContent = t.install;
+                document.getElementById('install-btn').href = t.installUrl;
+                document.getElementById('retry-btn').textContent = t.tryAgain;
+                document.getElementById('fallback-note').textContent = t.afterInstall;
+
+                // Language switch
+                document.getElementById('lang-switch').innerHTML = lang === 'fa'
+                    ? '<a href="?lang=en">English</a>'
+                    : '<a href="?lang=fa">فارسی</a>';
+
                 document.getElementById('contact-section').style.display = 'block';
                 const params = new URLSearchParams(query);
-                const name = params.get('n') || params.get('full') || 'Unknown Contact';
+                const name = params.get('n') || params.get('full') || t.unknownContact;
                 const label = params.get('label');
                 document.getElementById('contact-name').textContent = decodeURIComponent(name);
                 if (label) document.getElementById('contact-label').textContent = decodeURIComponent(label);
@@ -93,12 +200,24 @@
         } else {
             // Regular 404 - show not found page
             document.addEventListener('DOMContentLoaded', function() {
+                // Update text content with translations
+                document.getElementById('notfound-title').textContent = t.pageNotFound;
+                document.getElementById('notfound-desc').textContent = t.pageNotFoundDesc;
+                document.getElementById('notfound-btn').textContent = t.goToDocs;
+                document.getElementById('notfound-btn').href = t.docsUrl;
+
+                // Language switch
+                document.getElementById('lang-switch').innerHTML = lang === 'fa'
+                    ? '<a href="?lang=en">English</a>'
+                    : '<a href="?lang=fa">فارسی</a>';
+
                 document.getElementById('notfound-section').style.display = 'block';
             });
         }
     </script>
 </head>
 <body>
+    <div class="lang-switch" id="lang-switch"></div>
     <div class="container">
         <div class="logo">&#127760;</div>
 
@@ -106,8 +225,8 @@
         <div id="contact-section">
             <div id="loading">
                 <div class="spinner"></div>
-                <h1>Opening in Mycel...</h1>
-                <p>Redirecting to the app</p>
+                <h1 id="loading-title">Opening in Mycel...</h1>
+                <p id="loading-subtitle">Redirecting to the app</p>
             </div>
 
             <div id="fallback">
@@ -116,18 +235,18 @@
                     <div class="contact-label" id="contact-label"></div>
                 </div>
 
-                <h1>Mycel not installed?</h1>
-                <p>Download the app to import this contact and join the mesh network.</p>
+                <h1 id="fallback-title">Mycel not installed?</h1>
+                <p id="fallback-desc">Download the app to import this contact and join the mesh network.</p>
 
-                <a class="btn" href="/mycel-docs/getting-started/install/">
+                <a class="btn" id="install-btn" href="/mycel-docs/getting-started/install/">
                     Install Mycel
                 </a>
                 <br>
-                <a class="btn btn-secondary" href="javascript:window.location.href=window.mycelUrl">
+                <a class="btn btn-secondary" id="retry-btn" href="javascript:window.location.href=window.mycelUrl || 'mycel://contact/'">
                     Try opening again
                 </a>
 
-                <p class="note">
+                <p class="note" id="fallback-note">
                     After installing, come back and tap this link again to import the contact.
                 </p>
             </div>
@@ -135,9 +254,9 @@
 
         <!-- Regular 404 Section -->
         <div id="notfound-section">
-            <h1>Page Not Found</h1>
-            <p>The page you're looking for doesn't exist.</p>
-            <a class="btn" href="/mycel-docs/">Go to Documentation</a>
+            <h1 id="notfound-title">Page Not Found</h1>
+            <p id="notfound-desc">The page you're looking for doesn't exist.</p>
+            <a class="btn" id="notfound-btn" href="/mycel-docs/">Go to Documentation</a>
         </div>
     </div>
 </body>
