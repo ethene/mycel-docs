@@ -2,7 +2,11 @@
 
 این راهنما پیام‌های مستقیم (DM) - گفتگوهای رمزنگاری‌شده یک به یک را پوشش می‌دهد. برای گفتگوهای گروهی، به [گروه‌ها](groups.md) مراجعه کنید. برای کانال‌های پخش، به [کانال‌ها](channels.md) مراجعه کنید.
 
-![چت پیام مستقیم](../assets/screenshots/fa/chat-dm.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/fa/chat-dm.png" alt="چت پیام مستقیم">
+  </div>
+</div>
 
 ## نمای کلی پیام‌های مستقیم
 

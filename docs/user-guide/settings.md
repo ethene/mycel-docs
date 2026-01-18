@@ -2,7 +2,11 @@
 
 Complete reference for all Mycel settings and configuration options.
 
-![Settings screen](../assets/screenshots/en/settings-main.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/en/settings-main.png" alt="Settings screen">
+  </div>
+</div>
 
 ## Accessing Settings
 

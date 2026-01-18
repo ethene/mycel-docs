@@ -2,7 +2,11 @@
 
 همه چیزی که برای استفاده روزانه از Mycel باید بدانید.
 
-![لیست گفتگوها](../assets/screenshots/fa/conversations-list.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/fa/conversations-list.png" alt="لیست گفتگوها">
+  </div>
+</div>
 
 ## گفتگوها
 

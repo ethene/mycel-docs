@@ -2,7 +2,11 @@
 
 گروه‌ها به چند نفر اجازه می‌دهند با هم چت کنند. بر خلاف کانال‌ها، **هر عضوی می‌تواند پیام بگذارد**.
 
-![لیست گروه‌ها](../assets/screenshots/fa/groups-list.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/fa/groups-list.png" alt="لیست گروه‌ها">
+  </div>
+</div>
 
 ## گروه‌ها در مقابل سایر انواع گفتگو
 

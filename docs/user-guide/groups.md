@@ -2,7 +2,11 @@
 
 Groups let multiple people chat together. Unlike channels, **any member can post messages**.
 
-![Groups list](../assets/screenshots/en/groups-list.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/en/groups-list.png" alt="Groups list">
+  </div>
+</div>
 
 ## Groups vs Other Conversation Types
 

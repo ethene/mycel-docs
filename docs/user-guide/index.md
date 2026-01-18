@@ -2,7 +2,11 @@
 
 Everything you need to know about using Mycel day-to-day.
 
-![Conversations list](../assets/screenshots/en/conversations-list.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/en/conversations-list.png" alt="Conversations list">
+  </div>
+</div>
 
 ## Conversations
 

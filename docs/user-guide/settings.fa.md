@@ -2,7 +2,11 @@
 
 مرجع کامل برای همه تنظیمات و گزینه‌های پیکربندی Mycel.
 
-![صفحه تنظیمات](../assets/screenshots/fa/settings-main.png){ width="300" align="right" }
+<div class="screenshot-center">
+  <div class="phone-mockup">
+    <img src="../../assets/screenshots/fa/settings-main.png" alt="صفحه تنظیمات">
+  </div>
+</div>
 
 ## دسترسی به تنظیمات
 

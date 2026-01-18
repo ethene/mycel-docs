@@ -1,0 +1,211 @@
+/* Mycel Docs - Custom Styles */
+
+/* ============================================
+   Phone Screenshot Mockups
+   ============================================ */
+
+/* Phone device frame wrapper */
+.phone-mockup {
+  display: inline-block;
+  padding: 12px 8px 24px 8px;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 32px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.phone-mockup::before {
+  /* Notch/speaker */
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.phone-mockup img {
+  display: block;
+  border-radius: 20px;
+  max-width: 280px;
+  height: auto;
+}
+
+/* Screenshot figure with caption */
+figure.screenshot {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+figure.screenshot figcaption {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+
+/* ============================================
+   Content + Screenshot Grid Layout
+   ============================================ */
+
+.content-with-screenshot {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  margin: 2rem 0;
+}
+
+.content-with-screenshot > .content {
+  min-width: 0; /* Prevent grid blowout */
+}
+
+.content-with-screenshot > .screenshot {
+  position: sticky;
+  top: 5rem;
+}
+
+/* Stack on mobile */
+@media (max-width: 960px) {
+  .content-with-screenshot {
+    grid-template-columns: 1fr;
+  }
+
+  .content-with-screenshot > .screenshot {
+    order: -1; /* Screenshot first on mobile */
+    justify-self: center;
+    position: static;
+  }
+}
+
+/* ============================================
+   Screenshot Gallery
+   ============================================ */
+
+.screenshot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  justify-items: center;
+}
+
+.screenshot-gallery .phone-mockup img {
+  max-width: 220px;
+}
+
+/* ============================================
+   Standalone Screenshot (centered)
+   ============================================ */
+
+.screenshot-center {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* ============================================
+   Screenshot alongside text (improved float)
+   ============================================ */
+
+.screenshot-aside {
+  float: right;
+  margin: 0 0 1.5rem 2rem;
+  clear: right;
+}
+
+@media (max-width: 768px) {
+  .screenshot-aside {
+    float: none;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+}
+
+/* Clear floats after sections */
+.md-content hr {
+  clear: both;
+}
+
+/* ============================================
+   Simple border frame (lightweight alternative)
+   ============================================ */
+
+.screenshot-simple {
+  display: inline-block;
+  border: 3px solid var(--md-default-fg-color--lightest);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.screenshot-simple img {
+  display: block;
+  max-width: 280px;
+  height: auto;
+}
+
+/* ============================================
+   Feature showcase (screenshot + description)
+   ============================================ */
+
+.feature-showcase {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--md-code-bg-color);
+  border-radius: 12px;
+}
+
+.feature-showcase .screenshot {
+  flex-shrink: 0;
+}
+
+.feature-showcase .description h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .feature-showcase {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   Dark mode adjustments
+   ============================================ */
+
+[data-md-color-scheme="slate"] .phone-mockup {
+  background: linear-gradient(145deg, #3a3a3a, #252525);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-md-color-scheme="slate"] .screenshot-simple {
+  border-color: #444;
+}
+
+/* ============================================
+   Table improvements when with screenshots
+   ============================================ */
+
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+}
+
+/* Ensure tables don't wrap around floats poorly */
+.md-typeset h2,
+.md-typeset h3 {
+  clear: both;
+}
