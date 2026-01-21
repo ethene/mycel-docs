@@ -147,19 +147,39 @@
             document.documentElement.dir = 'rtl';
         }
 
-        // Check if this is a contact URL: /c/<pubkey> or /mycel-docs/c/<pubkey>
+        // Check if this is a deep link URL
         const fullPath = window.location.pathname;
-        // Match any base64 characters (standard + URL-safe)
+        const query = window.location.search;
+
+        // Match contact: /c/<pubkey> or /mycel-docs/c/<pubkey>
         const contactMatch = fullPath.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
+        // Match group: /g/<groupId> or /mycel-docs/g/<groupId>
+        const groupMatch = fullPath.match(/\/g\/([^?\/]+)/);
+        // Match channel: /ch/<channelId> or /mycel-docs/ch/<channelId>
+        const channelMatch = fullPath.match(/\/ch\/([^?\/]+)/);
+
+        let mycelUrl = null;
+        let linkType = null;
 
         if (contactMatch) {
-            // This is a contact link
             const pubkey = contactMatch[1];
-            const query = window.location.search;
-            const mycelUrl = 'mycel://contact/' + pubkey + query;
+            mycelUrl = 'mycel://contact/' + pubkey + query;
+            linkType = 'contact';
+        } else if (groupMatch) {
+            const groupId = groupMatch[1];
+            mycelUrl = 'mycel://group/' + groupId + query;
+            linkType = 'group';
+        } else if (channelMatch) {
+            const channelId = channelMatch[1];
+            mycelUrl = 'mycel://channel/' + channelId + query;
+            linkType = 'channel';
+        }
 
-            // Store for retry button
-            window.mycelUrl = mycelUrl;
+        // Store for retry button
+        window.mycelUrl = mycelUrl;
+
+        if (linkType) {
+            // This is a deep link
 
             // Show contact UI and try to open app after DOM loads
             document.addEventListener('DOMContentLoaded', function() {
