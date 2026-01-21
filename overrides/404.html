@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Mycel...</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0e0e0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00bcd4 0%, #009688 100%);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .status { color: #80cbc4; margin-bottom: 1.5rem; }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 188, 212, 0.3);
+            border-top-color: #00bcd4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1.5rem auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fallback { display: none; }
+        .fallback.show { display: block; }
+        .btn {
+            display: inline-block;
+            background: #00bcd4;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 0.5rem;
+            font-weight: 500;
+        }
+        .btn:hover { background: #00acc1; }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #00bcd4;
+            color: #00bcd4;
+        }
+        .info { font-size: 0.875rem; color: #888; margin-top: 1rem; }
+        .link-type {
+            background: rgba(0, 188, 212, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">M</div>
+        <h1>Mycel</h1>
+        <div id="link-type" class="link-type"></div>
+        <p id="status" class="status">Opening app...</p>
+        <div class="spinner" id="spinner"></div>
+
+        <div id="fallback" class="fallback">
+            <p>Mycel app not detected</p>
+            <a href="https://github.com/ethene/mycel-releases/releases/latest" class="btn">Download Mycel</a>
+            <a href="https://ethene.github.io/mycel-docs/" class="btn btn-secondary">Learn More</a>
+            <p class="info">After installing, tap the link again to join</p>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const path = window.location.pathname;
+            const search = window.location.search;
+            const fullUrl = window.location.href;
+
+            // Detect link type and construct deep link
+            let deepLink = null;
+            let linkTypeText = '';
+
+            if (path.includes('/mycel-docs/g/')) {
+                // Group invite link
+                const groupPart = path.split('/mycel-docs/g/')[1];
+                if (groupPart) {
+                    deepLink = 'mycel://group/' + groupPart + search;
+                    linkTypeText = 'Group Invite';
+                }
+            } else if (path.includes('/mycel-docs/ch/')) {
+                // Channel link
+                const channelPart = path.split('/mycel-docs/ch/')[1];
+                if (channelPart) {
+                    deepLink = 'mycel://channel/' + channelPart + search;
+                    linkTypeText = 'Channel';
+                }
+            } else if (path.includes('/mycel-docs/c/')) {
+                // Contact link
+                const contactPart = path.split('/mycel-docs/c/')[1];
+                if (contactPart) {
+                    deepLink = 'mycel://contact/' + contactPart + search;
+                    linkTypeText = 'Contact';
+                }
+            }
+
+            // Update UI
+            const linkTypeEl = document.getElementById('link-type');
+            const statusEl = document.getElementById('status');
+            const spinnerEl = document.getElementById('spinner');
+            const fallbackEl = document.getElementById('fallback');
+
+            if (linkTypeText) {
+                linkTypeEl.textContent = linkTypeText;
+            } else {
+                linkTypeEl.style.display = 'none';
+            }
+
+            if (deepLink) {
+                // Try to open the app
+                statusEl.textContent = 'Opening Mycel...';
+
+                // Set timeout to show fallback if app doesn't open
+                const fallbackTimeout = setTimeout(function() {
+                    spinnerEl.style.display = 'none';
+                    statusEl.textContent = '';
+                    fallbackEl.classList.add('show');
+                }, 2500);
+
+                // Listen for page visibility change (indicates app opened)
+                document.addEventListener('visibilitychange', function() {
+                    if (document.hidden) {
+                        clearTimeout(fallbackTimeout);
+                    }
+                });
+
+                // Try to open the deep link
+                window.location.href = deepLink;
+            } else {
+                // Not a deep link path, show 404
+                linkTypeEl.style.display = 'none';
+                spinnerEl.style.display = 'none';
+                statusEl.textContent = 'Page not found';
+                fallbackEl.innerHTML = '<a href="https://ethene.github.io/mycel-docs/" class="btn">Go to Documentation</a>';
+                fallbackEl.classList.add('show');
+            }
+        })();
+    </script>
+</body>
+</html>
