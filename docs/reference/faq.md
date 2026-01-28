@@ -129,3 +129,35 @@ Download the latest APK from [GitHub Releases](https://github.com/ethene/mycel-r
 ### Can I get automatic updates?
 
 Yes, use [Obtainium](https://github.com/ImranR98/Obtainium) to monitor for new releases.
+
+### Cannot add Mycel source from GitHub (Obtainium)
+
+If you see a connection error while adding the Mycel source in Obtainium:
+
+1. **Check your internet connection**
+    - Make sure your device has a stable internet connection
+    - Try switching between Wi-Fi and mobile data, then retry
+
+2. **Avoid restricted networks**
+    - Some networks block or interfere with connections to GitHub
+    - If you're using a corporate, hotel, or public Wi-Fi network, try a different network
+
+3. **Disable VPN or network filtering temporarily**
+    - VPNs, private DNS, or system-wide ad blockers may interrupt the connection
+    - Turn them off briefly and try again
+
+4. **Confirm the source URL**
+    - Make sure the source URL is entered exactly as: `https://github.com/ethene/mycel-releases`
+    - Even small changes or missing characters can cause the connection to fail
+
+5. **Retry after a short wait**
+    - Temporary network or service issues may resolve on their own
+    - Wait a few minutes and try again
+
+6. **Restart the app or device**
+    - If the error persists, restarting Obtainium or the device can help clear temporary network issues
+
+7. **If the problem continues**
+    - The issue is usually caused by network restrictions or connectivity problems
+    - Try again later or from a different internet connection
+    - You can also download the APK directly from [GitHub Releases](https://github.com/ethene/mycel-releases/releases)
