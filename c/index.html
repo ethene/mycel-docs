@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mycel Contact</title>
+    <meta name="description" content="Import contact to Mycel mesh messenger">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+        }
+        body[dir="rtl"] {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            padding: 40px 20px;
+        }
+        .logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+        }
+        p {
+            color: #a0a0a0;
+            margin: 0 0 24px 0;
+            line-height: 1.5;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #4ade80;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        #fallback {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(74, 222, 128, 0.4);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            box-shadow: none;
+            margin-top: 12px;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            box-shadow: none;
+        }
+        .note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 24px;
+        }
+        .contact-preview {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        body[dir="rtl"] .contact-preview {
+            text-align: right;
+        }
+        .contact-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .contact-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 14px;
+        }
+        body[dir="rtl"] .lang-switch {
+            right: auto;
+            left: 16px;
+        }
+        .lang-switch a {
+            color: #666;
+            text-decoration: none;
+        }
+        .lang-switch a:hover {
+            color: #fff;
+        }
+    </style>
+    <script>
+        // Localization strings
+        const i18n = {
+            en: {
+                opening: 'Opening in Mycel...',
+                redirecting: 'Redirecting to the app',
+                notInstalled: 'Mycel not installed?',
+                downloadPrompt: 'Download the app to import this contact and join the mesh network.',
+                install: 'Install Mycel',
+                tryAgain: 'Try opening again',
+                afterInstall: 'After installing, come back and tap this link again to import the contact.',
+                unknownContact: 'Unknown Contact',
+                installUrl: '/mycel-docs/getting-started/install/'
+            },
+            fa: {
+                opening: 'در حال باز کردن در Mycel...',
+                redirecting: 'در حال هدایت به برنامه',
+                notInstalled: 'Mycel نصب نیست؟',
+                downloadPrompt: 'برنامه را دانلود کنید تا این مخاطب را وارد کنید و به شبکه مش بپیوندید.',
+                install: 'نصب Mycel',
+                tryAgain: 'تلاش مجدد',
+                afterInstall: 'پس از نصب، برگردید و دوباره روی این لینک بزنید تا مخاطب وارد شود.',
+                unknownContact: 'مخاطب ناشناس',
+                installUrl: '/mycel-docs/fa/getting-started/install/'
+            }
+        };
+
+        // Detect language from URL query param, path, or browser
+        function detectLang() {
+            // Check query parameter first (for language switcher)
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam === 'fa') return 'fa';
+            if (langParam === 'en') return 'en';
+            // Check URL path
+            const path = window.location.pathname;
+            if (path.includes('/fa/')) return 'fa';
+            // Check browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang && browserLang.startsWith('fa')) return 'fa';
+            return 'en';
+        }
+
+        const lang = detectLang();
+        const t = i18n[lang];
+
+        // Set RTL for Farsi
+        if (lang === 'fa') {
+            document.documentElement.lang = 'fa';
+            document.documentElement.dir = 'rtl';
+        }
+
+        // Extract pubkey and params from URL
+        const fullPath = window.location.pathname;
+        const pathMatch = fullPath.match(/\/c\/([A-Za-z0-9_\-+=\/]+)/);
+        const pubkey = pathMatch ? pathMatch[1] : '';
+        const query = window.location.search;
+        const params = new URLSearchParams(query);
+
+        // Construct mycel:// deep link
+        const mycelUrl = pubkey ? ('mycel://contact/' + pubkey + query) : '';
+        window.mycelUrl = mycelUrl;
+
+        // Display content when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update text content
+            document.getElementById('loading-title').textContent = t.opening;
+            document.getElementById('loading-subtitle').textContent = t.redirecting;
+            document.getElementById('fallback-title').textContent = t.notInstalled;
+            document.getElementById('fallback-desc').textContent = t.downloadPrompt;
+            document.getElementById('install-btn').textContent = t.install;
+            document.getElementById('install-btn').href = t.installUrl;
+            document.getElementById('retry-btn').textContent = t.tryAgain;
+            document.getElementById('fallback-note').textContent = t.afterInstall;
+
+            // Language switch
+            document.getElementById('lang-switch').innerHTML = lang === 'fa'
+                ? '<a href="?lang=en">English</a>'
+                : '<a href="?lang=fa">فارسی</a>';
+
+            // Contact info
+            const name = params.get('n') || params.get('full') || t.unknownContact;
+            const label = params.get('label');
+            document.getElementById('contact-name').textContent = decodeURIComponent(name);
+            if (label) document.getElementById('contact-label').textContent = decodeURIComponent(label);
+
+            // Try to open app using hidden iframe
+            if (mycelUrl) {
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = mycelUrl;
+                document.body.appendChild(iframe);
+                setTimeout(function() { document.body.removeChild(iframe); }, 100);
+            }
+
+            // Show fallback after 2s
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('fallback').style.display = 'block';
+            }, 2000);
+        });
+    </script>
+</head>
+<body>
+    <div class="lang-switch" id="lang-switch"></div>
+    <div class="container">
+        <div class="logo">&#127760;</div>
+
+        <div id="loading">
+            <div class="spinner"></div>
+            <h1 id="loading-title">Opening in Mycel...</h1>
+            <p id="loading-subtitle">Redirecting to the app</p>
+        </div>
+
+        <div id="fallback">
+            <div class="contact-preview">
+                <div class="contact-name" id="contact-name">Contact</div>
+                <div class="contact-label" id="contact-label"></div>
+            </div>
+
+            <h1 id="fallback-title">Mycel not installed?</h1>
+            <p id="fallback-desc">Download the app to import this contact and join the mesh network.</p>
+
+            <a class="btn" id="install-btn" href="/mycel-docs/getting-started/install/">
+                Install Mycel
+            </a>
+            <br>
+            <a class="btn btn-secondary" id="retry-btn" href="javascript:window.location.href=window.mycelUrl || 'mycel://contact/'">
+                Try opening again
+            </a>
+
+            <p class="note" id="fallback-note">
+                After installing, come back and tap this link again to import the contact.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

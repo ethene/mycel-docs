@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/about/vision/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/about/vision/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/about/vision/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/building/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/building/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/building/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/glossary/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/glossary/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/glossary/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/roadmap/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/roadmap/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/roadmap/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/architecture/data-flow/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/architecture/data-flow/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/data-flow/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/architecture/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/architecture/overview/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/bundles/encryption/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/encryption/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/encryption/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/bundles/lifecycle/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/lifecycle/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/lifecycle/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/bundles/message-types/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/message-types/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/message-types/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/bundles/structure/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/structure/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/structure/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/ecosystem/crypto/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/ecosystem/crypto/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/ecosystem/crypto/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/groups/channels/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/channels/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/channels/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/groups/membership-crdt/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/membership-crdt/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/membership-crdt/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/groups/private-groups/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/private-groups/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/private-groups/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/identity/keys/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/identity/keys/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/identity/keys/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/routing/ack-learning/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/ack-learning/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/ack-learning/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/routing/geo-routing/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/geo-routing/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/geo-routing/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/routing/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/overview/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/routing/prophet/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/prophet/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/prophet/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/routing/spray-wait/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/spray-wait/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/spray-wait/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/transports/lora/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/lora/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/lora/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/transports/nearby/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/nearby/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nearby/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/deep-dive/transports/nostr/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/nostr/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nostr/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/first-steps/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/first-steps/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/first-steps/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/help/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/help/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/help/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/install/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/install/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/install/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/limitations/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/limitations/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/limitations/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/permissions/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/permissions/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/permissions/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/getting-started/updates/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/updates/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/updates/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/how-it-works/nearby-stack/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/nearby-stack/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/nearby-stack/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/how-it-works/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/overview/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/how-it-works/transports/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/transports/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/transports/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/legal/privacy-policy/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/legal/privacy-policy/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/legal/privacy-policy/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/legal/terms/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/legal/terms/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/legal/terms/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/reference/changelog/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/reference/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/reference/changelog/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/reference/faq/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/reference/faq/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/reference/faq/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/security/privacy/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/privacy/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/security/threat-model/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/threat-model/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/threat-model/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/security/verification/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/verification/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/verification/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/battery/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/battery/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/battery/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/channels/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/channels/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/channels/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/contacts/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/contacts/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/contacts/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/delivery/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/delivery/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/delivery/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/groups/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/groups/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/groups/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/mesh-broadcast/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/mesh-broadcast/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/mesh-broadcast/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/messaging/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/messaging/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/messaging/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/user-guide/settings/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/settings/"/>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/settings/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/about/vision/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/about/vision/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/about/vision/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/building/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/building/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/building/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/glossary/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/glossary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/glossary/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/roadmap/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/roadmap/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/roadmap/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/data-flow/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/data-flow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/architecture/data-flow/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/architecture/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/architecture/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/encryption/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/encryption/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/encryption/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/lifecycle/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/lifecycle/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/lifecycle/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/message-types/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/message-types/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/message-types/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/structure/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/bundles/structure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/bundles/structure/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/ecosystem/crypto/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/ecosystem/crypto/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/ecosystem/crypto/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/groups/channels/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/channels/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/channels/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/groups/membership-crdt/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/membership-crdt/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/membership-crdt/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/groups/private-groups/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/groups/private-groups/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/groups/private-groups/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/identity/keys/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/identity/keys/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/identity/keys/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/routing/ack-learning/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/ack-learning/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/ack-learning/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/routing/geo-routing/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/geo-routing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/geo-routing/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/routing/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/routing/prophet/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/prophet/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/prophet/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/routing/spray-wait/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/routing/spray-wait/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/routing/spray-wait/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/transports/lora/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/lora/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/lora/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nearby/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nearby/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/nearby/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nostr/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/deep-dive/transports/nostr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/deep-dive/transports/nostr/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/first-steps/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/first-steps/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/first-steps/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/help/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/help/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/help/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/install/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/install/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/install/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/limitations/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/limitations/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/limitations/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/permissions/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/permissions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/permissions/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/getting-started/updates/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/getting-started/updates/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/getting-started/updates/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/how-it-works/nearby-stack/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/nearby-stack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/nearby-stack/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/how-it-works/overview/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/overview/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/how-it-works/transports/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/how-it-works/transports/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/how-it-works/transports/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/legal/privacy-policy/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/legal/privacy-policy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/legal/privacy-policy/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/legal/terms/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/legal/terms/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/legal/terms/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/reference/changelog/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/reference/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/reference/changelog/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/reference/faq/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/reference/faq/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/reference/faq/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/security/privacy/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/privacy/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/security/threat-model/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/threat-model/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/threat-model/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/security/verification/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/security/verification/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/security/verification/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/battery/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/battery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/battery/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/channels/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/channels/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/channels/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/contacts/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/contacts/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/contacts/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/delivery/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/delivery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/delivery/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/groups/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/groups/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/groups/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/mesh-broadcast/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/mesh-broadcast/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/mesh-broadcast/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/messaging/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/messaging/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/messaging/"/>
+    </url>
+    <url>
+        <loc>https://ethene.github.io/mycel-docs/fa/user-guide/settings/</loc>
+        <lastmod>2026-01-28</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fa" href="https://ethene.github.io/mycel-docs/fa/user-guide/settings/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ethene.github.io/mycel-docs/user-guide/settings/"/>
+    </url>
+</urlset>
